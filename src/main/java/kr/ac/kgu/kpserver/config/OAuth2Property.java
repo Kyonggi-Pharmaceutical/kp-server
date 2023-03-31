@@ -18,8 +18,5 @@ public class OAuth2Property {
     public static class Google {
 
         private String clientId;
-        private String clientSecret;
-
     }
-
 }
