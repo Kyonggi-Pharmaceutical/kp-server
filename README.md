@@ -61,6 +61,7 @@ $ docker compose up -d
 git-flow 를 따르되, 가장 기본적인 feature, develop, main 브랜치만 사용
 
 - feature: 각각 기능에 대한 개발 브랜치
+  - ex) feature/OVZC-41-implements-login-feature
 - develop: 개발용 서버 배포용 브랜치
 - main: 개발 & 테스트 완료 후 최종 브랜치
 
