@@ -20,7 +20,7 @@ public class DailyProgress extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean check;
+    private Boolean isCheck;
 
     // TODO - 목표 연관관계
     // TODO - 유저 연관관계
