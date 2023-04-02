@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.overdose;
 
+import kr.ac.kgu.kpserver.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "overdoes")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Overdose {
+public class Overdose extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.activity;
 
+import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.health.Personality;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Table(name = "activities")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Activity {
+public class Activity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

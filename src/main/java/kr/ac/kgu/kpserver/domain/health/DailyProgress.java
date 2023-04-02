@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.health;
 
+import kr.ac.kgu.kpserver.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "daily_progresses")
 @AllArgsConstructor
 @NoArgsConstructor
-public class DailyProgress {
+public class DailyProgress extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

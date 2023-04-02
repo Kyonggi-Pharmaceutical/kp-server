@@ -1,6 +1,7 @@
 package kr.ac.kgu.kpserver.domain.health;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import kr.ac.kgu.kpserver.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @Table(name = "health_goals")
 @AllArgsConstructor
 @NoArgsConstructor
-public class HealthGoal {
+public class HealthGoal extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

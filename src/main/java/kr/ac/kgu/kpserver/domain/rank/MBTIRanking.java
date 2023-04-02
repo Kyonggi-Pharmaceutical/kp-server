@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.rank;
 
+import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Table(name = "mbti_ranking")
 @AllArgsConstructor
 @NoArgsConstructor
-public class MBTIRanking {
+public class MBTIRanking extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

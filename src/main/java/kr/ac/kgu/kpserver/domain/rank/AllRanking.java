@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.rank;
 
+import kr.ac.kgu.kpserver.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "all_ranking")
 @AllArgsConstructor
 @NoArgsConstructor
-public class AllRanking {
+public class AllRanking extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
