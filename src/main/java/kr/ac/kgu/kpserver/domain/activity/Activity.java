@@ -1,4 +1,4 @@
-package kr.ac.kgu.kpserver.domain.exercise;
+package kr.ac.kgu.kpserver.domain.activity;
 
 import kr.ac.kgu.kpserver.domain.health.Personality;
 import lombok.AllArgsConstructor;
@@ -11,20 +11,19 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "exercises")
+@Table(name = "activities")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Exercise {
+public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-    @Enumerated(EnumType.STRING)
-    private ExerciseType type;
+    private String symptom;
     @Enumerated(EnumType.STRING)
     private Personality personality;
-    private Double met;
+    private String type; // TODO - enum 으로 관리
 
 }
