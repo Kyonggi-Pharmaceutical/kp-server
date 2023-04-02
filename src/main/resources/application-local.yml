@@ -11,3 +11,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+
+web:
+  origin: "http://localhost:3000"
