@@ -2,7 +2,6 @@ package kr.ac.kgu.kpserver.domain.health;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
-import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
