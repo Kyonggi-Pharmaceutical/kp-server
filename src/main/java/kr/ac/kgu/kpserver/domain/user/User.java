@@ -1,7 +1,9 @@
 package kr.ac.kgu.kpserver.domain.user;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.health.HealthGoal;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
+import kr.ac.kgu.kpserver.domain.overdose.Overdose;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +39,14 @@ public class User extends BaseEntity {
     private Integer stressPoint;
     private Boolean isSmoking;
     private Boolean isAlcohol;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "health_goal_id", referencedColumnName = "id")
+    private HealthGoal healthGoal;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "overdose_id", referencedColumnName = "id")
+    private Overdose overdose;
 
     public User(String firstName, String lastName, String email, String profileImageUrl) {
         this.firstName = firstName;

@@ -25,6 +25,7 @@ public class Activity extends BaseEntity {
     private String symptom;
     @Enumerated(EnumType.STRING)
     private Personality personality;
-    private String type; // TODO - enum 으로 관리
+    @Enumerated(EnumType.STRING)
+    private ActivityType type;
 
 }
