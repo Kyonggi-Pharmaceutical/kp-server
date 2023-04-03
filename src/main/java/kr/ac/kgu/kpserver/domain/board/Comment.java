@@ -1,6 +1,7 @@
 package kr.ac.kgu.kpserver.domain.board;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,12 @@ public class Comment extends BaseEntity {
 
     private String description;
 
-    // TODO - 게시글 연관관계
-    // TODO - 작성자 연관관계
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id")
+    private Article article;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
 }

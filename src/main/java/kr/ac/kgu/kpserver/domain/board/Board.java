@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,5 +24,8 @@ public class Board extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private BoardCategory category;
+
+    @OneToMany(mappedBy = "board")
+    private List<Article> articles = new ArrayList<>();
 
 }

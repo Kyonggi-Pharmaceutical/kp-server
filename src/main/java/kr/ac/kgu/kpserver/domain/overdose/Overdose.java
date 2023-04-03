@@ -24,5 +24,4 @@ public class Overdose extends BaseEntity {
     private OverdoseGroup overdoseGroup;
     private Integer days;
 
-    // TODO - 유저 연관관계 추가
 }

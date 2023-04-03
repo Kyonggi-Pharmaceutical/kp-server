@@ -9,6 +9,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,13 +24,15 @@ public class HealthGoal extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type; // TODO - enum 으로 관리
+    @Enumerated(EnumType.STRING)
+    private HealthGoalType type;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
     private LocalDateTime startAt;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
     private LocalDateTime endAt;
     private Double accomplishRate;
 
-    // TODO - 유저 연관관계
+    @OneToMany(mappedBy = "healthGoal")
+    private List<DailyProgress> dailyProgresses = new ArrayList<>();
 
 }

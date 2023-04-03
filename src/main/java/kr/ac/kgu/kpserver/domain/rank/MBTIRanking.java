@@ -1,6 +1,5 @@
 package kr.ac.kgu.kpserver.domain.rank;
 
-import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "mbti_ranking")
 @AllArgsConstructor
 @NoArgsConstructor
-public class MBTIRanking extends BaseEntity {
+public class MBTIRanking extends Ranking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +23,5 @@ public class MBTIRanking extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MBTI mbti;
     private Integer rank;
-
-    // TODO - 랭킹 연관관계
 
 }

@@ -1,6 +1,7 @@
 package kr.ac.kgu.kpserver.domain.health;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,12 @@ public class DailyProgress extends BaseEntity {
 
     private Boolean isCheck;
 
-    // TODO - 목표 연관관계
-    // TODO - 유저 연관관계
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "health_goal_id")
+    private HealthGoal healthGoal;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
