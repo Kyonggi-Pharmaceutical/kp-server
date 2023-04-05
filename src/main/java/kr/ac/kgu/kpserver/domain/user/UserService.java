@@ -5,6 +5,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import kr.ac.kgu.kpserver.config.OAuth2Property;
+import kr.ac.kgu.kpserver.domain.user.dto.UserSignUpRequest;
 import kr.ac.kgu.kpserver.security.JwtAuthenticator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -53,6 +54,21 @@ public class UserService {
         }
         user = upsertUser(user);
         return jwtAuthenticator.createToken(user, false);
+    }
+
+    public void signUpUser(User user, UserSignUpRequest userSignUpRequest) {
+        User updatedUser = user.update(
+                userSignUpRequest.getGender(),
+                userSignUpRequest.getDateOfBirth(),
+                userSignUpRequest.getHeight(),
+                userSignUpRequest.getWeight(),
+                userSignUpRequest.getMbti(),
+                userSignUpRequest.getExerciseGroup(),
+                userSignUpRequest.getStressPoint(),
+                userSignUpRequest.getIsSmoking(),
+                userSignUpRequest.getIsAlcohol()
+        );
+        userRepository.save(updatedUser);
     }
 
     private User upsertUser(User userRequest) {
