@@ -4,17 +4,14 @@ import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.health.HealthGoal;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.overdose.Overdose;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -53,5 +50,28 @@ public class User extends BaseEntity {
         this.lastName = lastName;
         this.email = email;
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public User update(
+            Gender gender,
+            LocalDate dateOfBirth,
+            Double height,
+            Double weight,
+            MBTI mbti,
+            String exerciseGroup,
+            Integer stressPoint,
+            Boolean isSmoking,
+            Boolean isAlcohol
+    ) {
+        if (gender != null) this.gender = gender;
+        if (dateOfBirth != null) this.dateOfBirth = dateOfBirth;
+        if (height != null) this.height = height;
+        if (weight != null) this.weight = weight;
+        if (mbti != null) this.mbti = mbti;
+        if (exerciseGroup != null) this.exerciseGroup = exerciseGroup;
+        if (stressPoint != null) this.stressPoint = stressPoint;
+        if (isSmoking != null) this.isSmoking = isSmoking;
+        if (isAlcohol != null) this.isAlcohol = isAlcohol;
+        return this;
     }
 }
