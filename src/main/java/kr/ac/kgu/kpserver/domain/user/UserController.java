@@ -35,7 +35,17 @@ public class UserController {
         if (user.getExerciseGroup() != null) {
             throw new KpException(KpExceptionType.ALREADY_SIGN_UP);
         }
-        userService.updateUser(user, userRequest);
-        return ResponseEntity.ok().build();
+        User signUpUser = userService.updateUser(user, userRequest);
+        return ResponseEntity.ok(UserDto.from(signUpUser));
+    }
+
+    @UserAuthenticated
+    @PutMapping("/me")
+    public ResponseEntity<?> updateMyInfo(
+            @Valid @RequestBody UserRequest userRequest,
+            User user
+    ) {
+        User updatedUser = userService.updateUser(user, userRequest);
+        return ResponseEntity.ok(UserDto.from(updatedUser));
     }
 }
