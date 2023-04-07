@@ -1,5 +1,7 @@
 package kr.ac.kgu.kpserver.domain.user.dto;
 
+import kr.ac.kgu.kpserver.domain.bmi.BMI;
+import kr.ac.kgu.kpserver.domain.bmi.BMIResponse;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.user.Gender;
 import kr.ac.kgu.kpserver.domain.user.User;
@@ -24,6 +26,7 @@ public class UserDto {
     private final Integer stressPoint;
     private final Boolean isSmoking;
     private final Boolean isAlcohol;
+    private final BMIResponse bmi;
 
 
     public static UserDto from(User user) {
@@ -40,6 +43,7 @@ public class UserDto {
                 .stressPoint(user.getStressPoint())
                 .isSmoking(user.getIsSmoking())
                 .isAlcohol(user.getIsAlcohol())
+                .bmi(BMI.calculate(user))
                 .build();
     }
 }
