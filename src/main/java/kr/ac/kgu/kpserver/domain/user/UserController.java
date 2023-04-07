@@ -48,4 +48,11 @@ public class UserController {
         User updatedUser = userService.updateUser(user, userRequest);
         return ResponseEntity.ok(UserDto.from(updatedUser));
     }
+
+    @UserAuthenticated
+    @DeleteMapping("/me")
+    public ResponseEntity<?> withdrawal(User user) {
+        userService.deleteUser(user);
+        return ResponseEntity.ok().build();
+    }
 }

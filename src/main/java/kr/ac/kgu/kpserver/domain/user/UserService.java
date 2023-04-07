@@ -73,6 +73,11 @@ public class UserService {
         return userRepository.save(updatedUser);
     }
 
+    @Transactional
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
+
     private User upsertUser(User userRequest) {
         User user = userRepository.findByEmail(userRequest.getEmail()).orElse(userRequest);
         user.setFirstName(userRequest.getFirstName());
