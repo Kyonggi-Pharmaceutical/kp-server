@@ -5,7 +5,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import kr.ac.kgu.kpserver.config.OAuth2Property;
-import kr.ac.kgu.kpserver.domain.user.dto.UserSignUpRequest;
+import kr.ac.kgu.kpserver.domain.user.dto.UserRequest;
 import kr.ac.kgu.kpserver.security.JwtAuthenticator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -41,6 +41,7 @@ public class UserService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     public User findUserByIdOrNull(Long id) {
         return userRepository.findById(id).orElse(null);
     }
@@ -56,17 +57,18 @@ public class UserService {
         return jwtAuthenticator.createToken(user, false);
     }
 
-    public void signUpUser(User user, UserSignUpRequest userSignUpRequest) {
+    @Transactional
+    public void updateUser(User user, UserRequest userRequest) {
         User updatedUser = user.update(
-                userSignUpRequest.getGender(),
-                userSignUpRequest.getDateOfBirth(),
-                userSignUpRequest.getHeight(),
-                userSignUpRequest.getWeight(),
-                userSignUpRequest.getMbti(),
-                userSignUpRequest.getExerciseGroup(),
-                userSignUpRequest.getStressPoint(),
-                userSignUpRequest.getIsSmoking(),
-                userSignUpRequest.getIsAlcohol()
+                userRequest.getGender(),
+                userRequest.getDateOfBirth(),
+                userRequest.getHeight(),
+                userRequest.getWeight(),
+                userRequest.getMbti(),
+                userRequest.getExerciseGroup(),
+                userRequest.getStressPoint(),
+                userRequest.getIsSmoking(),
+                userRequest.getIsAlcohol()
         );
         userRepository.save(updatedUser);
     }

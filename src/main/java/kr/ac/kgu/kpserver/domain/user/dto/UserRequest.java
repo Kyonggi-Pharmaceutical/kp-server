@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Data
 @Builder
-public class UserSignUpRequest {
+public class UserRequest {
 
     @NotNull
     private final Gender gender;
