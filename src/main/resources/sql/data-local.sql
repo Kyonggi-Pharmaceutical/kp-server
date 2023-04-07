@@ -1,0 +1,1 @@
+insert into users(id, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, exercise_group, stress_point, is_smoking, is_alcohol, created_at, updated_at) values (0, '길동', '홍', 'test@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTJ', 'exercise_group', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00');

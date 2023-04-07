@@ -16,6 +16,10 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      data-locations: classpath:/sql/data-local.sql
 
 web:
   origin: "http://localhost:3000"

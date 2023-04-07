@@ -46,7 +46,7 @@ public class DummyAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private Authentication getAuthentication(User user) {
-        return new UsernamePasswordAuthenticationToken(user, "dummy", Collections.emptyList());
+        return new UsernamePasswordAuthenticationToken(user.getId(), "dummy", Collections.emptyList());
     }
 
     private void setErrorResponse(HttpServletResponse response) {
