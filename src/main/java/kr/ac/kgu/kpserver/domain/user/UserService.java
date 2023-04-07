@@ -58,7 +58,7 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(User user, UserRequest userRequest) {
+    public User updateUser(User user, UserRequest userRequest) {
         User updatedUser = user.update(
                 userRequest.getGender(),
                 userRequest.getDateOfBirth(),
@@ -70,7 +70,7 @@ public class UserService {
                 userRequest.getIsSmoking(),
                 userRequest.getIsAlcohol()
         );
-        userRepository.save(updatedUser);
+        return userRepository.save(updatedUser);
     }
 
     private User upsertUser(User userRequest) {
