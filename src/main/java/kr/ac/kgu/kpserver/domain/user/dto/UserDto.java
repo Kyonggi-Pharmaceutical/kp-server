@@ -1,5 +1,6 @@
-package kr.ac.kgu.kpserver.domain.user;
+package kr.ac.kgu.kpserver.domain.user.dto;
 
+import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.Builder;
 import lombok.Data;
 

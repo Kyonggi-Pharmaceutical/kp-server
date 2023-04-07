@@ -1,9 +1,9 @@
 package kr.ac.kgu.kpserver.config;
 
 import kr.ac.kgu.kpserver.security.CustomAuthenticationFilter;
+import kr.ac.kgu.kpserver.security.DummyAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,36 +11,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig implements WebMvcConfigurer {
+public class SecurityConfig {
 
     private final CustomAuthenticationFilter customAuthenticationFilter;
-    private final WebProperty webProperty;
+    private final DummyAuthenticationFilter dummyAuthenticationFilter;
 
-    public SecurityConfig(CustomAuthenticationFilter customAuthenticationFilter, WebProperty webProperty) {
+    public SecurityConfig(CustomAuthenticationFilter customAuthenticationFilter, DummyAuthenticationFilter dummyAuthenticationFilter) {
         this.customAuthenticationFilter = customAuthenticationFilter;
-        this.webProperty = webProperty;
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry
-                .addMapping("/**")
-                .allowedOrigins(webProperty.getOrigin())
-                .allowedMethods(
-                        HttpMethod.GET.name(),
-                        HttpMethod.POST.name(),
-                        HttpMethod.PUT.name(),
-                        HttpMethod.DELETE.name(),
-                        HttpMethod.OPTIONS.name()
-                )
-                .allowedHeaders("*")
-                .allowCredentials(true)
-        ;
+        this.dummyAuthenticationFilter = dummyAuthenticationFilter;
     }
 
     @Bean
@@ -48,13 +29,13 @@ public class SecurityConfig implements WebMvcConfigurer {
         http
                 .csrf().disable()
                 .cors()
-
         ;
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         ;
         http
                 .addFilterBefore(customAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(dummyAuthenticationFilter, CustomAuthenticationFilter.class)
                 .authorizeHttpRequests()
                 .antMatchers("/api/v1/login/**", "/h2-console/**", "/test/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .anyRequest().authenticated()
