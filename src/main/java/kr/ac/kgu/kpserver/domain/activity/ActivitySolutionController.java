@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 public class ActivitySolutionController {
 
+    //feature 이름 변경
     private final UserService userService;
     private final ActivityService activityService;
 
