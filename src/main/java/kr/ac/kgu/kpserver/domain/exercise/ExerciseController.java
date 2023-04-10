@@ -48,6 +48,7 @@ public class ExerciseController {
 
         return ResponseEntity.ok().body(exerciseSolution);
     }
+
     @UserAuthenticated
     @PostMapping("/exerciseChecked")
     public ResponseEntity<?> saveDailyProgress(@RequestBody boolean isCheck) {

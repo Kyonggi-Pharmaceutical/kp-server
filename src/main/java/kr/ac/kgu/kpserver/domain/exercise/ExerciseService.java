@@ -25,7 +25,6 @@ public class ExerciseService {
     @Autowired
     private HealthGoalRepository healthGoalRepository;
 
-
     @Autowired
     private UserRepository userRepository;
     private final Random random = new Random();
