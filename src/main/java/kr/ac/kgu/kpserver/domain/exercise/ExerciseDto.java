@@ -3,10 +3,15 @@ package kr.ac.kgu.kpserver.domain.exercise;
 import lombok.*;
 
 @Data
-@NoArgsConstructor
+@Builder
 public class ExerciseDto {
     // 운동 타입 저장
-    private String exerciseGroup;
+    private final ExerciseType exerciseGroup;
 
+    public static ExerciseDto of(Exercise exercise) {
+        return ExerciseDto.builder()
+                .exerciseGroup(exercise.getType())
+                .build();
+    }
 
 }

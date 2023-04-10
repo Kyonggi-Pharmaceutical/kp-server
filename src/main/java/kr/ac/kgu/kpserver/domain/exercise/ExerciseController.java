@@ -7,14 +7,12 @@ import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 
 @RestController
+@RequestMapping("/api/v1/exercises")
 @RequiredArgsConstructor
 public class ExerciseController {
     private final UserRepository userRepository;
@@ -23,21 +21,25 @@ public class ExerciseController {
 
     @UserAuthenticated
     @Transactional
-    @PostMapping("/api/v1/exercises")
-    public ResponseEntity<?> saveUserExerciseGroup(User user, @RequestBody UserDto userDto) {
-        ResponseEntity.ok().body(UserDto.from(user));
+    @PostMapping("/updateGroup")
+    public ResponseEntity<?> saveUserExerciseGroup(@RequestBody UserDto userDto) {
+        User users = exerciseService.saveExerciseGroup(userDto);
 
-        User users = new User();
-        users.setExerciseGroup(userDto.getExerciseGroup());
-        userRepository.save(users);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(users);
     }
+
     @UserAuthenticated
-    @GetMapping("api/v1/exercises")
-    public ResponseEntity<?> solutionExercise(User user, Exercise exercise) {
-        ResponseEntity.ok().body(UserDto.from(user));
+    @GetMapping("/exercisesInfo")
+    @ResponseBody
+    public ResponseEntity<?> solutionExercise(User user, Exercise exercise, UserDto userDto) {
+//      ResponseEntity.ok().body(UserDto.from(user));
 
         Exercise exerciseSolution = exerciseService.solutionTypeExercise(user, exercise);
+        // 사용자 몸무게 update -  Main 화면
+        User users = new User();
+        users.setWeight(userDto.getWeight());
+        userRepository.save(users);
+
         return ResponseEntity.ok().body(exerciseSolution);
     }
 
