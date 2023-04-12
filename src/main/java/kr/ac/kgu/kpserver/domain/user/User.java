@@ -1,11 +1,10 @@
 package kr.ac.kgu.kpserver.domain.user;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.health.HealthGoal;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.overdose.Overdose;
-import kr.ac.kgu.kpserver.util.KpException;
-import kr.ac.kgu.kpserver.util.KpExceptionType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,6 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Hidden
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
