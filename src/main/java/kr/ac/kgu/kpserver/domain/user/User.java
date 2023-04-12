@@ -4,6 +4,8 @@ import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.health.HealthGoal;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.overdose.Overdose;
+import kr.ac.kgu.kpserver.util.KpException;
+import kr.ac.kgu.kpserver.util.KpExceptionType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -50,6 +52,10 @@ public class User extends BaseEntity {
         this.lastName = lastName;
         this.email = email;
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public Boolean isSignUp() {
+        return exerciseGroup != null;
     }
 
     public User update(
