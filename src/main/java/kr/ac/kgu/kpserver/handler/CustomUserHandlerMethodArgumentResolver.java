@@ -34,7 +34,8 @@ public class CustomUserHandlerMethodArgumentResolver implements HandlerMethodArg
         if (authentication == null) {
             throw new KpException(KpExceptionType.AUTHENTICATION_FAILED);
         }
-        Long userId = Long.parseLong((String) authentication.getPrincipal());
+        Object principal = authentication.getPrincipal();
+        Long userId = (principal instanceof Long) ? (Long) principal : Long.parseLong((String) principal);
         User user = userService.findUserByIdOrNull(userId);
         if (user == null) {
             throw new KpException(KpExceptionType.NOT_FOUND_USER);
