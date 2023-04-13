@@ -53,24 +53,17 @@ public class ExerciseService {
             return null;
         }
 
-
         return selectedExercises.get(random.nextInt(selectedExercises.size()));
     }
 
-    //메소드 생성만 한 상태
-    public List<HealthGoal> isCheckedDailyGoal(List<DailyProgress> dailyProgresses) {
+    public void calculationHealthGoal(List<DailyProgress> dailyProgresses, HealthGoal healthGoal) {
 
+        //백분율 계산
         long trueCount = dailyProgresses.stream().filter(DailyProgress::isCheck).count();
-        double accomplishRate = (double) trueCount / dailyProgresses.size();
+        double accomplishRate = Math.round(((double) trueCount / dailyProgresses.size()) * 1000.0) / 10.0;
 
-        List<HealthGoal> healthGoals = healthGoalRepository.findAll();
-        for (HealthGoal h : healthGoals) {
-            h.setAccomplishRate(accomplishRate);
-        }
-        int lastIdx = healthGoals.size() - 1;
-        healthGoalRepository.save(healthGoals.get(lastIdx));
-
-        return healthGoals;
+        healthGoal.setAccomplishRate(accomplishRate);
+        healthGoalRepository.save(healthGoal);
 
     }
 
