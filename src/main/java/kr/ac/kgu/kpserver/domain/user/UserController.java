@@ -32,7 +32,7 @@ public class UserController {
             @Valid @RequestBody UserRequest userRequest,
             User user
     ) {
-        if (user.getExerciseGroup() != null) {
+        if (user.isSignUp()) {
             throw new KpException(KpExceptionType.ALREADY_SIGN_UP);
         }
         User signUpUser = userService.updateUser(user, userRequest);
