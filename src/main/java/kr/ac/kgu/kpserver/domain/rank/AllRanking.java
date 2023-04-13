@@ -20,6 +20,6 @@ public class AllRanking extends Ranking {
     private Long id;
 
     private Long userId;
-    private Integer rank;
+    private Integer rankScore;
 
 }
