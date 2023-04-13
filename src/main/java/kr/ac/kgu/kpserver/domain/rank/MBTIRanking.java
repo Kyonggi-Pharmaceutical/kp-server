@@ -22,6 +22,6 @@ public class MBTIRanking extends Ranking {
 
     @Enumerated(EnumType.STRING)
     private MBTI mbti;
-    private Integer rank;
+    private Integer rankScore;
 
 }
