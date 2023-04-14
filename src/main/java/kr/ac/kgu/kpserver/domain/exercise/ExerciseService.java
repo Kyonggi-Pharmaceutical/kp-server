@@ -1,9 +1,5 @@
-
 package kr.ac.kgu.kpserver.domain.exercise;
 
-import kr.ac.kgu.kpserver.domain.health.DailyProgress;
-import kr.ac.kgu.kpserver.domain.health.HealthGoal;
-import kr.ac.kgu.kpserver.domain.health.HealthGoalRepository;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
@@ -21,23 +17,25 @@ import java.util.Random;
 public class ExerciseService {
     @Autowired
     private ExerciseRepository exerciseRepository;
-
-    @Autowired
-    private HealthGoalRepository healthGoalRepository;
-
     @Autowired
     private UserRepository userRepository;
     private final Random random = new Random();
 
+    /*
+     * 사용자 운동 타입, 몸무게 저장
+     */
     public User saveExerciseGroup(UserDto userDto) {
         User user = new User();
         user.setExerciseGroup(userDto.getExerciseGroup());
+        user.setWeight(userDto.getWeight());
         return userRepository.save(user);
     }
 
+    /*
+     * 맞춤 운동 솔루션 제시
+     */
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
     public Exercise solutionTypeExercise(User user, Exercise exercise) {
-
         List<Exercise> allExercises = exerciseRepository.findAll();
         List<Exercise> selectedExercises = new ArrayList<>();
 
@@ -52,20 +50,6 @@ public class ExerciseService {
         if (selectedExercises.isEmpty()) {
             return null;
         }
-
         return selectedExercises.get(random.nextInt(selectedExercises.size()));
     }
-
-    public void calculationHealthGoal(List<DailyProgress> dailyProgresses, HealthGoal healthGoal) {
-
-        //백분율 계산
-        long trueCount = dailyProgresses.stream().filter(DailyProgress::isCheck).count();
-        double accomplishRate = Math.round(((double) trueCount / dailyProgresses.size()) * 1000.0) / 10.0;
-
-        healthGoal.setAccomplishRate(accomplishRate);
-        healthGoalRepository.save(healthGoal);
-
-    }
-
 }
-
