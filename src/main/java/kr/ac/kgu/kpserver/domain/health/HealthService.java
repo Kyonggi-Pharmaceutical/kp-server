@@ -1,0 +1,102 @@
+package kr.ac.kgu.kpserver.domain.health;
+
+import kr.ac.kgu.kpserver.domain.user.User;
+import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class HealthService {
+
+    private final DailyProgressRepository dailyProgressRepository;
+
+    private final HealthGoalRepository healthGoalRepository;
+
+    /*
+     * 사용자 목표 몸무게 데이터베이스 저장
+     */
+    public void saveUserWeightGoal(HealthGoalDto healthGoalDto) {
+        HealthGoal healthGoal = new HealthGoal();
+        healthGoal.setWeightGoal(healthGoalDto.getWeightGoal());
+        healthGoalRepository.save(healthGoal);
+    }
+
+    /*
+     * 일일 솔루션 달성 체크 확인
+     */
+    public void saveDailyProgress(User user, HealthGoal healthGoal,  Boolean isCheck) {
+
+        if (isCheck != null && isCheck) {
+            DailyProgress dailyProgress = new DailyProgress();
+            dailyProgress.setUser(user);
+            dailyProgress.setHealthGoal(healthGoal);
+            dailyProgress.setCheck(Boolean.TRUE);
+            dailyProgressRepository.save(dailyProgress);
+
+            healthGoal.getDailyProgresses().add(dailyProgress);
+        }
+    }
+
+    /*
+     * 매달 솔루션 달성률 계산
+     */
+    public HealthGoal calculationHealthGoal(HealthGoal healthGoal) {
+        List<DailyProgress> dailyProgresses = healthGoal.getDailyProgresses();
+        //백분율 계산
+        long trueCount = dailyProgresses.stream().filter(DailyProgress::isCheck).count();
+        double accomplishRate = Math.round(((double) trueCount / 30) * 1000.0) / 10.0;
+
+        healthGoal.setAccomplishRate(accomplishRate);
+        healthGoalRepository.save(healthGoal);
+
+        return healthGoal;
+    }
+
+    /*
+     * 이전 달성 여부 체크
+     */
+    public List<String> checkedMyProgress(List<DailyProgress> dailyProgresses) {
+        return dailyProgresses.stream()
+                .filter(dp -> dp.getDate().isBefore(LocalDate.now()))
+                .map(dp -> dp.isCheck() ? "완료" : "미완료")
+                .collect(Collectors.toList());
+    }
+
+    /*
+     * 솔루션 만족도 만족 선택시 몸무게 계산
+     */
+    public double satisfySurveySolution(User user,
+                                        UserDto userDto,
+                                        HealthGoal healthGoal) {
+        double userWeight = userDto.getWeight();
+        user.setWeight(userWeight);
+
+        double userWeightGoal = healthGoal.getWeightGoal();
+
+        double userWeightResult = userWeight - userWeightGoal;
+        if (userWeightResult <= 0) {
+            return 0.0;
+        }
+
+        return Math.max(0, userWeight - userWeightGoal);
+    }
+
+    /*
+     * 솔루션 만족도 불만족 선택시(미완성)
+     */
+    public void noSatisfactionSurveySolution(HealthGoalDto healthGoalDto) {
+        String solutionAnswer = String.valueOf(healthGoalDto.getAnswer());
+        if (solutionAnswer.equals("HARD")) {
+
+        }
+
+        if (solutionAnswer.equals("SOFT")) {
+
+        }
+    }
+}

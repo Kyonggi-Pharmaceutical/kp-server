@@ -22,7 +22,6 @@ public class DailyProgress extends BaseEntity {
     private Long id;
 
     private boolean isCheck;
-
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
