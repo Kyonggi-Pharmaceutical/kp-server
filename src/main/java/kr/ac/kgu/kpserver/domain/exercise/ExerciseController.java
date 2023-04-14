@@ -1,7 +1,8 @@
+
 package kr.ac.kgu.kpserver.domain.exercise;
 
+import io.swagger.v3.oas.annotations.Operation;
 import kr.ac.kgu.kpserver.domain.user.User;
-import kr.ac.kgu.kpserver.domain.user.UserRepository;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
@@ -15,32 +16,23 @@ import javax.transaction.Transactional;
 @RequestMapping("/api/v1/exercises")
 @RequiredArgsConstructor
 public class ExerciseController {
-    private final UserRepository userRepository;
     @Autowired
-    private ExerciseService exerciseService;
-
+    private final ExerciseService exerciseService;
+    @Operation(description = "사용자 운동 타입 저장 API")
     @UserAuthenticated
     @Transactional
     @PostMapping("/updateGroup")
     public ResponseEntity<?> saveUserExerciseGroup(@RequestBody UserDto userDto) {
         User users = exerciseService.saveExerciseGroup(userDto);
-
         return ResponseEntity.ok().body(users);
     }
-
+    @Operation(description = "일일 운동 솔루션 제시 API")
     @UserAuthenticated
-    @GetMapping("/exercisesInfo")
+    @GetMapping("/exercisesSolution")
     @ResponseBody
-    public ResponseEntity<?> solutionExercise(User user, Exercise exercise, UserDto userDto) {
-//      ResponseEntity.ok().body(UserDto.from(user));
-
+    public ResponseEntity<?> solutionExerciseMain(User user, Exercise exercise) {
         Exercise exerciseSolution = exerciseService.solutionTypeExercise(user, exercise);
-        // 사용자 몸무게 update -  Main 화면
-        User users = new User();
-        users.setWeight(userDto.getWeight());
-        userRepository.save(users);
 
         return ResponseEntity.ok().body(exerciseSolution);
     }
-
 }

@@ -1,3 +1,4 @@
+
 package kr.ac.kgu.kpserver.domain.exercise;
 
 import kr.ac.kgu.kpserver.domain.user.User;
@@ -21,15 +22,21 @@ public class ExerciseService {
     private UserRepository userRepository;
     private final Random random = new Random();
 
+    /*
+     * 사용자 운동 타입, 몸무게 저장
+     */
     public User saveExerciseGroup(UserDto userDto) {
         User user = new User();
         user.setExerciseGroup(userDto.getExerciseGroup());
+        user.setWeight(userDto.getWeight());
         return userRepository.save(user);
     }
 
+    /*
+     * 맞춤 운동 솔루션 제시
+     */
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
     public Exercise solutionTypeExercise(User user, Exercise exercise) {
-
         List<Exercise> allExercises = exerciseRepository.findAll();
         List<Exercise> selectedExercises = new ArrayList<>();
 
@@ -44,11 +51,7 @@ public class ExerciseService {
         if (selectedExercises.isEmpty()) {
             return null;
         }
-
-
         return selectedExercises.get(random.nextInt(selectedExercises.size()));
     }
-
 }
-
 
