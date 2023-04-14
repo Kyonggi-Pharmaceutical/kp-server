@@ -22,13 +22,13 @@ public class UserController {
 
     @UserAuthenticated
     @GetMapping("/me")
-    public ResponseEntity<?> getMyInfo(User user) {
+    public ResponseEntity<UserDto> getMyInfo(User user) {
         return ResponseEntity.ok().body(UserDto.from(user));
     }
 
     @UserAuthenticated
     @PostMapping("/sign-up")
-    public ResponseEntity<?> signUp(
+    public ResponseEntity<UserDto> signUp(
             @Valid @RequestBody UserRequest userRequest,
             User user
     ) {
@@ -41,7 +41,7 @@ public class UserController {
 
     @UserAuthenticated
     @PutMapping("/me")
-    public ResponseEntity<?> updateMyInfo(
+    public ResponseEntity<UserDto> updateMyInfo(
             @Valid @RequestBody UserRequest userRequest,
             User user
     ) {
@@ -51,7 +51,7 @@ public class UserController {
 
     @UserAuthenticated
     @DeleteMapping("/me")
-    public ResponseEntity<?> withdrawal(User user) {
+    public ResponseEntity<Void> withdrawal(User user) {
         userService.deleteUser(user);
         return ResponseEntity.ok().build();
     }
