@@ -6,6 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class HealthGoalDto {
-    private SurveyType answer;
     private Double weightGoal;
 }

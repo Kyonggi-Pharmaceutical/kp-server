@@ -31,10 +31,7 @@ public class HealthGoal extends BaseEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
     private LocalDateTime endAt;
     private Double accomplishRate;
-    @Enumerated(EnumType.STRING)
-    private SurveyType answer;
     private Double weightGoal;
-
     @OneToMany(mappedBy = "healthGoal")
     private List<DailyProgress> dailyProgresses = new ArrayList<>();
 

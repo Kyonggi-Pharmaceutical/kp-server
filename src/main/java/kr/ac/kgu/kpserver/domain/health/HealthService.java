@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class HealthService {
 
     private final DailyProgressRepository dailyProgressRepository;
-
     private final HealthGoalRepository healthGoalRepository;
 
     /*
@@ -29,17 +28,16 @@ public class HealthService {
     /*
      * 일일 솔루션 달성 체크 확인
      */
-    public void saveDailyProgress(User user, HealthGoal healthGoal,  Boolean isCheck) {
-
-        if (isCheck != null && isCheck) {
+    public void saveDailyProgress(User user,
+                                  HealthGoal healthGoal,
+                                  Boolean isCheck) {
             DailyProgress dailyProgress = new DailyProgress();
             dailyProgress.setUser(user);
             dailyProgress.setHealthGoal(healthGoal);
-            dailyProgress.setCheck(Boolean.TRUE);
+            dailyProgress.setCheck(isCheck);
             dailyProgressRepository.save(dailyProgress);
 
             healthGoal.getDailyProgresses().add(dailyProgress);
-        }
     }
 
     /*
@@ -70,7 +68,7 @@ public class HealthService {
     /*
      * 솔루션 만족도 만족 선택시 몸무게 계산
      */
-    public double satisfySurveySolution(User user,
+    public Double satisfySurveySolution(User user,
                                         UserDto userDto,
                                         HealthGoal healthGoal) {
         double userWeight = userDto.getWeight();
@@ -80,23 +78,9 @@ public class HealthService {
 
         double userWeightResult = userWeight - userWeightGoal;
         if (userWeightResult <= 0) {
-            return 0.0;
+            return null;
         }
 
         return Math.max(0, userWeight - userWeightGoal);
-    }
-
-    /*
-     * 솔루션 만족도 불만족 선택시(미완성)
-     */
-    public void noSatisfactionSurveySolution(HealthGoalDto healthGoalDto) {
-        String solutionAnswer = String.valueOf(healthGoalDto.getAnswer());
-        if (solutionAnswer.equals("HARD")) {
-
-        }
-
-        if (solutionAnswer.equals("SOFT")) {
-
-        }
     }
 }
