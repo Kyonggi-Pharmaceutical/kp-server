@@ -4,6 +4,9 @@ import kr.ac.kgu.kpserver.domain.user.User;
 
 public class BMI {
     public static BMIResponse calculate(User user) {
+        if (!user.isSignUp()) {
+            return null;
+        }
         Double heightByMeter = user.getHeight() / 100.0;
         Double weight = user.getWeight();
 
