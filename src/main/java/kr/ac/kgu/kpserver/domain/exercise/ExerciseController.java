@@ -33,10 +33,9 @@ public class ExerciseController {
     @GetMapping("/exercisesSolution")
     @ResponseBody
     public ResponseEntity<ExerciseDto> solutionExerciseDefault(User user,
-                                                  Exercise exercise,
                                                   ExerciseDto exerciseDto) {
         ExerciseDto exerciseSolution =
-                exerciseService.solutionTypeNormal(user, exercise, exerciseDto);
+                exerciseService.solutionTypeNormal(user,exerciseDto);
 
         return ResponseEntity.ok(exerciseSolution);
     }
@@ -44,22 +43,20 @@ public class ExerciseController {
     @UserAuthenticated
     @GetMapping("/lowExercisesSolution")
     @ResponseBody
-    public ResponseEntity<ExerciseDto> solutionExerciseHard(Exercise exercise,
-                                                          ExerciseDto exerciseDto,
+    public ResponseEntity<ExerciseDto> solutionExerciseHard(ExerciseDto exerciseDto,
                                                           User user){
         ExerciseDto lowExerciseSolution =
-                exerciseService.solutionTypeHard(user, exercise, exerciseDto);
+                exerciseService.solutionTypeHard(user, exerciseDto);
         return ResponseEntity.ok(lowExerciseSolution);
     }
     @Operation(summary = "일일 운동 솔루션 제시(강도 높음) API")
     @UserAuthenticated
     @GetMapping("/highExercisesSolution")
     @ResponseBody
-    public ResponseEntity<List<ExerciseDto>> solutionExerciseHigh(Exercise exercise,
-                                                                  ExerciseDto exerciseDto,
+    public ResponseEntity<List<ExerciseDto>> solutionExerciseHigh(ExerciseDto exerciseDto,
                                                                   User user){
         List<ExerciseDto> highExerciseSolution =
-                exerciseService.solutionTypeHigh(user, exercise, exerciseDto);
+                exerciseService.solutionTypeHigh(user, exerciseDto);
         return ResponseEntity.ok(highExerciseSolution);
     }
 

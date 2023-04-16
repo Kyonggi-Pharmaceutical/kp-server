@@ -41,18 +41,18 @@ public class ExerciseService {
      */
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
     public ExerciseDto solutionTypeNormal(User user,
-                                           Exercise exercise,
-                                           ExerciseDto exerciseDto) {
+                                          ExerciseDto exerciseDto) {
         List<Exercise> allExercisesList = findAllExercises();
         List<Exercise> selectedExercises = new ArrayList<>();
 
-        for (Exercise exerciseList : allExercisesList) {
-            String userMBTI = String.valueOf(user.getMbti());
-            String exercisePersonality = String.valueOf(exercise.getPersonality());
-            if (userMBTI.substring(0, 1).equals(exercisePersonality.substring(0, 1)) || exercisePersonality.equals("ALL")) {
-                selectedExercises.add(exerciseList);
-            }
-        }
+        String userMBTI = String.valueOf(user.getMbti());
+
+        allExercisesList.stream()
+                .filter(e -> {
+                    String personality = String.valueOf(e.getPersonality());
+                    return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
+                })
+                .forEach(selectedExercises::add);
 
         if (selectedExercises.isEmpty()) {
             return null;
@@ -60,6 +60,7 @@ public class ExerciseService {
 
         Exercise selectExerciseList = selectedExercises.get(random.nextInt(selectedExercises.size()));
         selectExerciseList.updateCalories(user);
+        exerciseRepository.save(selectExerciseList);
         return exerciseDto.mapToDto(selectExerciseList);
     }
 
@@ -68,18 +69,18 @@ public class ExerciseService {
      */
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
     public ExerciseDto solutionTypeHard(User user,
-                                        Exercise exercise,
                                         ExerciseDto exerciseDto) {
         List<Exercise> allExercisesList = findAllExercises();
         List<Exercise> selectedExercises = new ArrayList<>();
 
-        for (Exercise exerciseList : allExercisesList) {
-            String userMBTI = String.valueOf(user.getMbti());
-            String exercisePersonality = String.valueOf(exercise.getPersonality());
-            if (userMBTI.substring(0, 1).equals(exercisePersonality.substring(0, 1)) || exercisePersonality.equals("ALL")) {
-                selectedExercises.add(exerciseList);
-            }
-        }
+        String userMBTI = String.valueOf(user.getMbti());
+
+        allExercisesList.stream()
+                .filter(e -> {
+                    String personality = String.valueOf(e.getPersonality());
+                    return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
+                })
+                .forEach(selectedExercises::add);
 
         if (selectedExercises.isEmpty()) {
             return null;
@@ -87,7 +88,7 @@ public class ExerciseService {
 
         Exercise selectExerciseList = selectedExercises.get(random.nextInt(selectedExercises.size()));
         selectExerciseList.lowUpdateCalories(user);
-
+        exerciseRepository.save(selectExerciseList);
         return exerciseDto.mapToDto(selectExerciseList);
     }
 
@@ -96,26 +97,35 @@ public class ExerciseService {
      */
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
     public List<ExerciseDto> solutionTypeHigh(User user,
-                                              Exercise exercise,
                                               ExerciseDto exerciseDto) {
         List<Exercise> allExercisesList = findAllExercises();
         List<Exercise> selectedExercises = new ArrayList<>();
 
-        for (Exercise exerciseList : allExercisesList) {
-            String userMBTI = String.valueOf(user.getMbti());
-            String exercisePersonality = String.valueOf(exercise.getPersonality());
-            if (userMBTI.substring(0, 1).equals(exercisePersonality.substring(0, 1)) || exercisePersonality.equals("ALL")) {
-                selectedExercises.add(exerciseList);
-            }
-        }
+        String userMBTI = String.valueOf(user.getMbti());
+
+        allExercisesList.stream()
+                .filter(e -> {
+                    String personality = String.valueOf(e.getPersonality());
+                    return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
+                })
+                .forEach(selectedExercises::add);
 
         if (selectedExercises.isEmpty()) {
             return null;
         }
 
-        return selectedExercises.stream()
+        List<ExerciseDto> exerciseDtos = selectedExercises.stream()
                 .limit(2)
                 .map(exerciseDto::mapToDto)
                 .collect(Collectors.toList());
+
+        List<Exercise> exercisesToSave = exerciseDtos.stream()
+                .map(exerciseDto::mapToEntity)
+                .collect(Collectors.toList());
+
+        exerciseRepository.saveAll(exercisesToSave);
+
+        return exerciseDtos;
     }
+
 }

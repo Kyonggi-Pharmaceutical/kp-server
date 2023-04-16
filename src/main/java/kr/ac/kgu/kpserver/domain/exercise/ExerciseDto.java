@@ -24,4 +24,17 @@ public class ExerciseDto {
                 .duration(exercise.getDuration())
                 .build();
     }
+
+    public Exercise mapToEntity(ExerciseDto exerciseDto) {
+
+        Exercise exercise = new Exercise();
+        exercise.setId(exerciseDto.getId());
+        exercise.setName(exerciseDto.getName());
+        exercise.setType(exerciseDto.getExerciseGroup());
+        exercise.setPersonality(exerciseDto.getPersonality());
+        exercise.setCalorie(exerciseDto.getCalorie());
+        exercise.setDuration(exerciseDto.getDuration());
+
+        return exercise;
+    }
 }

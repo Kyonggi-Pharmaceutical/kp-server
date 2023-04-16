@@ -30,12 +30,11 @@ public class Exercise extends BaseEntity {
     private Double met;
 
     private double calorie; // 칼로리를 위한 필드 추가
+    private int duration = 60;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-    private int duration = 60;
 
     public void updateCalories(User user) {
         double metToCalories = met * user.getWeight() * duration / 60; // 칼로리 계산
