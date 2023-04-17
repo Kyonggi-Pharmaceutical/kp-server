@@ -5,6 +5,8 @@ on:
     workflows: [sandbox-ci]
     types:
       - completed
+    branches:
+      - sandbox
 
 jobs:
   run-deploy-script:
