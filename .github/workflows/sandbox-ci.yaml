@@ -1,4 +1,4 @@
-name: sandbox-continuous-integration
+name: sandbox-ci
 
 on:
   push:
