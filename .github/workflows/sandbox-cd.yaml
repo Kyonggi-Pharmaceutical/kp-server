@@ -1,0 +1,20 @@
+name: sandbox-cd
+
+on:
+  workflow_run:
+    workflows: [sandbox-ci]
+    types:
+      - completed
+
+jobs:
+  run-deploy-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.KP_SERVER_HOST }}
+          username: ${{ secrets.KP_SERVER_USERNAME }}
+          password: ${{ secrets.KP_SERVER_PASSWORD }}
+          port: ${{ secrets.KP_SERVER_PORT }}
+          script: /deploy/kp-server/sandbox.sh
