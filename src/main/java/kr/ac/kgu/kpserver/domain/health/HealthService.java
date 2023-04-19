@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +18,13 @@ public class HealthService {
     private final HealthGoalRepository healthGoalRepository;
 
     /*
-     * 사용자 목표 몸무게 데이터베이스 저장
+     * 사용자 운동 목표 데이터베이스 저장
      */
     public void saveUserWeightGoal(HealthGoalDto healthGoalDto) {
         HealthGoal healthGoal = new HealthGoal();
-        healthGoal.setWeightGoal(healthGoalDto.getWeightGoal());
+        healthGoal.setStartAt(healthGoalDto.getStartAt());
+        Double userGoalWeight = healthGoalDto.getWeightGoal();
+        healthGoal.setWeightGoal(userGoalWeight);
         healthGoalRepository.save(healthGoal);
     }
 
@@ -31,13 +34,12 @@ public class HealthService {
     public void saveDailyProgress(User user,
                                   HealthGoal healthGoal,
                                   Boolean isCheck) {
-            DailyProgress dailyProgress = new DailyProgress();
-            dailyProgress.setUser(user);
-            dailyProgress.setHealthGoal(healthGoal);
-            dailyProgress.setCheck(isCheck);
-            dailyProgressRepository.save(dailyProgress);
-
-            healthGoal.getDailyProgresses().add(dailyProgress);
+        DailyProgress dailyProgress = new DailyProgress();
+        dailyProgress.setUser(user);
+        dailyProgress.setHealthGoal(healthGoal);
+        dailyProgress.setCheck(isCheck);
+        dailyProgressRepository.save(dailyProgress);
+        healthGoal.getDailyProgresses().add(dailyProgress);
     }
 
     /*
@@ -48,7 +50,6 @@ public class HealthService {
         //백분율 계산
         long trueCount = dailyProgresses.stream().filter(DailyProgress::isCheck).count();
         double accomplishRate = Math.round(((double) trueCount / 30) * 1000.0) / 10.0;
-
         healthGoal.setAccomplishRate(accomplishRate);
         healthGoalRepository.save(healthGoal);
 
@@ -66,6 +67,15 @@ public class HealthService {
     }
 
     /*
+     * 솔수션 종료값 저장
+     */
+    public void saveEndSolutionDate(HealthGoal healthGoal) {
+        LocalDateTime finishDate = LocalDateTime.now();
+        healthGoal.setEndAt(finishDate);
+        healthGoalRepository.save(healthGoal);
+    }
+
+    /*
      * 솔루션 만족도 만족 선택시 몸무게 계산
      */
     public Double satisfySurveySolution(User user,
@@ -80,7 +90,6 @@ public class HealthService {
         if (userWeightResult <= 0) {
             return null;
         }
-
-        return Math.max(0, userWeight - userWeightGoal);
+        return userWeightGoal;
     }
 }
