@@ -1,5 +1,7 @@
-package kr.ac.kgu.kpserver.domain.health;
+package kr.ac.kgu.kpserver.domain.health.message;
 
+import kr.ac.kgu.kpserver.domain.health.HealthcareType;
+import kr.ac.kgu.kpserver.domain.health.Personality;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.util.KpException;
 import kr.ac.kgu.kpserver.util.KpExceptionType;

@@ -1,4 +1,4 @@
-package kr.ac.kgu.kpserver.domain.health;
+package kr.ac.kgu.kpserver.domain.health.message;
 
 import lombok.Data;
 

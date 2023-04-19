@@ -2,7 +2,7 @@ package kr.ac.kgu.kpserver.domain.user;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
-import kr.ac.kgu.kpserver.domain.health.HealthGoal;
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.health.HealthcareType;
 import kr.ac.kgu.kpserver.domain.health.Personality;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
