@@ -1,5 +1,7 @@
 package kr.ac.kgu.kpserver.domain.auth;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ac.kgu.kpserver.domain.user.UserService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
+@Tag(name = "로그인 API")
 @RestController
 @RequestMapping("/api/v1/login")
 public class LoginController {
@@ -21,6 +24,7 @@ public class LoginController {
         this.userService = userService;
     }
 
+    @Operation(summary = "Google OAuth2.0 로그인 API")
     @PostMapping("/oauth/google")
     public ResponseEntity<?> loginWithGoogleOAuth2(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         String authToken = userService.loginWithOAuth2Google(loginRequest.getIdToken());

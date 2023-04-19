@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.user;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.health.HealthGoal;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Hidden
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -50,6 +52,10 @@ public class User extends BaseEntity {
         this.lastName = lastName;
         this.email = email;
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public Boolean isSignUp() {
+        return exerciseGroup != null;
     }
 
     public User update(

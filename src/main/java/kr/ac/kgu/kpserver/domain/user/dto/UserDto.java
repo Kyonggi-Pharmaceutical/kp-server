@@ -14,6 +14,8 @@ import java.time.LocalDate;
 @Builder
 public class UserDto {
 
+    private final String firstName;
+    private final String lastName;
     private final String fullName;
     private final String email;
     private final String profileImageUrl;
@@ -31,6 +33,8 @@ public class UserDto {
 
     public static UserDto from(User user) {
         return UserDto.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .fullName(String.format("%s %s", user.getLastName(), user.getFirstName()))
                 .email(user.getEmail())
                 .profileImageUrl(user.getProfileImageUrl())
