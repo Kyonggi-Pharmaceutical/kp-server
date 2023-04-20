@@ -21,6 +21,7 @@ public class DailyHealthMessageService {
         this.dailyHealthMessageRepository = dailyHealthMessageRepository;
     }
 
+    // FIXME - 일일 메시지 랜덤이 아닌 하루마다 고정되도록 변경 필요!!!
     public DailyHealthMessageDto getRandomMessageByUser(User user) {
         HealthcareType healthcareType = user.getHealthcareType();
         DailyHealthMessageType dailyHealthMessageType = decideDailyHealthMessageType(healthcareType);
