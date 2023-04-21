@@ -25,6 +25,7 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String nickname;
     private String firstName;
     private String lastName;
     private String email;
@@ -66,6 +67,7 @@ public class User extends BaseEntity {
     }
 
     public User update(
+            String nickname,
             Gender gender,
             LocalDate dateOfBirth,
             Double height,
@@ -76,6 +78,7 @@ public class User extends BaseEntity {
             Boolean isSmoking,
             Boolean isAlcohol
     ) {
+        if (nickname != null) this.nickname = nickname;
         if (gender != null) this.gender = gender;
         if (dateOfBirth != null) this.dateOfBirth = dateOfBirth;
         if (height != null) this.height = height;
