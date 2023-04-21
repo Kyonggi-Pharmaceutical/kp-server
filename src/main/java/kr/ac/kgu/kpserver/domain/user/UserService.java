@@ -65,7 +65,7 @@ public class UserService {
                 userRequest.getHeight(),
                 userRequest.getWeight(),
                 userRequest.getMbti(),
-                userRequest.getExerciseGroup(),
+                userRequest.getHealthcareType(),
                 userRequest.getStressPoint(),
                 userRequest.getIsSmoking(),
                 userRequest.getIsAlcohol()
