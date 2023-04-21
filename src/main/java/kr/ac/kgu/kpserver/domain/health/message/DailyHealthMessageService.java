@@ -7,6 +7,7 @@ import kr.ac.kgu.kpserver.util.KpException;
 import kr.ac.kgu.kpserver.util.KpExceptionType;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -21,33 +22,30 @@ public class DailyHealthMessageService {
         this.dailyHealthMessageRepository = dailyHealthMessageRepository;
     }
 
-    // FIXME - 일일 메시지 랜덤이 아닌 하루마다 고정되도록 변경 필요!!!
     public DailyHealthMessageDto getRandomMessageByUser(User user) {
-        HealthcareType healthcareType = user.getHealthcareType();
-        DailyHealthMessageType dailyHealthMessageType = decideDailyHealthMessageType(healthcareType);
-        Personality personality = user.getPersonality();
-        DailyHealthMessage dailyHealthMessage = getRandomDailyHealthMessageByType(dailyHealthMessageType, personality);
+        DailyHealthMessageType dailyHealthMessageType = decideRandomDailyHealthMessageTypeByUser(user);
+        DailyHealthMessage dailyHealthMessage = getRandomDailyHealthMessageByTypeAndUser(dailyHealthMessageType, user);
         return DailyHealthMessageDto.from(dailyHealthMessage);
     }
 
-    private DailyHealthMessage getRandomDailyHealthMessageByType(DailyHealthMessageType type, Personality personality) {
-        List<DailyHealthMessage> messages = dailyHealthMessageRepository.findByTypeAndPersonality(type, personality);
-        Collections.shuffle(messages);
-        return messages.stream()
-                .findFirst()
-                .orElseThrow(() -> new KpException(KpExceptionType.INTERNAL_SERVER_ERROR));
-    }
-
-
-    private DailyHealthMessageType decideDailyHealthMessageType(HealthcareType healthcareType) {
+    private DailyHealthMessageType decideRandomDailyHealthMessageTypeByUser(User user) {
+        HealthcareType healthcareType = user.getHealthcareType();
         List<DailyHealthMessageType> dailyHealthMessageTypes = Arrays.stream(DailyHealthMessageType.values())
                 .filter(type -> isNotOtherHealthcareType(healthcareType, type))
                 .collect(Collectors.toList());
 
-        Collections.shuffle(dailyHealthMessageTypes);
-        return dailyHealthMessageTypes.stream()
-                .findFirst()
-                .orElseThrow(() -> new KpException(KpExceptionType.INTERNAL_SERVER_ERROR));
+        int today = LocalDateTime.now().getDayOfMonth();
+        int randomIndexByDay = today % (dailyHealthMessageTypes.size() + user.getId().intValue());
+        return dailyHealthMessageTypes.get(randomIndexByDay);
+    }
+
+    private DailyHealthMessage getRandomDailyHealthMessageByTypeAndUser(DailyHealthMessageType type, User user) {
+        Personality personality = user.getPersonality();
+        List<DailyHealthMessage> messages = dailyHealthMessageRepository.findByTypeAndPersonality(type, personality);
+
+        int today = LocalDateTime.now().getDayOfMonth();
+        int randomIndexByDay = today % (messages.size() + user.getId().intValue());
+        return messages.get(randomIndexByDay);
     }
 
     private boolean isNotOtherHealthcareType(HealthcareType healthcareType, DailyHealthMessageType dailyHealthMessageType) {
