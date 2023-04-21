@@ -60,6 +60,7 @@ public class UserService {
     @Transactional
     public User updateUser(User user, UserRequest userRequest) {
         User updatedUser = user.update(
+                userRequest.getNickname(),
                 userRequest.getGender(),
                 userRequest.getDateOfBirth(),
                 userRequest.getHeight(),

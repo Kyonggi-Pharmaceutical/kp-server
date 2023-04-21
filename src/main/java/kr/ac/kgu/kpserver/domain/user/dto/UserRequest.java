@@ -14,6 +14,8 @@ import java.time.LocalDate;
 public class UserRequest {
 
     @NotNull
+    private final String nickname;
+    @NotNull
     private final Gender gender;
     @NotNull
     private final LocalDate dateOfBirth;
