@@ -6,31 +6,35 @@ import kr.ac.kgu.kpserver.domain.health.HealthcareType;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.user.Gender;
 import kr.ac.kgu.kpserver.domain.user.User;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
 
-    private final String nickname;
-    private final String firstName;
-    private final String lastName;
-    private final String fullName;
-    private final String email;
-    private final String profileImageUrl;
-    private final Gender gender;
-    private final LocalDate dateOfBirth;
-    private final Double height;
-    private final Double weight;
-    private final MBTI mbti;
-    private final HealthcareType healthcareType;
-    private final Integer stressPoint;
-    private final Boolean isSmoking;
-    private final Boolean isAlcohol;
-    private final BMIResponse bmi;
+    private String nickname;
+    private String firstName;
+    private String lastName;
+    private String fullName;
+    private String email;
+    private String profileImageUrl;
+    private Gender gender;
+    private LocalDate dateOfBirth;
+    private Double height;
+    private Double weight;
+    private MBTI mbti;
+    private HealthcareType healthcareType;
+    private Integer stressPoint;
+    private Boolean isSmoking;
+    private Boolean isAlcohol;
+    private BMIResponse bmi;
 
 
     public static UserDto from(User user) {
