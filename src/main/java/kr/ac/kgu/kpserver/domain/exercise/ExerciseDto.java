@@ -34,6 +34,7 @@ public class ExerciseDto {
         exercise.setPersonality(exerciseDto.getPersonality());
         exercise.setCalorie(exerciseDto.getCalorie());
         exercise.setDuration(exerciseDto.getDuration());
+
         return exercise;
     }
 }

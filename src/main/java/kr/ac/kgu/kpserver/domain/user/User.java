@@ -2,15 +2,21 @@ package kr.ac.kgu.kpserver.domain.user;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.exercise.Exercise;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.health.HealthcareType;
 import kr.ac.kgu.kpserver.domain.health.Personality;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.overdose.Overdose;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -50,6 +56,9 @@ public class User extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "overdose_id", referencedColumnName = "id")
     private Overdose overdose;
+
+    @OneToMany(mappedBy = "user")
+    private List<Exercise> exercises = new ArrayList<>();
 
     public User(String firstName, String lastName, String email, String profileImageUrl) {
         this.firstName = firstName;

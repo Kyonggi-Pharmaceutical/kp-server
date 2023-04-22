@@ -20,15 +20,13 @@ import java.util.List;
 public class ExerciseController {
     @Autowired
     private final ExerciseService exerciseService;
-
     @Operation(summary = "사용자 운동 타입 저장 API")
     @UserAuthenticated
     @Transactional
     @PostMapping("/updateGroup")
-    public ResponseEntity<Void> saveUserExerciseGroup(User user ,
-                                                      @RequestBody UserDto userDto) {
-        exerciseService.saveExerciseGroup(user, userDto);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> saveUserExerciseGroup(@RequestBody UserDto userDto) {
+        User users = exerciseService.saveExerciseGroup(userDto);
+        return ResponseEntity.ok().body(users);
     }
     @Operation(summary = "일일 운동 솔루션 제시 API")
     @UserAuthenticated
