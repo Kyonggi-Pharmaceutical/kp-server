@@ -2,6 +2,7 @@ package kr.ac.kgu.kpserver.domain.health;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import kr.ac.kgu.kpserver.security.UserAuthenticated;

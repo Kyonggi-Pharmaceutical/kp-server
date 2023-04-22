@@ -31,7 +31,7 @@ public class ExerciseService {
      */
     public User saveExerciseGroup(UserDto userDto) {
         User user = new User();
-        user.setExerciseGroup(userDto.getExerciseGroup());
+        user.setHealthcareType(userDto.getHealthcareType());
         user.setWeight(userDto.getWeight());
         return userRepository.save(user);
     }

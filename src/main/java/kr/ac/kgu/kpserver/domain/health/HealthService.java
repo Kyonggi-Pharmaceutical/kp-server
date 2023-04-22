@@ -1,5 +1,7 @@
 package kr.ac.kgu.kpserver.domain.health;
 
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoalRepository;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
