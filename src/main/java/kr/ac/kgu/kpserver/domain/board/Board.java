@@ -28,4 +28,6 @@ public class Board extends BaseEntity {
     @OneToMany(mappedBy = "board")
     private List<Article> articles = new ArrayList<>();
 
+
+
 }
