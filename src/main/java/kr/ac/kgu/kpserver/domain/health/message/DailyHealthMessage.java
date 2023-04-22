@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.health.message;
 
+import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.health.Personality;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import javax.validation.constraints.Size;
 @Table(name = "daily_health_messages")
 @AllArgsConstructor
 @NoArgsConstructor
-public class DailyHealthMessage {
+public class DailyHealthMessage extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
