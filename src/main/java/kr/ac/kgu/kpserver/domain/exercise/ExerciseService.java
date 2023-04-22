@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.exercise;
 
+import kr.ac.kgu.kpserver.domain.health.HealthcareType;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
@@ -30,8 +31,8 @@ public class ExerciseService {
      * 사용자 운동 타입, 몸무게 저장
      */
     public void saveExerciseGroup(User user, UserDto userDto) {
-        String userExerciseGroup = userDto.getExerciseGroup();
-        user.setExerciseGroup(userExerciseGroup);
+        HealthcareType healthcareType = userDto.getHealthcareType();
+        user.setHealthcareType(healthcareType);
         userRepository.save(user);
     }
 
@@ -129,6 +130,3 @@ public class ExerciseService {
     }
 
 }
-
-
-
