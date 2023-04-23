@@ -2,7 +2,7 @@ package kr.ac.kgu.kpserver.domain.user;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
-import kr.ac.kgu.kpserver.domain.exercise.Exercise;
+import kr.ac.kgu.kpserver.domain.exercise.UserExercise;
 import kr.ac.kgu.kpserver.domain.health.HealthGoal;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.overdose.Overdose;
@@ -53,8 +53,8 @@ public class User extends BaseEntity {
     @JoinColumn(name = "overdose_id", referencedColumnName = "id")
     private Overdose overdose;
 
-    @OneToMany(mappedBy = "user")
-    private List<Exercise> exercises = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserExercise> userExercises = new ArrayList<>();
 
     public User(String firstName, String lastName, String email, String profileImageUrl) {
         this.firstName = firstName;

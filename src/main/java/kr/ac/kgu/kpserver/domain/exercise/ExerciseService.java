@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,7 +18,13 @@ public class ExerciseService {
     private ExerciseRepository exerciseRepository;
     @Autowired
     private UserRepository userRepository;
-    private final Random random = new Random();
+    @Autowired
+    private UserExerciseRepository userExerciseRepository;
+    private User user;
+
+    public ExerciseService(User user) {
+        this.user = user;
+    }
 
     protected List<Exercise> findAllExercises() {
         return exerciseRepository.findAll();
@@ -29,10 +33,9 @@ public class ExerciseService {
     /*
      * 사용자 운동 타입, 몸무게 저장
      */
-    public User saveExerciseGroup(UserDto userDto) {
-        User user = new User();
-        user.setExerciseGroup(userDto.getExerciseGroup());
-        user.setWeight(userDto.getWeight());
+    public User saveExerciseGroup(User user, UserDto userDto) {
+        String userExerciseGroup = userDto.getExerciseGroup();
+        user.setExerciseGroup(userExerciseGroup);
         return userRepository.save(user);
     }
 
@@ -40,92 +43,116 @@ public class ExerciseService {
      * 맞춤 운동 솔루션 제시(normal)
      */
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
-    public ExerciseDto solutionTypeNormal(User user,
-                                          ExerciseDto exerciseDto) {
+    public void solutionTypeNormal() {
         List<Exercise> allExercisesList = findAllExercises();
-        List<Exercise> selectedExercises = new ArrayList<>();
-
-        String userMBTI = String.valueOf(user.getMbti());
-
-        allExercisesList.stream()
+        List<Exercise> selectedExercises = allExercisesList.stream()
                 .filter(e -> {
                     String personality = String.valueOf(e.getPersonality());
-                    return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
+                    String userMBTI = String.valueOf(user.getMbti());
+                    if (userMBTI.length() >= 1 && personality.length() >= 1) {
+                        return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
+                    } else {
+                        return false;
+                    }
                 })
-                .forEach(selectedExercises::add);
+                .collect(Collectors.toList());
 
         if (selectedExercises.isEmpty()) {
-            return null;
+            return;
         }
 
-        Exercise selectExerciseList = selectedExercises.get(random.nextInt(selectedExercises.size()));
-        selectExerciseList.updateCalories(user);
-        exerciseRepository.save(selectExerciseList);
-        return exerciseDto.mapToDto(selectExerciseList);
+        UserExercise userExerciseObject = new UserExercise();
+        userExerciseObject.setUser(user);
+        Exercise exercise = selectedExercises.get(0);
+        userExerciseObject.setExercise(exercise);
+        userExerciseRepository.save(userExerciseObject);
+        selectedExercises.remove(0);
+
+
+        List<UserExercise> userExercises = userExerciseRepository.findByUserOrderByCreatedAtAsc(user);
+        userExercises.forEach(userExercise -> {
+            Exercise exercises = userExercise.getExercise();
+            exercises.updateCalories(user);
+        });
     }
 
     /*
      * 맞춤 운동 솔루션 제시(강도 낮춤)
      */
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
-    public ExerciseDto solutionTypeHard(User user,
-                                        ExerciseDto exerciseDto) {
+    public void solutionTypeHard() {
         List<Exercise> allExercisesList = findAllExercises();
-        List<Exercise> selectedExercises = new ArrayList<>();
-
-        String userMBTI = String.valueOf(user.getMbti());
-
-        allExercisesList.stream()
+        List<Exercise> selectedExercises = allExercisesList.stream()
                 .filter(e -> {
                     String personality = String.valueOf(e.getPersonality());
-                    return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
+                    String userMBTI = String.valueOf(user.getMbti());
+                    if (userMBTI.length() >= 1 && personality.length() >= 1) {
+                        return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
+                    } else {
+                        return false;
+                    }
                 })
-                .forEach(selectedExercises::add);
+                .collect(Collectors.toList());
 
         if (selectedExercises.isEmpty()) {
-            return null;
+            return;
         }
 
-        Exercise selectExerciseList = selectedExercises.get(random.nextInt(selectedExercises.size()));
-        selectExerciseList.lowUpdateCalories(user);
-        exerciseRepository.save(selectExerciseList);
-        return exerciseDto.mapToDto(selectExerciseList);
+        UserExercise userExerciseObject = new UserExercise();
+        userExerciseObject.setUser(user);
+        Exercise exercise = selectedExercises.get(0);
+        userExerciseObject.setExercise(exercise);
+        userExerciseRepository.save(userExerciseObject);
+        selectedExercises.remove(0);
+
+
+        List<UserExercise> userExercises = userExerciseRepository.findByUserOrderByCreatedAtAsc(user);
+        userExercises.forEach(userExercise -> {
+            Exercise exercises = userExercise.getExercise();
+            exercises.lowUpdateCalories(user);
+        });
     }
 
     /*
      * 맞춤 운동 솔루션 제시(강도 높임)
      */
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
-    public List<ExerciseDto> solutionTypeHigh(User user,
-                                              ExerciseDto exerciseDto) {
+    public void solutionTypeHigh() {
         List<Exercise> allExercisesList = findAllExercises();
-        List<Exercise> selectedExercises = new ArrayList<>();
-
-        String userMBTI = String.valueOf(user.getMbti());
-
-        allExercisesList.stream()
+        List<Exercise> selectedExercises = allExercisesList.stream()
                 .filter(e -> {
                     String personality = String.valueOf(e.getPersonality());
-                    return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
+                    String userMBTI = String.valueOf(user.getMbti());
+                    if (userMBTI.length() >= 1 && personality.length() >= 1) {
+                        return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
+                    } else {
+                        return false;
+                    }
                 })
-                .forEach(selectedExercises::add);
+                .collect(Collectors.toList());
 
         if (selectedExercises.isEmpty()) {
-            return null;
+            return;
         }
 
-        List<ExerciseDto> exerciseDtos = selectedExercises.stream()
+
+        List<Exercise> twoSelectedExercises = selectedExercises.stream()
                 .limit(2)
-                .map(exerciseDto::mapToDto)
                 .collect(Collectors.toList());
 
-        List<Exercise> exercisesToSave = exerciseDtos.stream()
-                .map(exerciseDto::mapToEntity)
-                .collect(Collectors.toList());
+        for (Exercise exercise : twoSelectedExercises) {
+            UserExercise userExerciseObject = new UserExercise();
+            userExerciseObject.setUser(user);
+            userExerciseObject.setExercise(exercise);
+            userExerciseRepository.save(userExerciseObject);
+        }
 
-        exerciseRepository.saveAll(exercisesToSave);
 
-        return exerciseDtos;
+        List<UserExercise> userExercises = userExerciseRepository.findByUserOrderByCreatedAtAsc(user);
+        userExercises.forEach(userExercise -> {
+            Exercise exercise = userExercise.getExercise();
+            exercise.updateCalories(user);
+        });
     }
 
 }

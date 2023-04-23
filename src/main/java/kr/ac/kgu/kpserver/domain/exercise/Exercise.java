@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,9 +34,8 @@ public class Exercise extends BaseEntity {
     private double calorie; // 칼로리를 위한 필드 추가
     private int duration = 60;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserExercise> userExercises = new ArrayList<>();
 
     public void updateCalories(User user) {
         double metToCalories = met * user.getWeight() * duration / 60; // 칼로리 계산
