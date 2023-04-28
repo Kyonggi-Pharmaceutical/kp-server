@@ -2,6 +2,7 @@ package kr.ac.kgu.kpserver.domain.exercise;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.health.Personality;
+import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +31,8 @@ public class Exercise extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Personality personality;
     private Double met;
+    @Enumerated(EnumType.STRING)
+    private MBTI mbti;
 
     private double calorie; // 칼로리를 위한 필드 추가
     private int duration = 60;

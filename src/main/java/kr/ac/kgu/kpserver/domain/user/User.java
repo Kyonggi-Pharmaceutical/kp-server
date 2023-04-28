@@ -44,6 +44,8 @@ public class User extends BaseEntity {
     private Integer stressPoint;
     private Boolean isSmoking;
     private Boolean isAlcohol;
+    @Enumerated(EnumType.STRING)
+    private UserAnswer userAnswer;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "health_goal_id", referencedColumnName = "id")

@@ -1,6 +1,8 @@
 package kr.ac.kgu.kpserver.domain.exercise;
 
+import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.user.User;
+import kr.ac.kgu.kpserver.domain.user.UserAnswer;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +42,21 @@ public class ExerciseService {
         String userExerciseGroup = userDto.getExerciseGroup();
         user.setExerciseGroup(userExerciseGroup);
         return userRepository.save(user);
+    }
+
+    public void normal() {
+        List<User> users = userRepository.findByUserAnswer(UserAnswer.NORMAL);
+        users.forEach(user -> {
+            MBTI userMbti = user.getMbti();
+            // 만족도가 보통인 유저에게 MBTI 에 맞춘 새로운 일일 솔루션 업데이트
+            List<Exercise> exerciseListByMbti = exerciseRepository.findByMbti(userMbti);
+
+            // 랜덤 운동 가져오기
+            int randomIndex = new Random().nextInt(exerciseListByMbti.size());
+            Exercise exercise = exerciseListByMbti.get(randomIndex);
+
+            // 신규 일일 운동 save
+        });
     }
 
     /*
