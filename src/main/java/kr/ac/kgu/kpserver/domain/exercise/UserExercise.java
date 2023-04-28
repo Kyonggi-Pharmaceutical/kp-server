@@ -26,4 +26,9 @@ public class UserExercise extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public UserExercise(User user, Exercise exercise) {
+        this.user = user;
+        this.exercise = exercise;
+    }
 }

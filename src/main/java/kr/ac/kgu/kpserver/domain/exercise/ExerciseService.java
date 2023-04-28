@@ -49,13 +49,19 @@ public class ExerciseService {
         users.forEach(user -> {
             MBTI userMbti = user.getMbti();
             // 만족도가 보통인 유저에게 MBTI 에 맞춘 새로운 일일 솔루션 업데이트
-            List<Exercise> exerciseListByMbti = exerciseRepository.findByMbti(userMbti);
+            List<Long> userExerciseIds = user.getUserExercises().stream()
+                    .map(UserExercise::getId)
+                    .collect(Collectors.toList());
+            List<Exercise> exerciseListByMbti = exerciseRepository.findByMbtiAndIdNotIn(userMbti, userExerciseIds);
 
             // 랜덤 운동 가져오기
             int randomIndex = new Random().nextInt(exerciseListByMbti.size());
             Exercise exercise = exerciseListByMbti.get(randomIndex);
 
             // 신규 일일 운동 save
+            List<UserExercise> userExercises = user.getUserExercises();
+            UserExercise userExercise = new UserExercise(user, exercise);
+            userExerciseRepository.save(userExercise);
         });
     }
 
