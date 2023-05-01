@@ -1,4 +1,4 @@
-package kr.ac.kgu.kpserver.domain.activity;
+package kr.ac.kgu.kpserver.domain.stress;
 
 public enum Symptom {
 

@@ -1,8 +1,7 @@
 package kr.ac.kgu.kpserver.domain.activity;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
-import kr.ac.kgu.kpserver.domain.health.Personality;
-import kr.ac.kgu.kpserver.domain.mbti.MBTI;
+import kr.ac.kgu.kpserver.domain.stress.Symptom;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
