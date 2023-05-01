@@ -51,12 +51,13 @@ public class ActivitySolutionController {
 
         List<Activity> activities = activityService.allActivityView();
         Activity userActivity = null;
-        for(Activity findActivity:activities){
-            if(userMBTI.substring(0) == (String.valueOf(findActivity.getPersonality()))){
-                userActivity = findActivity;
-                break;
-            }
-        }
+        // FIXME
+//        for(Activity findActivity:activities){
+//            if(userMBTI.substring(0) == (String.valueOf(findActivity.getPersonality()))){
+//                userActivity = findActivity;
+//                break;
+//            }
+//        }
         return "redirect:/";
 
     }
