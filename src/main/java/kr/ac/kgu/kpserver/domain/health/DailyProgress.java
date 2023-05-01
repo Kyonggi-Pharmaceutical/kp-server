@@ -2,6 +2,7 @@ package kr.ac.kgu.kpserver.domain.health;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
+import kr.ac.kgu.kpserver.domain.stress.goal.StressGoal;
 import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,10 @@ public class DailyProgress extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "health_goal_id")
     private HealthGoal healthGoal;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stress_goal_id")
+    private StressGoal stressGoal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

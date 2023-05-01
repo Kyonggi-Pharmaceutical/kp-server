@@ -7,6 +7,7 @@ import kr.ac.kgu.kpserver.domain.health.HealthcareType;
 import kr.ac.kgu.kpserver.domain.health.Personality;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.overdose.Overdose;
+import kr.ac.kgu.kpserver.domain.stress.goal.StressGoal;
 import lombok.*;
 
 import javax.persistence.*;
@@ -46,6 +47,10 @@ public class User extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "health_goal_id", referencedColumnName = "id")
     private HealthGoal healthGoal;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stress_goal_id", referencedColumnName = "id")
+    private StressGoal stressGoal;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "overdose_id", referencedColumnName = "id")
