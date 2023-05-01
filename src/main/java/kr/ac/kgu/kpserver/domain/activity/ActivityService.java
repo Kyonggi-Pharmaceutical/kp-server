@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.activity;
 
+import kr.ac.kgu.kpserver.domain.activity.dto.ActivityDto;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.stress.goal.StressGoal;
 import kr.ac.kgu.kpserver.domain.user.User;
@@ -17,9 +18,19 @@ import java.util.stream.Collectors;
 public class ActivityService {
 
     private final ActivityMBTIRepository activityMBTIRepository;
+    private final UserActivityRepository userActivityRepository;
     private final UserService userService;
 
-    private static final int MAX_DAILY_ACTIVITY_COUNT = 5;
+    private static final int MAX_DAILY_ACTIVITY_COUNT = 3;
+
+    @Transactional(readOnly = true)
+    public List<ActivityDto> getDailyActivitiesByUser(User user) {
+        List<UserActivity> userActivities = user.getUserActivities();
+        return userActivities.stream()
+                .map(UserActivity::getActivity)
+                .map(ActivityDto::from)
+                .collect(Collectors.toList());
+    }
 
     @Transactional
     public void renewAllUserActivities() {
@@ -40,8 +51,10 @@ public class ActivityService {
 
             Collections.shuffle(activitiesByMBTI);
             int newActivitySize = Math.min(activitiesByMBTI.size(), MAX_DAILY_ACTIVITY_COUNT);
-            List<Activity> newActivities = activitiesByMBTI.subList(0, newActivitySize - 1);
-            user.updateUserActivities(newActivities);
+            List<Activity> newActivities = activitiesByMBTI.subList(0, newActivitySize);
+            List<UserActivity> userActivities = user.updateUserActivities(newActivities);
+            userActivityRepository.deleteByUser(user);
+            userActivityRepository.saveAll(userActivities);
         }
     }
 }

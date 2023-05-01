@@ -57,7 +57,7 @@ public class User extends BaseEntity {
     @JoinColumn(name = "stress_goal_id", referencedColumnName = "id")
     private StressGoal stressGoal;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<UserActivity> userActivities = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -104,9 +104,10 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public void updateUserActivities(List<Activity> newActivities) {
+    public List<UserActivity> updateUserActivities(List<Activity> newActivities) {
         this.userActivities = newActivities.stream()
                 .map(activity -> new UserActivity(null, this, activity))
                 .collect(Collectors.toList());
+        return userActivities;
     }
 }
