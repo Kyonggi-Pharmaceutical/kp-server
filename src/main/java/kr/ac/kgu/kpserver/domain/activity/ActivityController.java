@@ -22,7 +22,7 @@ public class ActivityController {
     @Operation(summary = "오늘의 스트레스 솔루션 조회")
     @UserAuthenticated
     @GetMapping("/daily-solutions")
-    public ResponseEntity<List<ActivityDto>> foo(User user) {
+    public ResponseEntity<List<ActivityDto>> getDailyActivities(User user) {
         List<ActivityDto> dailyActivities = activityService.getDailyActivitiesByUser(user);
         return ResponseEntity.ok(dailyActivities);
     }
