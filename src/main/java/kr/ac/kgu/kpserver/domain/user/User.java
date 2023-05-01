@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.exercise.UserExercise;
 import kr.ac.kgu.kpserver.domain.health.HealthGoal;
+import kr.ac.kgu.kpserver.domain.health.UserAnswer;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.overdose.Overdose;
 import lombok.AllArgsConstructor;
@@ -44,6 +45,9 @@ public class User extends BaseEntity {
     private Integer stressPoint;
     private Boolean isSmoking;
     private Boolean isAlcohol;
+    private Double cal;
+    @Enumerated(EnumType.STRING)
+    private UserAnswer userAnswer = UserAnswer.NORMAL;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "health_goal_id", referencedColumnName = "id")

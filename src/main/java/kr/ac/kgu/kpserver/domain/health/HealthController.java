@@ -8,6 +8,7 @@ import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.logging.Logger;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -19,12 +20,14 @@ import java.util.List;
 public class HealthController {
 
     private final HealthService healthService;
-
+    private static final Logger logger = Logger.getLogger(HealthController.class.getName());
     @Operation(summary = "사용자 목표 몸무게 저장 API")
     @UserAuthenticated
     @Transactional
     @PostMapping("/updateUserWeightGoal")
     public ResponseEntity<Void> saveUserExerciseGroup(@RequestBody HealthGoalDto healthGoalDto) {
+        logger.info("운동목표 몸무게 api 호출");
+        System.out.println("이거 모게~ ? " + healthGoalDto);
         healthService.saveUserWeightGoal(healthGoalDto);
         return ResponseEntity.ok().build();
     }

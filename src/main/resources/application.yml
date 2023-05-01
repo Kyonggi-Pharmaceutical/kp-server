@@ -6,3 +6,7 @@ spring:
 oauth2:
   google:
     client-id: 921547342646-ef5msgs94nh7qqjmpi20ippop6hfq5tv.apps.googleusercontent.com
+logging:
+  level:
+    root: INFO
+    kr.ac.kgu.kpserver.domain.exercise: DEBUG

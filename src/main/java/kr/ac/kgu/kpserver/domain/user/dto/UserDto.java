@@ -2,6 +2,7 @@ package kr.ac.kgu.kpserver.domain.user.dto;
 
 import kr.ac.kgu.kpserver.domain.bmi.BMI;
 import kr.ac.kgu.kpserver.domain.bmi.BMIResponse;
+import kr.ac.kgu.kpserver.domain.health.UserAnswer;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.user.Gender;
 import kr.ac.kgu.kpserver.domain.user.User;
@@ -29,6 +30,7 @@ public class UserDto {
     private final Boolean isSmoking;
     private final Boolean isAlcohol;
     private final BMIResponse bmi;
+    private final UserAnswer userAnswer;
 
 
     public static UserDto from(User user) {

@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.logging.Logger;
 
 @Tag(name = "운동 API")
 @RestController
@@ -19,22 +21,29 @@ import javax.transaction.Transactional;
 public class ExerciseController {
     @Autowired
     private final ExerciseService exerciseService;
-    @Operation(summary = "사용자 운동 타입 저장 API")
+    private static final Logger logger = Logger.getLogger(ExerciseController.class.getName());
+
+    @Operation(summary = "사용자 운동 메인 API")
     @UserAuthenticated
     @Transactional
-    @PostMapping("/updateGroup")
-    public ResponseEntity<User> saveUserExerciseGroup(User user,
-                                                      @RequestBody UserDto userDto) {
-        User users = exerciseService.saveExerciseGroup(user, userDto);
-        return ResponseEntity.ok().body(users);
+    @GetMapping("/exerciseSolution")
+    public ResponseEntity<UserExercise> saveUserExerciseGroup(@RequestParam(required = false) LocalDate date) {
+        if (date == null) {
+            date = LocalDate.now(); // set default value to today's date
+        }
+        UserExercise userExerciseList =exerciseService.printExercise(date);
+        logger.info("운동 메인 api 호출"+ userExerciseList.getExercise());
+        logger.info("운동 메인 api 호출"+ userExerciseList.getUser());
+        return ResponseEntity.ok(userExerciseList);
     }
-    //메소드에 따른 api 수정 아직 미완
-    @Operation(summary = "사용자 운동 타입 저장 API")
+
+    @Operation(summary = "사용자 만족도 타입 저장 API")
     @UserAuthenticated
     @Transactional
-    @GetMapping("/exerciseMain")
-    public ResponseEntity<UserDto> saveUserExerciseGroup(User user) {
-        return ResponseEntity.ok().body(UserDto.from(user));
+    @PostMapping("/saveUserAnswer")
+    public ResponseEntity<Void> saveUserAnswer(User user, UserDto userDto) {
+        exerciseService.findByUserAnswer(user, userDto);
+        return ResponseEntity.ok().build();
     }
 
 
