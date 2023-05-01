@@ -1,7 +1,8 @@
-package kr.ac.kgu.kpserver.domain.health;
+package kr.ac.kgu.kpserver.domain.health.goal;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.health.DailyProgress;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
