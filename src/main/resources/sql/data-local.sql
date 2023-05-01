@@ -18,3 +18,8 @@ insert into daily_health_messages(id, type, personality, content) values(15, 'FO
 insert into daily_health_messages(id, type, personality, content) values(16, 'LIFE_STYLE', 'INTROVERSION', 'LIFE_STYLE INTROVERSION message');
 insert into daily_health_messages(id, type, personality, content) values(17, 'LIFE_STYLE', 'EXTROVERSION', 'LIFE_STYLE EXTROVERSION message');
 insert into daily_health_messages(id, type, personality, content) values(18, 'LIFE_STYLE', 'ALL', 'LIFE_STYLE ALL message');
+
+insert into activities(id, name, symptom) values (1, 'TEST_ACTIVITY', 'LETHARGIC');
+insert into activity_mbti(id, mbti, activity_id) values (1, 'INTJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (2, 'INFJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (3, 'INTP', 1);
