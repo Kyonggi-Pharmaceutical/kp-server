@@ -2,6 +2,8 @@ package kr.ac.kgu.kpserver.domain.user;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.activity.Activity;
+import kr.ac.kgu.kpserver.domain.activity.UserActivity;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.health.HealthcareType;
 import kr.ac.kgu.kpserver.domain.health.Personality;
@@ -12,6 +14,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -51,6 +56,9 @@ public class User extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stress_goal_id", referencedColumnName = "id")
     private StressGoal stressGoal;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserActivity> userActivities = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "overdose_id", referencedColumnName = "id")
@@ -94,5 +102,11 @@ public class User extends BaseEntity {
         if (isSmoking != null) this.isSmoking = isSmoking;
         if (isAlcohol != null) this.isAlcohol = isAlcohol;
         return this;
+    }
+
+    public void updateUserActivities(List<Activity> newActivities) {
+        this.userActivities = newActivities.stream()
+                .map(activity -> new UserActivity(null, this, activity))
+                .collect(Collectors.toList());
     }
 }

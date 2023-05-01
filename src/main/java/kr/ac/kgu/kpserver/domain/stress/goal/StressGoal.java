@@ -1,6 +1,5 @@
 package kr.ac.kgu.kpserver.domain.stress.goal;
 
-import kr.ac.kgu.kpserver.domain.activity.Activity;
 import kr.ac.kgu.kpserver.domain.health.DailyProgress;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,8 +26,4 @@ public class StressGoal {
 
     @OneToMany(mappedBy = "stressGoal")
     private List<DailyProgress> dailyProgresses = new ArrayList<>();
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activity_id", referencedColumnName = "id")
-    private Activity dailyActivity;
 }

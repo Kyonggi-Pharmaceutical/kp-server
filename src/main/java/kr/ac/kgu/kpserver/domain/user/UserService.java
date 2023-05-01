@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -77,6 +78,10 @@ public class UserService {
     @Transactional
     public void deleteUser(User user) {
         userRepository.delete(user);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     private User upsertUser(User userRequest) {
