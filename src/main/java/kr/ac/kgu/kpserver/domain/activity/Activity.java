@@ -25,7 +25,8 @@ public class Activity extends BaseEntity {
     private Long id;
 
     private String name;
-    private String symptom;
+    @Enumerated(EnumType.STRING)
+    private Symptom symptom;
 
     @OneToMany(mappedBy = "activity")
     private List<ActivityMBTI> mbtiList = new ArrayList<>();
