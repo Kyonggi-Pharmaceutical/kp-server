@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -22,6 +23,8 @@ public class Comment extends BaseEntity {
     private Long id;
 
     private String description;
+    private LocalDate createdAt;
+    private LocalDate updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
@@ -30,5 +33,12 @@ public class Comment extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    public Comment(User user, Article article, String description, LocalDate createdAt) {
+        this.user = user;
+        this.article = article;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
 
 }

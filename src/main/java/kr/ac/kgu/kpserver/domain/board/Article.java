@@ -43,6 +43,9 @@ public class Article extends BaseEntity {
     @OneToMany(mappedBy = "article")
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "article")
+    private List<Like> likes = new ArrayList<>();
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

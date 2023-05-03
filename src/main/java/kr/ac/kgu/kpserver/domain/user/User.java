@@ -2,6 +2,7 @@ package kr.ac.kgu.kpserver.domain.user;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.board.Like;
 import kr.ac.kgu.kpserver.domain.exercise.Exercise;
 import kr.ac.kgu.kpserver.domain.health.HealthGoal;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
@@ -55,6 +56,9 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private List<Exercise> exercises = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Like> likes = new ArrayList<>();
 
     public User(String firstName, String lastName, String email, String profileImageUrl) {
         this.firstName = firstName;
