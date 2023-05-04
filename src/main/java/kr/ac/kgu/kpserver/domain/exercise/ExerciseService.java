@@ -12,8 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -35,7 +36,7 @@ public class ExerciseService {
     }
 
     Logger logger = LoggerFactory.getLogger(ExerciseService.class);
-
+    @Transactional
     public void findByUserAnswer(User user, UserDto userDto) {
         String userAnswer = String.valueOf(userDto.getUserAnswer());
         user.setUserAnswer(UserAnswer.valueOf(userAnswer));
@@ -45,6 +46,7 @@ public class ExerciseService {
     /*
      * met -> calories
      * */
+
     private double calculateCaloriesToNormalAndEasy(Exercise exercise, User user) {
         double metToCalories = exercise.getMet() * user.getWeight() * 60 / 60;
         return Math.round(metToCalories * 100) / 100.0;
@@ -68,13 +70,9 @@ public class ExerciseService {
                     .map(UserExercise::getExercise)
                     .map(Exercise::getId)
                     .collect(Collectors.toList());
-            logger.info(String.valueOf(userMBTI));
-            List<Exercise> exercisesList = exerciseRepository.findByMbtiAndIdNotIn(userMBTI, exerciseIds);
 
-            if (exercisesList.isEmpty()) {
-                logger.error("Exercises list is empty");
-                return;
-            }
+            List<Exercise> exercisesList = Optional.ofNullable(exerciseRepository.findByMbtiAndIdNotIn(userMBTI, exerciseIds))
+                    .orElse(Collections.emptyList());
 
             int randomIdx = new Random().nextInt(exercisesList.size());
             Exercise exercise = exercisesList.get(randomIdx);
@@ -138,12 +136,15 @@ public class ExerciseService {
         });
     }
 
-    public UserExercise printExercise(LocalDate date) {
-        UserExercise userExercises = userExerciseRepository.findByDate(date);
-        logger.info(userExercises.getUser().getEmail(),
-                userExercises.getExercise().getName(), userExercises.getCal());
-        return userExercises;
+    @Transactional
+    public List<ExerciseDto> getDailyExercisesByUser(User user) {
+        List<UserExercise> userExercise = user.getUserExercises();
+        return userExercise.stream()
+                .map(userEx -> {
+                    ExerciseDto exerciseDto = ExerciseDto.from(userEx.getExercise());
+                    exerciseDto.setCal(userEx.getCal());
+                    return exerciseDto;
+                })
+                .collect(Collectors.toList());
     }
-
-
 }

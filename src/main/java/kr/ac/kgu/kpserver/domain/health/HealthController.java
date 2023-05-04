@@ -2,16 +2,16 @@ package kr.ac.kgu.kpserver.domain.health;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.logging.Logger;
 
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Tag(name = "목표 달성 API")
 @RestController
@@ -23,7 +23,6 @@ public class HealthController {
     private static final Logger logger = Logger.getLogger(HealthController.class.getName());
     @Operation(summary = "사용자 목표 몸무게 저장 API")
     @UserAuthenticated
-    @Transactional
     @PostMapping("/updateUserWeightGoal")
     public ResponseEntity<Void> saveUserExerciseGroup(@RequestBody HealthGoalDto healthGoalDto) {
         logger.info("운동목표 몸무게 api 호출");
@@ -45,9 +44,9 @@ public class HealthController {
     @Operation(summary = "월별 솔루션 달성률 제시 API")
     @UserAuthenticated
     @GetMapping("/monthAchievementRate")
-    public ResponseEntity<HealthGoal> calculationMonthExerciseGoal(HealthGoal healthGoal) {
-        HealthGoal healthGoal1 = healthService.calculationHealthGoal(healthGoal);
-        return ResponseEntity.ok().body(healthGoal1);
+    public ResponseEntity<Double> calculationMonthExerciseGoal(HealthGoal healthGoal) {
+        Double accomplishRate = healthService.calculationHealthGoal(healthGoal);
+        return ResponseEntity.ok(accomplishRate);
     }
 
     @Operation(summary = "이전 솔루션 체크 리스트 확인 API")

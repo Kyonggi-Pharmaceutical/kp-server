@@ -1,17 +1,27 @@
 package kr.ac.kgu.kpserver.domain.exercise;
 
-import kr.ac.kgu.kpserver.domain.health.Personality;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ExerciseDto {
-    private final Long id;
-    private final String name;
-    private final ExerciseType exerciseGroup;
-    private final Personality personality;
-    private final double calorie;
-    private final int duration;
+    private Long id;
+    private String name;
+    private ExerciseType type;
+    private Double cal;
 
+    public static ExerciseDto from(Exercise exercise) {
+        return new ExerciseDto(
+                exercise.getId(),
+                exercise.getName(),
+                exercise.getType(),
+                null
+        );
+
+    }
 }

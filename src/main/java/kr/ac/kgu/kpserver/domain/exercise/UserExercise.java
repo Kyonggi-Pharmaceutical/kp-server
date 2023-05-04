@@ -13,15 +13,15 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@Table(name = "UserExercises")
+@Table(name = "user_exercises")
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserExercise extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
     @Id
@@ -36,6 +36,5 @@ public class UserExercise extends BaseEntity {
         this.cal = calories;
         this.date = LocalDate.now();
     }
-
 
 }

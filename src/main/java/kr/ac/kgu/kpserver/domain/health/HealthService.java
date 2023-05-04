@@ -1,5 +1,7 @@
 package kr.ac.kgu.kpserver.domain.health;
 
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoalRepository;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -45,15 +47,15 @@ public class HealthService {
     /*
      * 매달 솔루션 달성률 계산
      */
-    public HealthGoal calculationHealthGoal(HealthGoal healthGoal) {
+    public Double calculationHealthGoal(HealthGoal healthGoal) {
+
         List<DailyProgress> dailyProgresses = healthGoal.getDailyProgresses();
         //백분율 계산
         long trueCount = dailyProgresses.stream().filter(DailyProgress::isCheck).count();
         double accomplishRate = Math.round(((double) trueCount / 30) * 1000.0) / 10.0;
         healthGoal.setAccomplishRate(accomplishRate);
         healthGoalRepository.save(healthGoal);
-
-        return healthGoal;
+        return accomplishRate;
     }
 
     /*

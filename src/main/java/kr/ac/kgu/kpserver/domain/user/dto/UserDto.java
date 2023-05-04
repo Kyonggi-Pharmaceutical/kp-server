@@ -45,7 +45,6 @@ public class UserDto {
                 .height(user.getHeight())
                 .weight(user.getWeight())
                 .mbti(user.getMbti())
-                .exerciseGroup(user.getExerciseGroup())
                 .stressPoint(user.getStressPoint())
                 .isSmoking(user.getIsSmoking())
                 .isAlcohol(user.getIsAlcohol())
