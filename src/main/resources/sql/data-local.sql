@@ -61,6 +61,16 @@ insert into activity_mbti(id, mbti, activity_id) values (27, 'ESTP', 9);
 insert into activity_mbti(id, mbti, activity_id) values (28, 'ESTJ', 10);
 insert into activity_mbti(id, mbti, activity_id) values (29, 'ESFJ', 10);
 insert into activity_mbti(id, mbti, activity_id) values (30, 'ESTP', 10);
+insert into activity_mbti(id, mbti, activity_id) values (31, 'ESFP', 1);
+insert into activity_mbti(id, mbti, activity_id) values (32, 'ESFP', 2);
+insert into activity_mbti(id, mbti, activity_id) values (33, 'ESFP', 3);
+insert into activity_mbti(id, mbti, activity_id) values (34, 'ESFP', 4);
+insert into activity_mbti(id, mbti, activity_id) values (35, 'ESFP', 5);
+insert into activity_mbti(id, mbti, activity_id) values (36, 'ESFP', 6);
+insert into activity_mbti(id, mbti, activity_id) values (37, 'ESFP', 7);
+insert into activity_mbti(id, mbti, activity_id) values (38, 'ESFP', 8);
+insert into activity_mbti(id, mbti, activity_id) values (39, 'ESFP', 9);
+insert into activity_mbti(id, mbti, activity_id) values (40, 'ESFP', 10);
 
 insert into user_activities(id, user_id, activity_id) values (0, -1, 1);
 insert into stress_goals(id, accomplish_rate, start_at, end_at) values (0, 0.0, '2023-04-01T00:00:00', '2023-04-30T23:59:59');
