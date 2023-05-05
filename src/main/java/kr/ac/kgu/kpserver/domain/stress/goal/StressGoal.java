@@ -34,6 +34,10 @@ public class StressGoal {
     @OneToMany(mappedBy = "stressGoal")
     private List<DailyProgress> dailyProgresses = new ArrayList<>();
 
+    public Double getAccomplishRate() {
+        return accomplishRate == 0 ? updateAccomplishRate() : accomplishRate;
+    }
+
     public void addDailyProgress(DailyProgress dailyProgress) {
         dailyProgresses.add(dailyProgress);
         updateAccomplishRate();
@@ -45,9 +49,10 @@ public class StressGoal {
         );
     }
 
-    private void updateAccomplishRate() {
+    private double updateAccomplishRate() {
         long checkedCount = dailyProgresses.stream().filter(DailyProgress::getIsCheck).count();
         double value = checkedCount / 30.0 * 100;
         this.accomplishRate = Math.round(value * 10) / 10.0;
+        return this.accomplishRate;
     }
 }
