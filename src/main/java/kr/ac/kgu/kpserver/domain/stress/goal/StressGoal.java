@@ -27,7 +27,7 @@ public class StressGoal {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
     private LocalDateTime startAt = LocalDateTime.now();
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
-    private LocalDateTime endAt;
+    private LocalDateTime endAt = startAt.plusDays(30);
 
     private Double accomplishRate;
 
@@ -36,11 +36,18 @@ public class StressGoal {
 
     public void addDailyProgress(DailyProgress dailyProgress) {
         dailyProgresses.add(dailyProgress);
+        updateAccomplishRate();
     }
 
     public boolean hasDailyProgress() {
         return dailyProgresses.stream().anyMatch(dailyProgress ->
                 dailyProgress.getCreatedAt().getDayOfYear() == LocalDateTime.now().getDayOfYear()
         );
+    }
+
+    private void updateAccomplishRate() {
+        long checkedCount = dailyProgresses.stream().filter(DailyProgress::getIsCheck).count();
+        double value = checkedCount / 30.0 * 100;
+        this.accomplishRate = Math.round(value * 10) / 10.0;
     }
 }
