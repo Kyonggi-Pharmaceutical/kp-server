@@ -3,6 +3,8 @@ package kr.ac.kgu.kpserver.domain.stress;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ac.kgu.kpserver.domain.health.progress.DailyProgressService;
+import kr.ac.kgu.kpserver.domain.stress.dto.StressGoalResponse;
+import kr.ac.kgu.kpserver.domain.stress.goal.StressGoalService;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.UserService;
 import kr.ac.kgu.kpserver.domain.user.dto.UserRequest;
@@ -16,10 +18,12 @@ import org.springframework.web.bind.annotation.*;
 public class StressController {
 
     private final DailyProgressService dailyProgressService;
+    private final StressGoalService stressGoalService;
     private final UserService userService;
 
-    public StressController(DailyProgressService dailyProgressService, UserService userService) {
+    public StressController(DailyProgressService dailyProgressService, StressGoalService stressGoalService, UserService userService) {
         this.dailyProgressService = dailyProgressService;
+        this.stressGoalService = stressGoalService;
         this.userService = userService;
     }
 
@@ -39,6 +43,14 @@ public class StressController {
     public ResponseEntity<Void> setStressDailyProgress(User user, @RequestParam boolean done) {
         dailyProgressService.setUserStressDailyProgress(user.getId(), done);
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "스트레스 목표 조회 API")
+    @UserAuthenticated
+    @GetMapping("/stress-goal")
+    public ResponseEntity<StressGoalResponse> getStressGoal(User user) {
+        StressGoalResponse response = stressGoalService.getStressGoal(user.getId());
+        return ResponseEntity.ok(response);
     }
 
     // TODO - 스트레스 월간 체크
