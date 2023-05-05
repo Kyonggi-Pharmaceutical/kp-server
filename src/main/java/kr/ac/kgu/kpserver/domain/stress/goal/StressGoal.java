@@ -1,12 +1,14 @@
 package kr.ac.kgu.kpserver.domain.stress.goal;
 
-import kr.ac.kgu.kpserver.domain.health.DailyProgress;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import kr.ac.kgu.kpserver.domain.health.progress.DailyProgress;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +24,23 @@ public class StressGoal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
+    private LocalDateTime startAt = LocalDateTime.now();
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
+    private LocalDateTime endAt;
+
     private Double accomplishRate;
 
     @OneToMany(mappedBy = "stressGoal")
     private List<DailyProgress> dailyProgresses = new ArrayList<>();
+
+    public void addDailyProgress(DailyProgress dailyProgress) {
+        dailyProgresses.add(dailyProgress);
+    }
+
+    public boolean hasDailyProgress() {
+        return dailyProgresses.stream().anyMatch(dailyProgress ->
+                dailyProgress.getCreatedAt().getDayOfYear() == LocalDateTime.now().getDayOfYear()
+        );
+    }
 }

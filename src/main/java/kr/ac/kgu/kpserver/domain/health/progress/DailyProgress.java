@@ -1,4 +1,4 @@
-package kr.ac.kgu.kpserver.domain.health;
+package kr.ac.kgu.kpserver.domain.health.progress;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
@@ -37,4 +37,15 @@ public class DailyProgress extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public DailyProgress(Boolean isCheck, HealthGoal healthGoal, User user) {
+        this.isCheck = isCheck;
+        this.healthGoal = healthGoal;
+        this.user = user;
+    }
+
+    public DailyProgress(Boolean isCheck, StressGoal stressGoal, User user) {
+        this.isCheck = isCheck;
+        this.stressGoal = stressGoal;
+        this.user = user;
+    }
 }

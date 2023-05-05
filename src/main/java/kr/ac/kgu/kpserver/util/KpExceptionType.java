@@ -10,6 +10,8 @@ public enum KpExceptionType {
     ILLEGAL_ARGUMENT(HttpStatus.BAD_REQUEST, 104, "부적절한 값입니다."),
     NOT_SIGN_UP(HttpStatus.BAD_REQUEST, 105, "회원가입하지 않은 유저입니다."),
 
+    ALREADY_SET_DAILY_PROGRESS(HttpStatus.BAD_REQUEST, 110, "이미 오늘의 일일 진척도를 입력했습니다."),
+
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 500, "부적절한 값입니다."),
 
 
