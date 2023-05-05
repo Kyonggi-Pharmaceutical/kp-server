@@ -1,131 +1,150 @@
 package kr.ac.kgu.kpserver.domain.exercise;
 
+import kr.ac.kgu.kpserver.domain.health.UserAnswer;
+import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@Slf4j
 public class ExerciseService {
     @Autowired
-    private ExerciseRepository exerciseRepository;
+    private final ExerciseRepository exerciseRepository;
     @Autowired
-    private UserRepository userRepository;
-    private final Random random = new Random();
+    private final UserRepository userRepository;
+    @Autowired
+    private final UserExerciseRepository userExerciseRepository;
 
-    protected List<Exercise> findAllExercises() {
-        return exerciseRepository.findAll();
+    public ExerciseService(ExerciseRepository exerciseRepository, UserRepository userRepository, UserExerciseRepository userExerciseRepository) {
+        this.exerciseRepository = exerciseRepository;
+        this.userExerciseRepository = userExerciseRepository;
+        this.userRepository = userRepository;
+
+    }
+
+    Logger logger = LoggerFactory.getLogger(ExerciseService.class);
+    @Transactional
+    public void findByUserAnswer(User user, UserDto userDto) {
+        String userAnswer = String.valueOf(userDto.getUserAnswer());
+        user.setUserAnswer(UserAnswer.valueOf(userAnswer));
+        userRepository.save(user);
     }
 
     /*
-     * 사용자 운동 타입, 몸무게 저장
-     */
-    public User saveExerciseGroup(UserDto userDto) {
-        User user = new User();
-        user.setExerciseGroup(userDto.getExerciseGroup());
-        user.setWeight(userDto.getWeight());
-        return userRepository.save(user);
+     * met -> calories
+     * */
+
+    private double calculateCaloriesToNormalAndEasy(Exercise exercise, User user) {
+        double metToCalories = exercise.getMet() * user.getWeight() * 60 / 60;
+        return Math.round(metToCalories * 100) / 100.0;
+    }
+
+    private double calculateCaloriesToEasy(Exercise exercise, User user) {
+        double metToCalories = exercise.getMet() * user.getWeight() * 30 / 60;
+        return Math.round(metToCalories * 100) / 100.0;
     }
 
     /*
      * 맞춤 운동 솔루션 제시(normal)
      */
-    @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
-    public ExerciseDto solutionTypeNormal(User user,
-                                          ExerciseDto exerciseDto) {
-        List<Exercise> allExercisesList = findAllExercises();
-        List<Exercise> selectedExercises = new ArrayList<>();
+    @Transactional
+    public void solutionTypeNormal() {
+        List<User> userList = userRepository.findByUserAnswer(UserAnswer.NORMAL);
 
-        String userMBTI = String.valueOf(user.getMbti());
+        userList.forEach(user -> {
+            MBTI userMBTI = user.getMbti();
+            List<Long> exerciseIds = user.getUserExercises().stream()
+                    .map(UserExercise::getExercise)
+                    .map(Exercise::getId)
+                    .collect(Collectors.toList());
 
-        allExercisesList.stream()
-                .filter(e -> {
-                    String personality = String.valueOf(e.getPersonality());
-                    return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
-                })
-                .forEach(selectedExercises::add);
+            List<Exercise> exercisesList = Optional.ofNullable(exerciseRepository.findByMbtiAndIdNotIn(userMBTI, exerciseIds))
+                    .orElse(Collections.emptyList());
 
-        if (selectedExercises.isEmpty()) {
-            return null;
-        }
-
-        Exercise selectExerciseList = selectedExercises.get(random.nextInt(selectedExercises.size()));
-        selectExerciseList.updateCalories(user);
-        exerciseRepository.save(selectExerciseList);
-        return exerciseDto.mapToDto(selectExerciseList);
+            int randomIdx = new Random().nextInt(exercisesList.size());
+            Exercise exercise = exercisesList.get(randomIdx);
+            logger.info(exercise.toString());
+            double calories = calculateCaloriesToNormalAndEasy(exercise, user); // 칼로리 계산
+            UserExercise userExerciseSolution = new UserExercise(user, exercise, calories); // 칼로리 추가
+            userExerciseRepository.save(userExerciseSolution);
+            logger.info(userExerciseSolution.toString());
+        });
     }
 
     /*
      * 맞춤 운동 솔루션 제시(강도 낮춤)
      */
-    @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
-    public ExerciseDto solutionTypeHard(User user,
-                                        ExerciseDto exerciseDto) {
-        List<Exercise> allExercisesList = findAllExercises();
-        List<Exercise> selectedExercises = new ArrayList<>();
+    @Transactional
+    public void solutionTypeHard() {
+        List<User> userList = userRepository.findByUserAnswer(UserAnswer.HARD);
+        userList.forEach(user -> {
+                    MBTI userMBTI = user.getMbti();
+                    List<Long> exerciseIds = user.getUserExercises().stream()
+                            .map(UserExercise::getExercise)
+                            .map(Exercise::getId)
+                            .collect(Collectors.toList());
+                    List<Exercise> exercisesList = exerciseRepository
+                            .findByMbtiAndIdNotIn(userMBTI, exerciseIds);
 
-        String userMBTI = String.valueOf(user.getMbti());
+                    int randomIdx = new Random().nextInt(exercisesList.size());
+                    Exercise exercise = exercisesList.get(randomIdx);
 
-        allExercisesList.stream()
-                .filter(e -> {
-                    String personality = String.valueOf(e.getPersonality());
-                    return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
-                })
-                .forEach(selectedExercises::add);
 
-        if (selectedExercises.isEmpty()) {
-            return null;
-        }
-
-        Exercise selectExerciseList = selectedExercises.get(random.nextInt(selectedExercises.size()));
-        selectExerciseList.lowUpdateCalories(user);
-        exerciseRepository.save(selectExerciseList);
-        return exerciseDto.mapToDto(selectExerciseList);
+                    double calories = calculateCaloriesToEasy(exercise, user); // 칼로리 계산
+                    UserExercise userExerciseSolution = new UserExercise(user, exercise, calories); // 칼로리 추가
+                    userExerciseRepository.save(userExerciseSolution);
+                }
+        );
     }
 
     /*
      * 맞춤 운동 솔루션 제시(강도 높임)
      */
-    @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
-    public List<ExerciseDto> solutionTypeHigh(User user,
-                                              ExerciseDto exerciseDto) {
-        List<Exercise> allExercisesList = findAllExercises();
-        List<Exercise> selectedExercises = new ArrayList<>();
+    @Transactional
+    public void solutionTypeHigh() {
+        List<User> userList = userRepository.findByUserAnswer(UserAnswer.EASY);
+        userList.forEach(user -> {
+            MBTI userMBTI = user.getMbti();
+            List<Long> exerciseIds = user.getUserExercises().stream()
+                    .map(UserExercise::getExercise)
+                    .map(Exercise::getId)
+                    .collect(Collectors.toList());
+            List<Exercise> exercisesList = exerciseRepository.findByMbtiAndIdNotIn(userMBTI, exerciseIds);
 
-        String userMBTI = String.valueOf(user.getMbti());
 
-        allExercisesList.stream()
-                .filter(e -> {
-                    String personality = String.valueOf(e.getPersonality());
-                    return personality.equals("ALL") || userMBTI.substring(0, 1).equals(personality.substring(0, 1));
-                })
-                .forEach(selectedExercises::add);
+            for (int i = 0; i < 2; i++) {
+                int randomIdx = new Random().nextInt(exercisesList.size());
+                Exercise exercise = exercisesList.get(randomIdx);
 
-        if (selectedExercises.isEmpty()) {
-            return null;
-        }
-
-        List<ExerciseDto> exerciseDtos = selectedExercises.stream()
-                .limit(2)
-                .map(exerciseDto::mapToDto)
-                .collect(Collectors.toList());
-
-        List<Exercise> exercisesToSave = exerciseDtos.stream()
-                .map(exerciseDto::mapToEntity)
-                .collect(Collectors.toList());
-
-        exerciseRepository.saveAll(exercisesToSave);
-
-        return exerciseDtos;
+                double calories = calculateCaloriesToNormalAndEasy(exercise, user); // 칼로리 계산
+                UserExercise userExerciseSolution = new UserExercise(user, exercise, calories); // 칼로리 추가
+                userExerciseRepository.save(userExerciseSolution);
+            }
+        });
     }
 
+    @Transactional
+    public List<ExerciseDto> getDailyExercisesByUser(User user) {
+        List<UserExercise> userExercise = user.getUserExercises();
+        return userExercise.stream()
+                .map(userEx -> {
+                    ExerciseDto exerciseDto = ExerciseDto.from(userEx.getExercise());
+                    exerciseDto.setCal(userEx.getCal());
+                    return exerciseDto;
+                })
+                .collect(Collectors.toList());
+    }
 }

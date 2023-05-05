@@ -1,11 +1,14 @@
 package kr.ac.kgu.kpserver.domain.health;
 
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoalRepository;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +20,13 @@ public class HealthService {
     private final HealthGoalRepository healthGoalRepository;
 
     /*
-     * 사용자 목표 몸무게 데이터베이스 저장
+     * 사용자 운동 목표 데이터베이스 저장
      */
     public void saveUserWeightGoal(HealthGoalDto healthGoalDto) {
         HealthGoal healthGoal = new HealthGoal();
-        healthGoal.setWeightGoal(healthGoalDto.getWeightGoal());
+        healthGoal.setStartAt(healthGoalDto.getStartAt());
+        Double userGoalWeight = healthGoalDto.getWeightGoal();
+        healthGoal.setWeightGoal(userGoalWeight);
         healthGoalRepository.save(healthGoal);
     }
 
@@ -31,28 +36,26 @@ public class HealthService {
     public void saveDailyProgress(User user,
                                   HealthGoal healthGoal,
                                   Boolean isCheck) {
-            DailyProgress dailyProgress = new DailyProgress();
-            dailyProgress.setUser(user);
-            dailyProgress.setHealthGoal(healthGoal);
-            dailyProgress.setCheck(isCheck);
-            dailyProgressRepository.save(dailyProgress);
-
-            healthGoal.getDailyProgresses().add(dailyProgress);
+        DailyProgress dailyProgress = new DailyProgress();
+        dailyProgress.setUser(user);
+        dailyProgress.setHealthGoal(healthGoal);
+        dailyProgress.setCheck(isCheck);
+        dailyProgressRepository.save(dailyProgress);
+        healthGoal.getDailyProgresses().add(dailyProgress);
     }
 
     /*
      * 매달 솔루션 달성률 계산
      */
-    public HealthGoal calculationHealthGoal(HealthGoal healthGoal) {
+    public Double calculationHealthGoal(HealthGoal healthGoal) {
+
         List<DailyProgress> dailyProgresses = healthGoal.getDailyProgresses();
         //백분율 계산
         long trueCount = dailyProgresses.stream().filter(DailyProgress::isCheck).count();
         double accomplishRate = Math.round(((double) trueCount / 30) * 1000.0) / 10.0;
-
         healthGoal.setAccomplishRate(accomplishRate);
         healthGoalRepository.save(healthGoal);
-
-        return healthGoal;
+        return accomplishRate;
     }
 
     /*
@@ -63,6 +66,15 @@ public class HealthService {
                 .filter(dp -> dp.getDate().isBefore(LocalDate.now()))
                 .map(dp -> dp.isCheck() ? "완료" : "미완료")
                 .collect(Collectors.toList());
+    }
+
+    /*
+     * 솔수션 종료값 저장
+     */
+    public void saveEndSolutionDate(HealthGoal healthGoal) {
+        LocalDateTime finishDate = LocalDateTime.now();
+        healthGoal.setEndAt(finishDate);
+        healthGoalRepository.save(healthGoal);
     }
 
     /*
@@ -80,7 +92,6 @@ public class HealthService {
         if (userWeightResult <= 0) {
             return null;
         }
-
-        return Math.max(0, userWeight - userWeightGoal);
+        return userWeightGoal;
     }
 }

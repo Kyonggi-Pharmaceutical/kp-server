@@ -6,58 +6,40 @@ import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Tag(name = "운동 API")
 @RestController
 @RequestMapping("/api/v1/exercises")
 @RequiredArgsConstructor
 public class ExerciseController {
-    @Autowired
-    private final ExerciseService exerciseService;
-    @Operation(summary = "사용자 운동 타입 저장 API")
-    @UserAuthenticated
-    @Transactional
-    @PostMapping("/updateGroup")
-    public ResponseEntity<?> saveUserExerciseGroup(@RequestBody UserDto userDto) {
-        User users = exerciseService.saveExerciseGroup(userDto);
-        return ResponseEntity.ok().body(users);
-    }
-    @Operation(summary = "일일 운동 솔루션 제시 API")
-    @UserAuthenticated
-    @GetMapping("/exercisesSolution")
-    @ResponseBody
-    public ResponseEntity<ExerciseDto> solutionExerciseDefault(User user,
-                                                  ExerciseDto exerciseDto) {
-        ExerciseDto exerciseSolution =
-                exerciseService.solutionTypeNormal(user,exerciseDto);
 
-        return ResponseEntity.ok(exerciseSolution);
-    }
-    @Operation(summary = "일일 운동 솔루션 제시(강도 낮음) API")
+    private final ExerciseService exerciseService;
+    private static final Logger logger = Logger.getLogger(ExerciseController.class.getName());
+
+    @Operation(summary = "사용자 운동 메인 API")
     @UserAuthenticated
-    @GetMapping("/lowExercisesSolution")
-    @ResponseBody
-    public ResponseEntity<ExerciseDto> solutionExerciseHard(ExerciseDto exerciseDto,
-                                                          User user){
-        ExerciseDto lowExerciseSolution =
-                exerciseService.solutionTypeHard(user, exerciseDto);
-        return ResponseEntity.ok(lowExerciseSolution);
+    @GetMapping("/exerciseSolution")
+    public ResponseEntity<List<ExerciseDto>> getDailyExercises(User user) {
+        List<ExerciseDto> dailyExercises = exerciseService.getDailyExercisesByUser(user);
+        logger.info(String.valueOf(dailyExercises.size()));
+        return ResponseEntity.ok(dailyExercises);
     }
-    @Operation(summary = "일일 운동 솔루션 제시(강도 높음) API")
+
+    @Operation(summary = "사용자 만족도 타입 저장 API")
     @UserAuthenticated
-    @GetMapping("/highExercisesSolution")
-    @ResponseBody
-    public ResponseEntity<List<ExerciseDto>> solutionExerciseHigh(ExerciseDto exerciseDto,
-                                                                  User user){
-        List<ExerciseDto> highExerciseSolution =
-                exerciseService.solutionTypeHigh(user, exerciseDto);
-        return ResponseEntity.ok(highExerciseSolution);
+    @PostMapping("/saveUserAnswer")
+    public ResponseEntity<Void> saveUserAnswer(User user, UserDto userDto) {
+        exerciseService.findByUserAnswer(user, userDto);
+        return ResponseEntity.ok().build();
     }
+
 
 }

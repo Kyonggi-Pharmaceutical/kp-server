@@ -33,6 +33,7 @@ public class HealthGoal extends BaseEntity {
     private LocalDateTime endAt;
     private Double accomplishRate;
     private Double weightGoal;
+
     @OneToMany(mappedBy = "healthGoal")
     private List<DailyProgress> dailyProgresses = new ArrayList<>();
 

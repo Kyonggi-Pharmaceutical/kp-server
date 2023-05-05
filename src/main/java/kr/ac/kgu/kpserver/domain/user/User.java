@@ -4,19 +4,18 @@ import io.swagger.v3.oas.annotations.Hidden;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.board.Like;
 import kr.ac.kgu.kpserver.domain.exercise.Exercise;
+import kr.ac.kgu.kpserver.domain.exercise.UserExercise;
+import kr.ac.kgu.kpserver.domain.health.UserAnswer;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.health.HealthcareType;
 import kr.ac.kgu.kpserver.domain.health.Personality;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.overdose.Overdose;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.ArrayList;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -43,6 +42,8 @@ public class User extends BaseEntity {
     private Double height;
     private Double weight;
     @Enumerated(EnumType.STRING)
+    private UserAnswer userAnswer = UserAnswer.NORMAL;
+    @Enumerated(EnumType.STRING)
     private MBTI mbti;
     @Enumerated(EnumType.STRING)
     private HealthcareType healthcareType;
@@ -58,8 +59,8 @@ public class User extends BaseEntity {
     @JoinColumn(name = "overdose_id", referencedColumnName = "id")
     private Overdose overdose;
 
-    @OneToMany(mappedBy = "user")
-    private List<Exercise> exercises = new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<UserExercise> userExercises = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Like> likes = new ArrayList<>();
