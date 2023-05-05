@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -21,10 +20,7 @@ public class Comment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String description;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
@@ -34,11 +30,10 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    public Comment(User user, Article article, String description, LocalDate createdAt) {
+    public Comment(User user, Article article, String description) {
         this.user = user;
         this.article = article;
         this.description = description;
-        this.createdAt = createdAt;
     }
 
 }

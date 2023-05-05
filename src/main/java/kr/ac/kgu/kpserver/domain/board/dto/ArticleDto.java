@@ -27,8 +27,6 @@ public class ArticleDto {
         articleDto.setId(article.getId());
         articleDto.setTitle(article.getTitle());
         articleDto.setDescription(article.getDescription());
-        articleDto.setCreatedAt(article.getCreateAt());
-        articleDto.setUpdatedAt(article.getUpdateAt());
         articleDto.setBoardId(article.getBoard().getId());
         articleDto.setUserId(article.getUser().getId());
         return articleDto;

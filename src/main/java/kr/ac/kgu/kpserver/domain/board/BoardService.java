@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -62,7 +60,7 @@ public class BoardService {
         Article article = articleRepository.findById(commentRequest.getArticleId())
                 .orElseThrow(() -> new NotFoundException("Could not find article with id : " + commentRequest.getArticleId()));
 
-        Comment comment = new Comment(user, article, commentRequest.getDescription(),  LocalDate.now());
+        Comment comment = new Comment(user, article, commentRequest.getDescription());
         commentRepository.save(comment);
         articleRepository.save(article);
 
@@ -75,7 +73,6 @@ public class BoardService {
                 .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + commentId));
 
         comment.setDescription(commentRequest.getDescription());
-        comment.setUpdatedAt(LocalDate.from(LocalDateTime.now()));
 
         return commentRepository.save(comment);
     }
@@ -123,7 +120,7 @@ public class BoardService {
             throw new Exception();
         }
 
-        Like like = new Like(article, user, LocalDate.now());
+        Like like = new Like(article, user);
         likeRepository.save(like);
         articleRepository.save(article);
     }

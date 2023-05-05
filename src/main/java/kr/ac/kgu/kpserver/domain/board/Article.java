@@ -1,6 +1,5 @@
 package kr.ac.kgu.kpserver.domain.board;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.*;
@@ -8,7 +7,6 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +28,7 @@ public class Article extends BaseEntity {
     @NotBlank
     @Size(max = 500)
     private String description;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
-    private LocalDateTime createAt;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
-    private LocalDateTime updateAt;
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;

@@ -3,10 +3,8 @@ package kr.ac.kgu.kpserver.domain.board;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -25,13 +23,10 @@ public class Like extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "article_id")
     private Article article;
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private LocalDate createDate; // 날짜
 
-    public Like(Article article, User user, LocalDate createDate) {
+    public Like(Article article, User user) {
         this.article = article;
         this.user = user;
-        this.createDate = createDate;
     }
 
 }

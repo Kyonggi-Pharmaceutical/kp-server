@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.health;
 
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
@@ -7,11 +8,12 @@ import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
+import java.util.logging.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
-import java.util.logging.Logger;
 
 @Tag(name = "목표 달성 API")
 @RestController
@@ -64,7 +66,6 @@ public class HealthController {
                                                             @RequestBody UserDto userDto,
                                                             HealthGoal healthGoal) {
         double resultWeight = healthService.satisfySurveySolution(user, userDto, healthGoal);
-        healthService.saveEndSolutionDate(healthGoal);
         return ResponseEntity.ok().body(resultWeight);
     }
 }
