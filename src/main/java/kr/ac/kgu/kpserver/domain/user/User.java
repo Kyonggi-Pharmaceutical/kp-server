@@ -57,7 +57,7 @@ public class User extends BaseEntity {
     @JoinColumn(name = "overdose_id", referencedColumnName = "id")
     private Overdose overdose;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserExercise> userExercises = new ArrayList<>();
 
     public User(String firstName, String lastName, String email, String profileImageUrl) {
