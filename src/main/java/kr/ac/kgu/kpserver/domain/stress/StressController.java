@@ -4,12 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ac.kgu.kpserver.domain.health.progress.DailyProgressService;
 import kr.ac.kgu.kpserver.domain.user.User;
+import kr.ac.kgu.kpserver.domain.user.UserService;
+import kr.ac.kgu.kpserver.domain.user.dto.UserRequest;
 import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "스트레스 관리 API")
 @RestController
@@ -17,12 +16,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class StressController {
 
     private final DailyProgressService dailyProgressService;
+    private final UserService userService;
 
-    public StressController(DailyProgressService dailyProgressService) {
+    public StressController(DailyProgressService dailyProgressService, UserService userService) {
         this.dailyProgressService = dailyProgressService;
+        this.userService = userService;
     }
 
-    // TODO - 스트레스 점수 등록
+
+    @Operation(summary = "스트레스 점수 업데이트 API")
+    @UserAuthenticated
+    @PutMapping("/stress-point")
+    public ResponseEntity<Void> updateUserStressPoint(User user, @RequestParam int stressPoint) {
+        UserRequest request = UserRequest.builder().stressPoint(stressPoint).build();
+        userService.updateUser(user, request);
+        return ResponseEntity.ok().build();
+    }
 
     @Operation(summary = "스트레스 관리 활동 일간 진척도 체크 API")
     @UserAuthenticated
