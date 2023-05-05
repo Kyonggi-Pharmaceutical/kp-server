@@ -1,4 +1,5 @@
 insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at) values (0, '홍길동!!!', '길동', '홍', 'test@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTJ', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00');
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at) values (-1, '김영희!!!', '영희', '김', 'test2@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP', 'STRESS', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00');
 
 insert into daily_health_messages(id, type, personality, content) values(1, 'EXERCISE', 'INTROVERSION', 'EXERCISE INTROVERSION message');
 insert into daily_health_messages(id, type, personality, content) values(2, 'EXERCISE', 'EXTROVERSION', 'EXERCISE EXTROVERSION message');
@@ -61,6 +62,15 @@ insert into activity_mbti(id, mbti, activity_id) values (28, 'ESTJ', 10);
 insert into activity_mbti(id, mbti, activity_id) values (29, 'ESFJ', 10);
 insert into activity_mbti(id, mbti, activity_id) values (30, 'ESTP', 10);
 
-insert into user_activities(id, user_id, activity_id) values (0, 0, 1);
-insert into stress_goals(id, accomplish_rate) values (0, 0.0);
-update users set stress_goal_id = 0 where id = 0;
+insert into user_activities(id, user_id, activity_id) values (0, -1, 1);
+insert into stress_goals(id, accomplish_rate, start_at, end_at) values (0, 0.0, '2023-04-01T00:00:00', '2023-04-30T23:59:59');
+update users set stress_goal_id = 0 where id = -1;
+
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-1, true, null, 0, -1, '2023-04-01T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-2, true, null, 0, -1, '2023-04-02T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-3, true, null, 0, -1, '2023-04-03T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-4, false, null, 0, -1, '2023-04-04T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-5, true, null, 0, -1, '2023-04-05T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-6, true, null, 0, -1, '2023-04-06T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-7, false, null, 0, -1, '2023-04-07T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-8, true, null, 0, -1, '2023-04-08T19:00:00');
