@@ -4,9 +4,14 @@ services:
   mysql:
     image: mysql:8.0.32
     restart: always
-    container_name: kp_mysql
+    container_name: kp-mysql
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: pwd
       MYSQL_DATABASE: kp
+
+networks:
+  default:
+    name: kp-project
+    external: true

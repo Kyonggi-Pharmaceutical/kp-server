@@ -8,6 +8,9 @@ public enum KpExceptionType {
     ALREADY_SIGN_UP(HttpStatus.BAD_REQUEST, 102, "이미 회원가입한 유저 입니다."),
     AUTHENTICATION_FAILED(HttpStatus.UNAUTHORIZED, 103, "인증에 실패했습니다."),
     ILLEGAL_ARGUMENT(HttpStatus.BAD_REQUEST, 104, "부적절한 값입니다."),
+    NOT_SIGN_UP(HttpStatus.BAD_REQUEST, 105, "회원가입하지 않은 유저입니다."),
+
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 500, "부적절한 값입니다."),
 
 
     TEST(HttpStatus.BAD_REQUEST, 999, "ERROR MESSAGE");
