@@ -53,6 +53,4 @@ public class StressController {
         return ResponseEntity.ok(response);
     }
 
-    // TODO - 스트레스 월간 체크
-
 }
