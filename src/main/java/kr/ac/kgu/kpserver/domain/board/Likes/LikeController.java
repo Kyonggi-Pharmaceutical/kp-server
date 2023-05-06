@@ -21,7 +21,7 @@ public class LikeController {
 
     @Operation(summary = "좋아요 체크 API")
     @UserAuthenticated
-    @PostMapping("/saveLikes")
+    @PostMapping("/createdLike")
     public ResponseEntity<Void> saveLikes(@RequestBody LikeRequest likeRequest) throws Exception {
         likeService.checkLikes(likeRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -29,19 +29,12 @@ public class LikeController {
 
     @Operation(summary = "좋아요 삭제 API")
     @UserAuthenticated
-    @PostMapping("/deleteLikes")
+    @PostMapping("/deletedLike")
     public ResponseEntity<Void> deleteLikes(@RequestBody LikeRequest likeRequest) {
         likeService.deleteLikes(likeRequest);
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "각 게시글 좋아요 모아보기 API")
-    @UserAuthenticated
-    @GetMapping("/{articleId}")
-    public ResponseEntity<Integer> getLikesForArticle(@PathVariable Long articleId) throws NotFoundException {
-        int likesCount = likeService.getLikesForArticle(articleId);
-        return ResponseEntity.ok().body(likesCount);
-    }
 
     @Operation(summary = "사용자별 좋아요 모아보기 API")
     @UserAuthenticated

@@ -8,6 +8,7 @@ import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.webjars.NotFoundException;
 
 import javax.validation.Valid;
 @Tag(name = "게시글 API")
@@ -18,7 +19,7 @@ public class ArticleController {
     private final ArticleService articleService;
     @Operation(summary = "게시글 작성 API")
     @UserAuthenticated
-    @PostMapping("/postCreated")
+    @PostMapping("/createdArticle")
     public ResponseEntity<ArticleDto> postBoard(@RequestBody CreateArticleRequest createArticleRequest,
                                                 Article article) {
         Article savedBoard = articleService.updateArticle(article, createArticleRequest);
@@ -27,7 +28,7 @@ public class ArticleController {
 
     @Operation(summary = "게시글 수정 API")
     @UserAuthenticated
-    @PutMapping("/updateArticle")
+    @PutMapping("/updatedArticle")
     public ResponseEntity<ArticleDto> putBoard(Article article,
                                                @Valid @RequestBody CreateArticleRequest createArticleRequest) {
 
@@ -37,9 +38,17 @@ public class ArticleController {
 
     @Operation(summary = "게시글 삭제 API")
     @UserAuthenticated
-    @DeleteMapping("/deleteArticle")
+    @DeleteMapping("/deletedArticle")
     public ResponseEntity<Void> deleteArticle(Article article) {
         articleService.deleteArticle(article);
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "각 게시글 좋아요 모아보기 API")
+    @UserAuthenticated
+    @GetMapping("/{articleId}")
+    public ResponseEntity<Integer> getLikesForArticle(@PathVariable Long articleId) throws NotFoundException {
+        int likesCount = articleService.getLikesForArticle(articleId);
+        return ResponseEntity.ok().body(likesCount);
     }
 }

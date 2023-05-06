@@ -51,13 +51,6 @@ public class LikeService {
     }
 
     @Transactional
-    public int getLikesForArticle(Long articleId) throws NotFoundException {
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
-        return article.getLikes().size();
-    }
-
-    @Transactional
     public List<Article> getLikedArticlesForUser(Long userId) throws NotFoundException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));

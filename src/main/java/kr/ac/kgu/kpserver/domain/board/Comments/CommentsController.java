@@ -19,15 +19,15 @@ public class CommentsController {
 
     @Operation(summary = "댓글 작성 API")
     @UserAuthenticated
-    @PostMapping("/saveLikes")
+    @PostMapping("/createdComment")
     public ResponseEntity<Comment> saveComment(@RequestBody CommentRequest commentRequest) {
         Comment comment =  commentService.createComment(commentRequest);
         return ResponseEntity.ok(comment);
     }
     @Operation(summary = "댓글 수정 API")
     @UserAuthenticated
-    @PutMapping("/{commentId}")
-    public ResponseEntity<Comment> updateComment(@PathVariable Long commentId,
+    @PutMapping("/updatedComment")
+    public ResponseEntity<Comment> updateComment(Long commentId,
                                                  @RequestBody CommentRequest commentRequest){
         Comment comment = commentService.updateComment(commentId,commentRequest);
         return ResponseEntity.ok(comment);
@@ -35,7 +35,7 @@ public class CommentsController {
 
     @Operation(summary = "댓글 삭제 API")
     @UserAuthenticated
-    @DeleteMapping("/deleteLikes")
+    @DeleteMapping("/deletedComment")
     public ResponseEntity<Void> deleteComment(@RequestBody CommentRequest commentRequest){
         commentService.deleteComment(commentRequest);
         return ResponseEntity.noContent().build();
@@ -49,7 +49,7 @@ public class CommentsController {
         return ResponseEntity.ok(comments);
     }
 
-    @Operation(summary = "각 게시글 댓글 모아보기 API")
+    @Operation(summary = "내가 쓴 댓글 모아보기 API")
     @UserAuthenticated
     @GetMapping("/{articleId}")
     public ResponseEntity<List<Comment>> getCommentsForArticle(@RequestBody CommentRequest commentRequest) throws NotFoundException {
