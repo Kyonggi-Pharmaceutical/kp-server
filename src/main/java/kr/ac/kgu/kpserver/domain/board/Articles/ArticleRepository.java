@@ -1,5 +1,6 @@
-package kr.ac.kgu.kpserver.domain.board;
+package kr.ac.kgu.kpserver.domain.board.Articles;
 
+import kr.ac.kgu.kpserver.domain.board.BoardCategory;
 import kr.ac.kgu.kpserver.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

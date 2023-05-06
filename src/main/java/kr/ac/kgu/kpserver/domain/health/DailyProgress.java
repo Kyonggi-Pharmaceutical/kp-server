@@ -21,10 +21,8 @@ public class DailyProgress extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private boolean isCheck;
     private LocalDate date;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "health_goal_id")
     private HealthGoal healthGoal;
@@ -32,5 +30,11 @@ public class DailyProgress extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    public DailyProgress(User user, boolean isCheck, LocalDate date) {
+        this.user = user;
+        this.isCheck = isCheck;
+        this.date = date;
+    }
 
 }

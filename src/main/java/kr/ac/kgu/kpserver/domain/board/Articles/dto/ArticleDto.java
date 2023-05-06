@@ -1,12 +1,10 @@
-package kr.ac.kgu.kpserver.domain.board.dto;
+package kr.ac.kgu.kpserver.domain.board.Articles.dto;
 
-import kr.ac.kgu.kpserver.domain.board.Article;
+import kr.ac.kgu.kpserver.domain.board.Articles.Article;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -17,8 +15,6 @@ public class ArticleDto {
     private Long id;
     private String title;
     private String description;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
     private Long boardId;
     private Long userId;
 

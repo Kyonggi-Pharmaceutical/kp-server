@@ -1,6 +1,7 @@
-package kr.ac.kgu.kpserver.domain.board;
+package kr.ac.kgu.kpserver.domain.board.Likes;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.board.Articles.Article;
 import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.*;
 
@@ -18,10 +19,10 @@ public class Like extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "article_id")
+    @JoinColumn(name = "article_id")
     private Article article;
 
     public Like(Article article, User user) {

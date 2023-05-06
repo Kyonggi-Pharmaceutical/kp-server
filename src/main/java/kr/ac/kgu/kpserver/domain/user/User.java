@@ -2,8 +2,7 @@ package kr.ac.kgu.kpserver.domain.user;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import kr.ac.kgu.kpserver.domain.BaseEntity;
-import kr.ac.kgu.kpserver.domain.board.Like;
-import kr.ac.kgu.kpserver.domain.exercise.Exercise;
+import kr.ac.kgu.kpserver.domain.board.Likes.Like;
 import kr.ac.kgu.kpserver.domain.exercise.UserExercise;
 import kr.ac.kgu.kpserver.domain.health.UserAnswer;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;

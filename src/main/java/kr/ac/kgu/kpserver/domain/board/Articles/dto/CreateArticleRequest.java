@@ -1,4 +1,4 @@
-package kr.ac.kgu.kpserver.domain.board.dto;
+package kr.ac.kgu.kpserver.domain.board.Articles.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

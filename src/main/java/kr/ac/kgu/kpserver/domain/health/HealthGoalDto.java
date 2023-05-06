@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Builder
 public class HealthGoalDto {
     private Double weightGoal;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
     private LocalDateTime startAt;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")

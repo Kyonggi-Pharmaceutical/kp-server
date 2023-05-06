@@ -1,4 +1,4 @@
-package kr.ac.kgu.kpserver.domain.board.dto;
+package kr.ac.kgu.kpserver.domain.board.Likes;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,9 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CommentRequest {
+public class LikeRequest {
     private Long userId;
     private Long articleId;
-    private String description;
-
 }

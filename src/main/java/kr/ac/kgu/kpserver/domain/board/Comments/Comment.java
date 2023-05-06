@@ -1,11 +1,9 @@
-package kr.ac.kgu.kpserver.domain.board;
+package kr.ac.kgu.kpserver.domain.board.Comments;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.board.Articles.Article;
 import kr.ac.kgu.kpserver.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -35,5 +33,4 @@ public class Comment extends BaseEntity {
         this.article = article;
         this.description = description;
     }
-
 }

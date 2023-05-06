@@ -23,10 +23,7 @@ public class HealthService {
      * 사용자 운동 목표 데이터베이스 저장
      */
     public void saveUserWeightGoal(HealthGoalDto healthGoalDto) {
-        HealthGoal healthGoal = new HealthGoal();
-        healthGoal.setStartAt(healthGoalDto.getStartAt());
-        Double userGoalWeight = healthGoalDto.getWeightGoal();
-        healthGoal.setWeightGoal(userGoalWeight);
+        HealthGoal healthGoal = new HealthGoal(LocalDateTime.now(), healthGoalDto.getWeightGoal());
         healthGoalRepository.save(healthGoal);
     }
 
@@ -34,14 +31,10 @@ public class HealthService {
      * 일일 솔루션 달성 체크 확인
      */
     public void saveDailyProgress(User user,
-                                  HealthGoal healthGoal,
                                   Boolean isCheck) {
-        DailyProgress dailyProgress = new DailyProgress();
-        dailyProgress.setUser(user);
-        dailyProgress.setHealthGoal(healthGoal);
-        dailyProgress.setCheck(isCheck);
+        DailyProgress dailyProgress = new DailyProgress(user,
+                isCheck, LocalDate.now());
         dailyProgressRepository.save(dailyProgress);
-        healthGoal.getDailyProgresses().add(dailyProgress);
     }
 
     /*

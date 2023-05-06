@@ -1,5 +1,6 @@
-package kr.ac.kgu.kpserver.domain.board;
+package kr.ac.kgu.kpserver.domain.board.Likes;
 
+import kr.ac.kgu.kpserver.domain.board.Articles.Article;
 import kr.ac.kgu.kpserver.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

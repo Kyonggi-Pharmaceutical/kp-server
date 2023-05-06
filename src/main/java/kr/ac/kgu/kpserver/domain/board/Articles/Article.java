@@ -1,6 +1,9 @@
-package kr.ac.kgu.kpserver.domain.board;
+package kr.ac.kgu.kpserver.domain.board.Articles;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.board.Board;
+import kr.ac.kgu.kpserver.domain.board.Comments.Comment;
+import kr.ac.kgu.kpserver.domain.board.Likes.Like;
 import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.*;
 

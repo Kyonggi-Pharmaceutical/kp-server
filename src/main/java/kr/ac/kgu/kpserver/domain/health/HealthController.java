@@ -37,9 +37,8 @@ public class HealthController {
     @UserAuthenticated
     @PostMapping("/dailyProgressChecked")
     public ResponseEntity<Void> saveDailyProgress(User user,
-                                                  HealthGoal healthGoal,
                                                   Boolean isCheck) {
-        healthService.saveDailyProgress(user, healthGoal, isCheck);
+        healthService.saveDailyProgress(user, isCheck);
         return ResponseEntity.ok().build();
     }
 
