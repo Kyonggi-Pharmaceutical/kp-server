@@ -1,6 +1,7 @@
 insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, user_answer) values (0, '홍길동!!!', '길동', '홍', 'test@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTJ', 'HEALTH', 0,
                                                                                                                                                                                                                                   false, false, '2023-01-01T00:00:00',
                                                                                                                                                                                                                                   '2023-01-01T00:00:00', 'NORMAL');
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at) values (-1, '김영희!!!', '영희', '김', 'test2@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP', 'STRESS', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00');
 
 insert into daily_health_messages(id, type, personality, content) values(1, 'EXERCISE', 'INTROVERSION', 'EXERCISE INTROVERSION message');
 insert into daily_health_messages(id, type, personality, content) values(2, 'EXERCISE', 'EXTROVERSION', 'EXERCISE EXTROVERSION message');
@@ -71,3 +72,68 @@ insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE) VALUES
                                                                                  (14,'2023-05-01', '2023-05-01', 'ISTJ', 3.8, 'Yoga',
                                                                                   'CARDIO');
 insert into user_exercises(ID, CAL, DATE, EXERCISE_ID, USER_ID) values (0, 33.3, '2023-05-05', 0, 1);
+
+insert into activities(id, name, symptom) values (1, 'TEST_ACTIVITY_1', 'LETHARGIC');
+insert into activities(id, name, symptom) values (2, 'TEST_ACTIVITY_2', 'LETHARGIC');
+insert into activities(id, name, symptom) values (3, 'TEST_ACTIVITY_3', 'LETHARGIC');
+insert into activities(id, name, symptom) values (4, 'TEST_ACTIVITY_4', 'LETHARGIC');
+insert into activities(id, name, symptom) values (5, 'TEST_ACTIVITY_5', 'LETHARGIC');
+insert into activities(id, name, symptom) values (6, 'TEST_ACTIVITY_6', 'LETHARGIC');
+insert into activities(id, name, symptom) values (7, 'TEST_ACTIVITY_7', 'LETHARGIC');
+insert into activities(id, name, symptom) values (8, 'TEST_ACTIVITY_8', 'LETHARGIC');
+insert into activities(id, name, symptom) values (9, 'TEST_ACTIVITY_9', 'LETHARGIC');
+insert into activities(id, name, symptom) values (10, 'TEST_ACTIVITY_10', 'LETHARGIC');
+
+insert into activity_mbti(id, mbti, activity_id) values (1, 'INTJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (2, 'INFJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (3, 'INTP', 1);
+insert into activity_mbti(id, mbti, activity_id) values (4, 'INTJ', 2);
+insert into activity_mbti(id, mbti, activity_id) values (5, 'INFJ', 2);
+insert into activity_mbti(id, mbti, activity_id) values (6, 'INTP', 2);
+insert into activity_mbti(id, mbti, activity_id) values (7, 'INTJ', 3);
+insert into activity_mbti(id, mbti, activity_id) values (8, 'INFJ', 3);
+insert into activity_mbti(id, mbti, activity_id) values (9, 'INTP', 3);
+insert into activity_mbti(id, mbti, activity_id) values (10, 'INTJ', 4);
+insert into activity_mbti(id, mbti, activity_id) values (11, 'INFJ', 4);
+insert into activity_mbti(id, mbti, activity_id) values (12, 'INTP', 4);
+insert into activity_mbti(id, mbti, activity_id) values (13, 'INTJ', 5);
+insert into activity_mbti(id, mbti, activity_id) values (14, 'INFJ', 5);
+insert into activity_mbti(id, mbti, activity_id) values (15, 'INTP', 5);
+insert into activity_mbti(id, mbti, activity_id) values (16, 'ESTJ', 6);
+insert into activity_mbti(id, mbti, activity_id) values (17, 'ESFJ', 6);
+insert into activity_mbti(id, mbti, activity_id) values (18, 'ESTP', 6);
+insert into activity_mbti(id, mbti, activity_id) values (19, 'ESTJ', 7);
+insert into activity_mbti(id, mbti, activity_id) values (20, 'ESFJ', 7);
+insert into activity_mbti(id, mbti, activity_id) values (21, 'ESTP', 7);
+insert into activity_mbti(id, mbti, activity_id) values (22, 'ESTJ', 8);
+insert into activity_mbti(id, mbti, activity_id) values (23, 'ESFJ', 8);
+insert into activity_mbti(id, mbti, activity_id) values (24, 'ESTP', 8);
+insert into activity_mbti(id, mbti, activity_id) values (25, 'ESTJ', 9);
+insert into activity_mbti(id, mbti, activity_id) values (26, 'ESFJ', 9);
+insert into activity_mbti(id, mbti, activity_id) values (27, 'ESTP', 9);
+insert into activity_mbti(id, mbti, activity_id) values (28, 'ESTJ', 10);
+insert into activity_mbti(id, mbti, activity_id) values (29, 'ESFJ', 10);
+insert into activity_mbti(id, mbti, activity_id) values (30, 'ESTP', 10);
+insert into activity_mbti(id, mbti, activity_id) values (31, 'ESFP', 1);
+insert into activity_mbti(id, mbti, activity_id) values (32, 'ESFP', 2);
+insert into activity_mbti(id, mbti, activity_id) values (33, 'ESFP', 3);
+insert into activity_mbti(id, mbti, activity_id) values (34, 'ESFP', 4);
+insert into activity_mbti(id, mbti, activity_id) values (35, 'ESFP', 5);
+insert into activity_mbti(id, mbti, activity_id) values (36, 'ESFP', 6);
+insert into activity_mbti(id, mbti, activity_id) values (37, 'ESFP', 7);
+insert into activity_mbti(id, mbti, activity_id) values (38, 'ESFP', 8);
+insert into activity_mbti(id, mbti, activity_id) values (39, 'ESFP', 9);
+insert into activity_mbti(id, mbti, activity_id) values (40, 'ESFP', 10);
+
+insert into user_activities(id, user_id, activity_id) values (0, -1, 1);
+insert into stress_goals(id, accomplish_rate, start_at, end_at) values (0, 0.0, '2023-04-01T00:00:00', '2023-04-30T23:59:59');
+update users set stress_goal_id = 0 where id = -1;
+
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-1, true, null, 0, -1, '2023-04-01T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-2, true, null, 0, -1, '2023-04-02T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-3, true, null, 0, -1, '2023-04-03T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-4, false, null, 0, -1, '2023-04-04T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-5, true, null, 0, -1, '2023-04-05T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-6, true, null, 0, -1, '2023-04-06T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-7, false, null, 0, -1, '2023-04-07T19:00:00');
+insert into daily_progresses(id, is_check, health_goal_id, stress_goal_id, user_id, created_at) values (-8, true, null, 0, -1, '2023-04-08T19:00:00');

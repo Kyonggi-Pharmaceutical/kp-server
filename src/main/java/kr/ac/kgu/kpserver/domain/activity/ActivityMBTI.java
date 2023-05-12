@@ -1,32 +1,32 @@
 package kr.ac.kgu.kpserver.domain.activity;
 
+
 import kr.ac.kgu.kpserver.domain.BaseEntity;
-import kr.ac.kgu.kpserver.domain.stress.Symptom;
+import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "activities")
+@Table(name = "activity_mbti")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Activity extends BaseEntity {
+public class ActivityMBTI extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
     @Enumerated(EnumType.STRING)
-    private Symptom symptom;
+    private MBTI mbti;
 
-    @OneToMany(mappedBy = "activity")
-    private List<ActivityMBTI> mbtiList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "activity_id", nullable = false)
+    private Activity activity;
+
 }
