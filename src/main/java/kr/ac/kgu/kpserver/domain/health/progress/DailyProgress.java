@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -22,8 +22,8 @@ public class DailyProgress extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean isCheck;
-    private LocalDate date;
+    private Boolean isCheck;
+    private LocalDateTime date;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "health_goal_id")
     private HealthGoal healthGoal;
@@ -32,14 +32,20 @@ public class DailyProgress extends BaseEntity {
     @JoinColumn(name = "stress_goal_id")
     private StressGoal stressGoal;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
-    public DailyProgress(Boolean isCheck, HealthGoal healthGoal, User user) {
+    public DailyProgress(Boolean isCheck,
+                         HealthGoal healthGoal,
+                         StressGoal stressGoal,
+                         User user,
+                         LocalDateTime date) {
         this.isCheck = isCheck;
         this.healthGoal = healthGoal;
+        this.stressGoal = stressGoal;
         this.user = user;
+        this.date = date;
     }
 
     public DailyProgress(Boolean isCheck, StressGoal stressGoal, User user) {

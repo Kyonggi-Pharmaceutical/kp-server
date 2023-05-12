@@ -46,10 +46,15 @@ public class Article extends BaseEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    public Article updateArticle(String title, String content) {
+    public Article(String title, String content, User user) {
+        this.user = user;
         this.title = title;
         this.description = content;
-        return this;
+    }
+
+    public void addComments(Comment comment) {
+        comments.add(comment);
+        comment.setArticle(this);
     }
 
 }

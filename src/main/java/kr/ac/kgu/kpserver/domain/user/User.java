@@ -6,19 +6,24 @@ import kr.ac.kgu.kpserver.domain.activity.Activity;
 import kr.ac.kgu.kpserver.domain.activity.UserActivity;
 import kr.ac.kgu.kpserver.domain.board.Likes.Like;
 import kr.ac.kgu.kpserver.domain.exercise.UserExercise;
-import kr.ac.kgu.kpserver.domain.health.UserAnswer;
-import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.health.HealthcareType;
 import kr.ac.kgu.kpserver.domain.health.Personality;
+import kr.ac.kgu.kpserver.domain.health.UserAnswer;
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.overdose.Overdose;
 import kr.ac.kgu.kpserver.domain.stress.goal.StressGoal;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
@@ -89,7 +94,6 @@ public class User extends BaseEntity {
     public Personality getPersonality() {
         return mbti.getPersonality();
     }
-
     public User update(
             String nickname,
             Gender gender,
