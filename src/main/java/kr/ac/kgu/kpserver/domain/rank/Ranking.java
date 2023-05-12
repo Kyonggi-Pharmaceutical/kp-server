@@ -1,6 +1,7 @@
 package kr.ac.kgu.kpserver.domain.rank;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
+import kr.ac.kgu.kpserver.domain.rank.period.RankingPeriod;
 import lombok.Getter;
 import lombok.Setter;
 
