@@ -50,7 +50,7 @@ public class StressGoal {
     }
 
     private double updateAccomplishRate() {
-        long checkedCount = dailyProgresses.stream().filter(DailyProgress::getIsCheck).count();
+        long checkedCount = dailyProgresses.stream().filter(DailyProgress::isCheck).count();
         double value = checkedCount / 30.0 * 100;
         this.accomplishRate = Math.round(value * 10) / 10.0;
         return this.accomplishRate;

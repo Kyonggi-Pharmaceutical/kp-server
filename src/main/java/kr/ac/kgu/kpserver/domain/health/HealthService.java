@@ -2,6 +2,8 @@ package kr.ac.kgu.kpserver.domain.health;
 
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoalRepository;
+import kr.ac.kgu.kpserver.domain.health.progress.DailyProgress;
+import kr.ac.kgu.kpserver.domain.health.progress.DailyProgressRepository;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +34,7 @@ public class HealthService {
      */
     public void saveDailyProgress(User user,
                                   Boolean isCheck) {
-        DailyProgress dailyProgress = new DailyProgress(user,
-                isCheck, LocalDate.now());
+        DailyProgress dailyProgress = new DailyProgress(isCheck, user.getHealthGoal(), user);
         dailyProgressRepository.save(dailyProgress);
     }
 
