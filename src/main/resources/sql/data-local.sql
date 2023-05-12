@@ -22,20 +22,20 @@ insert into daily_health_messages(id, type, personality, content) values(16, 'LI
 insert into daily_health_messages(id, type, personality, content) values(17, 'LIFE_STYLE', 'EXTROVERSION', 'LIFE_STYLE EXTROVERSION message');
 insert into daily_health_messages(id, type, personality, content) values(18, 'LIFE_STYLE', 'ALL', 'LIFE_STYLE ALL message');
 
-insert into users(id, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti,
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti,
                   stress_point, is_smoking, is_alcohol, created_at, updated_at, user_answer)
 values
-       (1, '이정은', '컴퓨터공학부', 'lje4624@kyonggi.ac.kr', '', 'MALE', '1990-01-01', 180, 75,
+       (1, '이정은!!', '이정은', '컴퓨터공학부', 'lje4624@kyonggi.ac.kr', '', 'MALE', '1990-01-01', 180, 75,
         'ISTJ',  4, true, false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'NORMAL'),
-       (2, 'Jane', 'Doe', 'jane.doe@gmail.com', 'https://example.com/profiles/jane.jpg', 'FEMALE', '1995-05-05', 165,
+       (2, 'Jane!!', 'Jane', 'Doe', 'jane.doe@gmail.com', 'https://example.com/profiles/jane.jpg', 'FEMALE', '1995-05-05', 165,
         55, 'ENFP',  6, false, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'EASY'),
-       (3, 'Mike', 'Smith', 'mike.smith@gmail.com', 'https://example.com/profiles/mike.jpg', 'MALE', '1985-08-08', 175,
+       (3, 'Mike!!', 'Mike', 'Smith', 'mike.smith@gmail.com', 'https://example.com/profiles/mike.jpg', 'MALE', '1985-08-08', 175,
         70, 'INTP',  2, false, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'NORMAL'),
-       (4, 'Lisa', 'Kim', 'lisa.kim@gmail.com', 'https://example.com/profiles/lisa.jpg', 'FEMALE', '1992-12-12', 160,
+       (4, 'Lisa!!', 'Lisa', 'Kim', 'lisa.kim@gmail.com', 'https://example.com/profiles/lisa.jpg', 'FEMALE', '1992-12-12', 160,
         50, 'ISTJ',  8, true, false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'EASY'),
-       (5, 'David', 'Lee', 'david.lee@gmail.com', 'https://example.com/profiles/david.jpg', 'MALE', '1988-06-06', 185,
+       (5, 'David!!', 'David', 'Lee', 'david.lee@gmail.com', 'https://example.com/profiles/david.jpg', 'MALE', '1988-06-06', 185,
         80, 'ENTJ',  5, false, false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'NORMAL'),
-       (6, 'Emily', 'Wong', 'emily.wong@gmail.com', 'https://example.com/profiles/emily.jpg', 'FEMALE', '1999-09-09',
+       (6, 'Emily!!', 'Emily', 'Wong', 'emily.wong@gmail.com', 'https://example.com/profiles/emily.jpg', 'FEMALE', '1999-09-09',
         170, 60, 'INFP',  3, false, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'EASY');
 
 

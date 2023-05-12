@@ -15,11 +15,10 @@ import kr.ac.kgu.kpserver.domain.overdose.Overdose;
 import kr.ac.kgu.kpserver.domain.stress.goal.StressGoal;
 import lombok.*;
 
-import java.util.ArrayList;
+import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
@@ -64,14 +63,14 @@ public class User extends BaseEntity {
     private StressGoal stressGoal;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    private List<UserActivity> userActivities = new ArrayList<>();
+    private Set<UserActivity> userActivities = new HashSet<>();
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "overdose_id", referencedColumnName = "id")
     private Overdose overdose;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<UserExercise> userExercises = new ArrayList<>();
+    private Set<UserExercise> userExercises = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
     private List<Like> likes = new ArrayList<>();
@@ -116,10 +115,10 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public List<UserActivity> updateUserActivities(List<Activity> newActivities) {
+    public Set<UserActivity> updateUserActivities(List<Activity> newActivities) {
         this.userActivities = newActivities.stream()
                 .map(activity -> new UserActivity(null, this, activity))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return userActivities;
     }
 }
