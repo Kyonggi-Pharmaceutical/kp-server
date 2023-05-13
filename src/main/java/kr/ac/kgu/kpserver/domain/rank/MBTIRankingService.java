@@ -25,44 +25,43 @@ public class MBTIRankingService extends PeriodRankingService<MBTIRanking> {
 
     @Override
     public void createDailyRanking() {
-        CustomTimePeriod timePeriod = RankingPeriod.BEFORE_DAILY.getTimePeriod();
-        List<MBTIRanking> rankings = getMBTIRankingsByTimePeriod(timePeriod);
+        List<MBTIRanking> rankings = getMBTIRankingsByTimePeriod(RankingPeriod.BEFORE_DAILY);
         mbtiRankingRepository.saveAll(rankings);
     }
 
     @Override
     public void createWeeklyRanking() {
-        CustomTimePeriod timePeriod = RankingPeriod.BEFORE_WEEKLY.getTimePeriod();
-        List<MBTIRanking> rankings = getMBTIRankingsByTimePeriod(timePeriod);
+        List<MBTIRanking> rankings = getMBTIRankingsByTimePeriod(RankingPeriod.BEFORE_WEEKLY);
         mbtiRankingRepository.saveAll(rankings);
     }
 
     @Override
     public void createMonthlyRanking() {
-        CustomTimePeriod timePeriod = RankingPeriod.BEFORE_MONTHLY.getTimePeriod();
-        List<MBTIRanking> rankings = getMBTIRankingsByTimePeriod(timePeriod);
+        List<MBTIRanking> rankings = getMBTIRankingsByTimePeriod(RankingPeriod.BEFORE_MONTHLY);
         mbtiRankingRepository.saveAll(rankings);
     }
 
     @Override
     public List<MBTIRanking> getDailyRanking() {
         CustomTimePeriod timePeriod = RankingPeriod.BEFORE_DAILY.getTimePeriod();
-        return mbtiRankingRepository.findByCreatedAtBetween(timePeriod.getFrom(), timePeriod.getTo());
+        return mbtiRankingRepository.findByTargetDate(timePeriod.getFrom().toLocalDate());
     }
 
     @Override
     public List<MBTIRanking> getWeeklyRanking() {
         CustomTimePeriod timePeriod = RankingPeriod.BEFORE_WEEKLY.getTimePeriod();
-        return mbtiRankingRepository.findByCreatedAtBetween(timePeriod.getFrom(), timePeriod.getTo());
+        return mbtiRankingRepository.findByTargetDate(timePeriod.getFrom().toLocalDate());
     }
 
     @Override
     public List<MBTIRanking> getMonthlyRanking() {
         CustomTimePeriod timePeriod = RankingPeriod.BEFORE_MONTHLY.getTimePeriod();
-        return mbtiRankingRepository.findByCreatedAtBetween(timePeriod.getFrom(), timePeriod.getTo());
+        return mbtiRankingRepository.findByTargetDate(timePeriod.getFrom().toLocalDate());
     }
 
-    private List<MBTIRanking> getMBTIRankingsByTimePeriod(CustomTimePeriod timePeriod) {
+    private List<MBTIRanking> getMBTIRankingsByTimePeriod(RankingPeriod rankingPeriod) {
+        CustomTimePeriod timePeriod = rankingPeriod.getTimePeriod();
+
         List<Map.Entry<MBTI, Double>> sortedCheckedRateByMBTI = mbtiRankingRepository
                 .findMBTIDailyProgressCheckedCountBetween(timePeriod.getFrom(), timePeriod.getTo())
                 .stream()
@@ -75,7 +74,7 @@ public class MBTIRankingService extends PeriodRankingService<MBTIRanking> {
         return IntStream.range(0, sortedCheckedRateByMBTI.size())
                 .mapToObj(rank -> {
                     Map.Entry<MBTI, Double> map = sortedCheckedRateByMBTI.get(rank);
-                    return new MBTIRanking(map.getKey(), rank + 1);
+                    return new MBTIRanking(map.getKey(), rank + 1, rankingPeriod, RankingType.MOST_PARTICIPATE, timePeriod.getFrom().toLocalDate());
                 }).collect(Collectors.toList());
     }
 }

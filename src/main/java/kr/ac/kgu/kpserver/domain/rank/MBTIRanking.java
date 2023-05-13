@@ -1,12 +1,14 @@
 package kr.ac.kgu.kpserver.domain.rank;
 
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
+import kr.ac.kgu.kpserver.domain.rank.period.RankingPeriod;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -24,8 +26,11 @@ public class MBTIRanking extends Ranking {
     private MBTI mbti;
     private Integer rankScore;
 
-    public MBTIRanking(MBTI mbti, Integer rankScore) {
+    public MBTIRanking(MBTI mbti, Integer rankScore, RankingPeriod period, RankingType type, LocalDate targetDate) {
         this.mbti = mbti;
         this.rankScore = rankScore;
+        this.setPeriod(period);
+        this.setType(type);
+        this.setTargetDate(targetDate);
     }
 }

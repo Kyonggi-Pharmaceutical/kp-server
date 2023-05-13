@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,5 +21,7 @@ public class Ranking extends BaseEntity {
     private RankingPeriod period;
     @Enumerated(EnumType.STRING)
     private RankingType type;
+
+    private LocalDate targetDate;
 
 }
