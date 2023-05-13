@@ -1,4 +1,4 @@
-package kr.ac.kgu.kpserver.domain.rank;
+package kr.ac.kgu.kpserver.domain.rank.mbti;
 
 import kr.ac.kgu.kpserver.domain.rank.dto.MBTICheckedCountDto;
 import org.springframework.data.jpa.repository.JpaRepository;

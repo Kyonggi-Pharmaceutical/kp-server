@@ -1,5 +1,6 @@
-package kr.ac.kgu.kpserver.domain.rank;
+package kr.ac.kgu.kpserver.domain.rank.all;
 
+import kr.ac.kgu.kpserver.domain.rank.Ranking;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

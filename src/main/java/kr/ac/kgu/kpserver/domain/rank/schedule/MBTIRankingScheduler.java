@@ -1,6 +1,6 @@
 package kr.ac.kgu.kpserver.domain.rank.schedule;
 
-import kr.ac.kgu.kpserver.domain.rank.MBTIRankingService;
+import kr.ac.kgu.kpserver.domain.rank.mbti.MBTIRankingService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

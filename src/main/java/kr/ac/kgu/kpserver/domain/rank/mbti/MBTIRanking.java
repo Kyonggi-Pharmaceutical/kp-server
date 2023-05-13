@@ -1,6 +1,8 @@
-package kr.ac.kgu.kpserver.domain.rank;
+package kr.ac.kgu.kpserver.domain.rank.mbti;
 
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
+import kr.ac.kgu.kpserver.domain.rank.Ranking;
+import kr.ac.kgu.kpserver.domain.rank.RankingType;
 import kr.ac.kgu.kpserver.domain.rank.period.RankingPeriod;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -3,6 +3,8 @@ package kr.ac.kgu.kpserver.domain.rank;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ac.kgu.kpserver.domain.rank.dto.MBTIRankingResponse;
+import kr.ac.kgu.kpserver.domain.rank.mbti.MBTIRanking;
+import kr.ac.kgu.kpserver.domain.rank.mbti.MBTIRankingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
