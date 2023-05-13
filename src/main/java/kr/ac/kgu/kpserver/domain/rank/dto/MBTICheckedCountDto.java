@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MBTIRankingDto {
+public class MBTICheckedCountDto {
 
     private MBTI mbti;
     private Long totalCount;
