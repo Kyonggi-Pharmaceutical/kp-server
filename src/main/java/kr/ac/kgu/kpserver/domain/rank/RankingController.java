@@ -13,7 +13,7 @@ import java.util.List;
 
 @Tag(name = "랭킹 API")
 @RestController
-@RequestMapping("/api/v1/rankings")
+@RequestMapping("/api/v1/ranking")
 public class RankingController {
 
     private final MBTIRankingService mbtiRankingService;

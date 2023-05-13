@@ -18,8 +18,8 @@ public class MBTIRankingResponse {
     private MBTI mbti;
     private Integer rank;
 
-    public static List<MBTIRankingResponse> from(List<MBTIRanking> mbtiRankings) {
-        return mbtiRankings.stream()
+    public static List<MBTIRankingResponse> from(List<MBTIRanking> mbtiRankingList) {
+        return mbtiRankingList.stream()
                 .map(ranking -> new MBTIRankingResponse(ranking.getMbti(), ranking.getRankScore()))
                 .collect(Collectors.toList());
     }

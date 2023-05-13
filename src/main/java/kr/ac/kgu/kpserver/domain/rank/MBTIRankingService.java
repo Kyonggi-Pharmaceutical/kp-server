@@ -25,20 +25,20 @@ public class MBTIRankingService extends PeriodRankingService<MBTIRanking> {
 
     @Override
     public void createDailyRanking() {
-        List<MBTIRanking> rankings = getMBTIRankingsByTimePeriod(RankingPeriod.BEFORE_DAILY);
-        mbtiRankingRepository.saveAll(rankings);
+        List<MBTIRanking> rankingList = getMBTIRankingListByTimePeriod(RankingPeriod.BEFORE_DAILY);
+        mbtiRankingRepository.saveAll(rankingList);
     }
 
     @Override
     public void createWeeklyRanking() {
-        List<MBTIRanking> rankings = getMBTIRankingsByTimePeriod(RankingPeriod.BEFORE_WEEKLY);
-        mbtiRankingRepository.saveAll(rankings);
+        List<MBTIRanking> rankingList = getMBTIRankingListByTimePeriod(RankingPeriod.BEFORE_WEEKLY);
+        mbtiRankingRepository.saveAll(rankingList);
     }
 
     @Override
     public void createMonthlyRanking() {
-        List<MBTIRanking> rankings = getMBTIRankingsByTimePeriod(RankingPeriod.BEFORE_MONTHLY);
-        mbtiRankingRepository.saveAll(rankings);
+        List<MBTIRanking> rankingList = getMBTIRankingListByTimePeriod(RankingPeriod.BEFORE_MONTHLY);
+        mbtiRankingRepository.saveAll(rankingList);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class MBTIRankingService extends PeriodRankingService<MBTIRanking> {
         return mbtiRankingRepository.findByTargetDate(timePeriod.getFrom().toLocalDate());
     }
 
-    private List<MBTIRanking> getMBTIRankingsByTimePeriod(RankingPeriod rankingPeriod) {
+    private List<MBTIRanking> getMBTIRankingListByTimePeriod(RankingPeriod rankingPeriod) {
         CustomTimePeriod timePeriod = rankingPeriod.getTimePeriod();
 
         List<Map.Entry<MBTI, Double>> sortedCheckedRateByMBTI = mbtiRankingRepository
