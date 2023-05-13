@@ -1,12 +1,19 @@
 package kr.ac.kgu.kpserver.domain.rank.period;
 
 
-abstract class PeriodRankingService {
+import org.springframework.transaction.annotation.Transactional;
 
-    public abstract void createDailyRanking();
+import java.util.List;
 
-    public abstract void createWeeklyRanking();
+public abstract class PeriodRankingService<T> {
 
-    public abstract void createMonthlyRanking();
+    @Transactional
+    public abstract List<T> createDailyRanking();
+
+    @Transactional
+    public abstract List<T> createWeeklyRanking();
+
+    @Transactional
+    public abstract List<T> createMonthlyRanking();
 
 }
