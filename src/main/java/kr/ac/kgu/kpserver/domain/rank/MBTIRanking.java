@@ -24,4 +24,8 @@ public class MBTIRanking extends Ranking {
     private MBTI mbti;
     private Integer rankScore;
 
+    public MBTIRanking(MBTI mbti, Integer rankScore) {
+        this.mbti = mbti;
+        this.rankScore = rankScore;
+    }
 }

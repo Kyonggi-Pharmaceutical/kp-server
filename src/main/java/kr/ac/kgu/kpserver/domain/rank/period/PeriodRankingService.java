@@ -8,12 +8,21 @@ import java.util.List;
 public abstract class PeriodRankingService<T> {
 
     @Transactional
-    public abstract List<T> createDailyRanking();
+    public abstract void createDailyRanking();
 
     @Transactional
-    public abstract List<T> createWeeklyRanking();
+    public abstract void createWeeklyRanking();
 
     @Transactional
-    public abstract List<T> createMonthlyRanking();
+    public abstract void createMonthlyRanking();
+
+    @Transactional(readOnly = true)
+    public abstract List<T> getDailyRanking();
+
+    @Transactional(readOnly = true)
+    public abstract List<T> getWeeklyRanking();
+
+    @Transactional(readOnly = true)
+    public abstract List<T> getMonthlyRanking();
 
 }

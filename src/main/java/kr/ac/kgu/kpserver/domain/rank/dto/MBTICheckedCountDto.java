@@ -14,4 +14,7 @@ public class MBTICheckedCountDto {
     private Long totalCount;
     private Long checkedCount;
 
+    public Double getProgressRate() {
+        return Math.round(((double) checkedCount / totalCount) * 1000.0) / 10.0;
+    }
 }
