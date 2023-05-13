@@ -46,17 +46,20 @@ public class MBTIRankingService extends PeriodRankingService<MBTIRanking> {
 
     @Override
     public List<MBTIRanking> getDailyRanking() {
-        return null;
+        CustomTimePeriod timePeriod = RankingPeriod.BEFORE_DAILY.getTimePeriod();
+        return mbtiRankingRepository.findByCreatedAtBetween(timePeriod.getFrom(), timePeriod.getTo());
     }
 
     @Override
     public List<MBTIRanking> getWeeklyRanking() {
-        return null;
+        CustomTimePeriod timePeriod = RankingPeriod.BEFORE_WEEKLY.getTimePeriod();
+        return mbtiRankingRepository.findByCreatedAtBetween(timePeriod.getFrom(), timePeriod.getTo());
     }
 
     @Override
     public List<MBTIRanking> getMonthlyRanking() {
-        return null;
+        CustomTimePeriod timePeriod = RankingPeriod.BEFORE_MONTHLY.getTimePeriod();
+        return mbtiRankingRepository.findByCreatedAtBetween(timePeriod.getFrom(), timePeriod.getTo());
     }
 
     private List<MBTIRanking> getMBTIRankingsByTimePeriod(CustomTimePeriod timePeriod) {

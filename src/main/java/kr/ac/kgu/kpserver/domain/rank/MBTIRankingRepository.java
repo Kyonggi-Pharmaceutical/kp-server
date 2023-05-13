@@ -16,4 +16,5 @@ public interface MBTIRankingRepository extends JpaRepository<MBTIRanking, Long> 
             "GROUP BY u.mbti")
     List<MBTICheckedCountDto> findMBTIDailyProgressCheckedCountBetween(LocalDateTime from, LocalDateTime to);
 
+    List<MBTIRanking> findByCreatedAtBetween(LocalDateTime from, LocalDateTime to);
 }
