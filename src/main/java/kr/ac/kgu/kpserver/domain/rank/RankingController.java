@@ -32,14 +32,14 @@ public class RankingController {
     @Operation(summary = "주간 MBTI 랭킹 API")
     @GetMapping("/mbti/weekly")
     public ResponseEntity<List<MBTIRankingResponse>> getWeeklyMBTIRanking() {
-        List<MBTIRanking> dailyRanking = mbtiRankingService.getDailyRanking();
+        List<MBTIRanking> dailyRanking = mbtiRankingService.getWeeklyRanking();
         return ResponseEntity.ok(MBTIRankingResponse.from(dailyRanking));
     }
 
     @Operation(summary = "월간 MBTI 랭킹 API")
     @GetMapping("/mbti/monthly")
     public ResponseEntity<List<MBTIRankingResponse>> getMonthlyMBTIRanking() {
-        List<MBTIRanking> dailyRanking = mbtiRankingService.getDailyRanking();
+        List<MBTIRanking> dailyRanking = mbtiRankingService.getMonthlyRanking();
         return ResponseEntity.ok(MBTIRankingResponse.from(dailyRanking));
     }
 
