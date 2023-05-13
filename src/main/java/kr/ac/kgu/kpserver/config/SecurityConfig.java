@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .addFilterBefore(customAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(dummyAuthenticationFilter, CustomAuthenticationFilter.class)
                 .authorizeHttpRequests()
-                .antMatchers("/api/v1/login/**", "/h2-console/**", "/test/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .antMatchers("/api/v1/login/**", "/api/v1/ranking/**", "/h2-console/**", "/test/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .anyRequest().authenticated()
         ;
         http
