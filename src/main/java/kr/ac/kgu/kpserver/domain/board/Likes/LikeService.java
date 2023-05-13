@@ -19,12 +19,12 @@ public class LikeService {
     private final LikeRepository likeRepository;
 
     @Transactional
-    public void checkLikes(LikeRequest likeRequest) throws Exception {
-        User user = userRepository.findById(likeRequest.getUserId())
-                .orElseThrow(() -> new NotFoundException("Could not found user id : " + likeRequest.getUserId()));
+    public void checkedLikes(Long userId, Long articleId) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
 
-        Article article = articleRepository.findById(likeRequest.getArticleId())
-                .orElseThrow(() -> new NotFoundException("Could not found article id : " + likeRequest.getArticleId()));
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException("Could not found article id : " + articleId));
 
         if (likeRepository.findByUserAndArticle(user, article).isPresent()) {
             throw new Exception();
@@ -32,22 +32,23 @@ public class LikeService {
 
         Like like = new Like(article, user);
         likeRepository.save(like);
+
+        userRepository.save(user);
         articleRepository.save(article);
     }
 
     @Transactional
-    public void deleteLikes(LikeRequest likeRequest) {
-        User user = userRepository.findById(likeRequest.getUserId())
-                .orElseThrow(() -> new NotFoundException("Could not found user id : " + likeRequest.getUserId()));
+    public void deletedLikes(Long userId, Long likeId ) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
 
-        Article article = articleRepository.findById(likeRequest.getArticleId())
-                .orElseThrow(() -> new NotFoundException("Could not found article id : " + likeRequest.getArticleId()));
+        Like like = likeRepository.findById(likeId)
+                .orElseThrow(() -> new NotFoundException("Could not find like with id: " + likeId));
 
-        Like like = likeRepository.findByUserAndArticle(user, article)
-                .orElseThrow(() -> new NotFoundException("Could not found like id"));
-
+        if (!user.getId().equals(like.getUser().getId())) {
+            throw new Exception();
+        }
         likeRepository.delete(like);
-        articleRepository.save(article);
     }
 
     @Transactional

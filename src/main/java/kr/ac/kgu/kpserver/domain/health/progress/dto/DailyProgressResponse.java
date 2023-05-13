@@ -28,7 +28,7 @@ public class DailyProgressResponse {
         return DailyProgressResponse.builder()
                 .date(date)
                 .type(type)
-                .isCheck(dailyProgress.isCheck())
+                .isCheck(dailyProgress.getIsCheck())
                 .build();
     }
 

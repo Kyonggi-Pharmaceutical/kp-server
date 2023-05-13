@@ -11,20 +11,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArticleDto {
-
-    private Long id;
     private String title;
     private String description;
-    private Long boardId;
-    private Long userId;
 
-    public static ArticleDto from(Article article) {
-        ArticleDto articleDto = new ArticleDto();
-        articleDto.setId(article.getId());
-        articleDto.setTitle(article.getTitle());
-        articleDto.setDescription(article.getDescription());
-        articleDto.setBoardId(article.getBoard().getId());
-        articleDto.setUserId(article.getUser().getId());
-        return articleDto;
+    public static ArticleDto of(Article article) {
+        return ArticleDto.builder()
+                .title(article.getTitle())
+                .description(article.getDescription())
+                .build();
     }
+
 }

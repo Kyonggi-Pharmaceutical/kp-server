@@ -15,4 +15,5 @@ public class HealthGoalDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
     private LocalDateTime endAt;
     private Double accomplishRate;
+    private HealthcareType type;
 }

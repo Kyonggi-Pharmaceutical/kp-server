@@ -1,6 +1,6 @@
 package kr.ac.kgu.kpserver.domain.board.Articles;
 
-import kr.ac.kgu.kpserver.domain.board.BoardCategory;
+import kr.ac.kgu.kpserver.domain.board.Board;
 import kr.ac.kgu.kpserver.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Article> findByLikesUser(User user);
-    Page<Article> findByBoard(BoardCategory category, Pageable pageable);
+    Page<Article> findByBoard(Board board, Pageable pageable);
 }

@@ -20,6 +20,4 @@ public class CreateArticleRequest {
     private String description;
     @NotNull
     private Long boardId;
-    @NotNull
-    private Long userId;
 }

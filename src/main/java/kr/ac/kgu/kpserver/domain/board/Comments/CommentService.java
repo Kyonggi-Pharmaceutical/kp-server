@@ -19,55 +19,55 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     @Transactional
-    public Comment createComment(CommentRequest commentRequest) throws NotFoundException {
-        User user = userRepository.findById(commentRequest.getUserId())
-                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + commentRequest.getUserId()));
+    public void createdComments(Long userId, Long articleId, CommentRequest commentRequest) throws NotFoundException {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
 
-        Article article = articleRepository.findById(commentRequest.getArticleId())
-                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + commentRequest.getArticleId()));
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
 
         Comment comment = new Comment(user, article, commentRequest.getDescription());
         commentRepository.save(comment);
+        article.addComments(comment);
         articleRepository.save(article);
-
-        return comment;
     }
 
     @Transactional
-    public Comment updateComment(Long commentId, CommentRequest commentRequest) throws NotFoundException {
+    public void updatedComments(Long userId, Long commentId, CommentRequest commentRequest) throws NotFoundException {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
+
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + commentId));
 
+        if (!user.getId().equals(comment.getUser().getId())) {
+            return ;
+        }
         comment.setDescription(commentRequest.getDescription());
-        return commentRepository.save(comment);
+        commentRepository.save(comment);
     }
 
     @Transactional
-    public void deleteComment(CommentRequest commentRequest) throws NotFoundException {
-        User user = userRepository.findById(commentRequest.getUserId())
-                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + commentRequest.getUserId()));
-
-        Article article = articleRepository.findById(commentRequest.getArticleId())
-                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + commentRequest.getArticleId()));
-
-        Comment comment = commentRepository.findByUserAndArticle(user, article)
-                .orElseThrow(() -> new NotFoundException("Could not find comment"));
-
+    public void deleteComment(Long commentId)throws NotFoundException {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + commentId));
         commentRepository.delete(comment);
-        articleRepository.save(article);
     }
 
     @Transactional(readOnly = true)
     public List<Comment> getCommentsForArticle(Long articleId) throws NotFoundException {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
-        return commentRepository.findByArticle(article);
+        return article.getComments();
     }
 
-    public List<Comment> getCommentsByUser(Long userId) {
+    public List<Comment> getCommentsByUser(Long userId, Long articleId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
-        return commentRepository.findByUser(user);
+
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
+        return commentRepository.findByUserAndArticle(user, article);
     }
 
 }
