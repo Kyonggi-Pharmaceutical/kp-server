@@ -3,7 +3,6 @@ package kr.ac.kgu.kpserver.domain.board.Articles;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ac.kgu.kpserver.domain.board.Articles.dto.ArticleDto;
-import kr.ac.kgu.kpserver.domain.board.Board;
 import kr.ac.kgu.kpserver.domain.board.Comments.Comment;
 import kr.ac.kgu.kpserver.domain.board.Comments.CommentService;
 import kr.ac.kgu.kpserver.domain.user.User;
