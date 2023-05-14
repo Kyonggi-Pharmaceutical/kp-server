@@ -1,7 +1,9 @@
 package kr.ac.kgu.kpserver.domain.board.Articles;
 
 import kr.ac.kgu.kpserver.domain.board.Articles.dto.ArticleDto;
+import kr.ac.kgu.kpserver.domain.board.BoardRepository;
 import kr.ac.kgu.kpserver.domain.user.User;
+import kr.ac.kgu.kpserver.domain.board.Board;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,14 +15,17 @@ import org.webjars.NotFoundException;
 public class ArticleService {
     private final ArticleRepository articleRepository;
     private final UserRepository userRepository;
+    private final BoardRepository boardRepository;
 
     @Transactional
-    public void createdAndUpdatedArticle(Long userId, ArticleDto articleDto) {
+    public void createdAndUpdatedArticle(Long userId, Long boardId, ArticleDto articleDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find article with id : " + userId));
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + boardId));
         Article article =
                 new Article(articleDto.getTitle(),
-                        articleDto.getDescription(), user);
+                        articleDto.getDescription(), user, board);
         articleRepository.save(article);
     }
 
