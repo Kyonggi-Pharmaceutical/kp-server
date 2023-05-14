@@ -25,10 +25,11 @@ public class ArticleController {
 
     @Operation(summary = "게시글 저장 작성 API")
     @UserAuthenticated
-    @PostMapping("/createdAndUpdatedArticle")
-    public ResponseEntity<Void> createdArticles(User user, Board board,
+    @PostMapping("{boardId}/createdAndUpdatedArticle")
+    public ResponseEntity<Void> createdArticles(User user,
+                                                @PathVariable Long boardId,
                                                 @RequestBody ArticleDto articleDto) {
-        articleService.createdAndUpdatedArticle(user.getId(), board.getId(), articleDto);
+        articleService.createdAndUpdatedArticle(user.getId(), boardId, articleDto);
         return ResponseEntity.ok().build();
     }
 
