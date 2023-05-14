@@ -55,12 +55,12 @@ public class ArticleController {
     @GetMapping("displayArticles/{articleId}")
     public ResponseEntity<ArticleDto> displayArticleDetails(@PathVariable Long articleId) {
         ArticleDto articleDto = articleService.displayArticleDetails(articleId);
-        return ResponseEntity.ok(articleDto);
+        return   ResponseEntity.ok(articleDto);
     }
 
     @Operation(summary = "각 게시글 좋아요 모아보기 API")
     @UserAuthenticated
-    @GetMapping("/{articleId}")
+    @GetMapping("/likes/{articleId}")
     public ResponseEntity<Integer> getLikesForArticle(@PathVariable Long articleId) throws NotFoundException {
         int likesCount = articleService.getLikesForArticle(articleId);
         return ResponseEntity.ok().body(likesCount);
@@ -68,7 +68,7 @@ public class ArticleController {
 
     @Operation(summary = "게시물 댓글 모아보기 API")
     @UserAuthenticated
-    @GetMapping("/{articleId}/comments")
+    @GetMapping("/comments/{articleId}")
     public ResponseEntity<List<Comment>> getCommentsForArticle(@PathVariable Long articleId) throws NotFoundException {
         List<Comment> comments = commentService.getCommentsForArticle( articleId);
         return ResponseEntity.ok(comments);

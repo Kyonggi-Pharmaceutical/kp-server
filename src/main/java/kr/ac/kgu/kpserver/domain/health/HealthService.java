@@ -78,6 +78,7 @@ public class HealthService {
     public double getAccomplishRate(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
+
         HealthGoal healthGoal = user.getHealthGoal();
         return healthGoal.getAccomplishRate();
     }
@@ -106,31 +107,20 @@ public class HealthService {
                 .collect(Collectors.toList());
     }
 
-//    /*
-//     * 솔수션 종료값 저장
-//     */
-//    public void saveEndSolutionDate(HealthGoal healthGoal) {
-//        LocalDateTime finishDate = LocalDateTime.now();
-//        healthGoal.setEndAt(finishDate);
-//        healthGoalRepository.save(healthGoal);
-//    }
-//
-//    /*
-//     * 솔루션 만족도 만족 선택시 몸무게 계산
-//     */
-//    public Double satisfySurveySolution(User user,
-//                                        UserDto userDto,
-//                                        HealthGoal healthGoal) {
-//        double userWeight = userDto.getWeight();
-//        user.setWeight(userWeight);
-//
-//        double userWeightGoal = healthGoal.getWeightGoal();
-//
-//        double userWeightResult = userWeight - userWeightGoal;
-//        if (userWeightResult <= 0) {
-//            return null;
-//        }
-//        return userWeightGoal;
-//    }
-//}
+    /*
+     * 솔루션 만족도 만족 선택시 몸무게 계산
+     */
+    public Double satisfySurveySolution(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
+
+        double userWeight = user.getWeight();
+        double userWeightGoal = user.getHealthGoal().getWeightGoal();
+
+        double userWeightResult = userWeight - userWeightGoal;
+        if (userWeightResult <= 0) {
+            return null;
+        }
+        return userWeightGoal;
+    }
 }
