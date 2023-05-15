@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
+import java.nio.file.AccessDeniedException;
+
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
@@ -31,10 +33,10 @@ public class ArticleService {
                 .orElseThrow(() -> new NotFoundException("Could not find article with id : " + userId));
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new NotFoundException("Could not find article with id : " + boardId));
-        boolean canEdit = false;
+        String username = user.getNickname();
         Article article =
                 new Article(articleDto.getTitle(),
-                        articleDto.getDescription(), user, board, canEdit);
+                        articleDto.getDescription(), user, board, username);
         articleRepository.save(article);
     }
 
@@ -49,9 +51,7 @@ public class ArticleService {
 
         if (user.getId().equals(article.getUser().getId())) {
             article.setTitle(articleDto.getTitle());
-            article.setDescription(article.getDescription());
-            boolean canEdit = true;
-            article.setCanEdit(canEdit);
+            article.setDescription(articleDto.getDescription());
             articleRepository.save(article);
         }
     }
@@ -64,16 +64,18 @@ public class ArticleService {
     }
 
     @Transactional
-    public void deleteArticle(Long userId, Long articleId) {
+    public void deleteArticle(Long userId, Long articleId) throws AccessDeniedException {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + userId));
+                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
+
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
-        if (user.getId().equals(article.getUser().getId())) {
-            boolean canEdit = true;
-            article.setCanEdit(canEdit);
-            articleRepository.delete(article);
+
+        if (!article.getUser().equals(user)) {
+            throw new AccessDeniedException(("User is not authorized to delete this article."));
         }
+
+        articleRepository.delete(article);
     }
 
     @Transactional

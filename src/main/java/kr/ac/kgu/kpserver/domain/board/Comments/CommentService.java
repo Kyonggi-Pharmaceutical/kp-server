@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,54 +26,41 @@ public class CommentService {
 
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
-        boolean canEdit = false;
-        Comment comment = new Comment(user, article, commentRequest.getDescription(), canEdit);
+        String username = user.getNickname();
+        Comment comment = new Comment(user, article, commentRequest.getDescription(), username);
         commentRepository.save(comment);
         article.addComments(comment);
         articleRepository.save(article);
     }
 
     @Transactional
-    public void updatedComments(Long userId, Long articleId, Long commentId, CommentRequest commentRequest) throws NotFoundException {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + articleId));
+    public void updateComment(Long commentId, CommentRequest commentRequest) throws NotFoundException {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + commentId));
+                .orElseThrow(() -> new NotFoundException("Could not find comment with id: " + commentId));
 
-        if (user.getId().equals(article.getUser().getId())) {
-            boolean canEdit = true;
-            comment.setCanEdit(canEdit);
-            comment.setDescription(commentRequest.getDescription());
-            commentRepository.save(comment);
-        }
+        comment.setDescription(commentRequest.getDescription());
+        commentRepository.save(comment);
     }
 
     @Transactional
-    public void deleteComment(Long userId,
-                              Long articleId,
+    public void deleteComment(Long articleId,
                               Long commentId) throws NotFoundException {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
-
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + articleId));
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + commentId));
-        if (user.getId().equals(article.getUser().getId())) {
-            boolean canEdit = true;
-            comment.setCanEdit(canEdit);
-            commentRepository.delete(comment);
-        }
-
+        article.getComments().remove(comment);
+        commentRepository.delete(comment);
     }
 
     @Transactional(readOnly = true)
-    public List<Comment> getCommentsForArticle(Long articleId) throws NotFoundException {
+    public List<CommentRequest> getCommentsForArticle(Long articleId) throws NotFoundException {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
-        return article.getComments();
+        List<Comment> comments = commentRepository.findByArticle(article);
+        return comments.stream()
+                .map(CommentRequest::of)
+                .collect(Collectors.toList());
     }
 
     public List<Comment> getCommentsByUser(Long userId, Long articleId) {

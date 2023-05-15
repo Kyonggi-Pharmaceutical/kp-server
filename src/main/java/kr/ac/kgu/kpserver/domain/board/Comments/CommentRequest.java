@@ -6,8 +6,22 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Data
 public class CommentRequest {
+    private Long id;
+    private Long articleId;
     private String description;
-    private boolean canEdit;
+    private Long userId;
+    private String username;
 
+    public static CommentRequest of(Comment comment) {
+        return CommentRequest.builder()
+                .id(comment.getId())
+                .articleId(comment.getArticle().getId())
+                .description(comment.getDescription())
+                .username(comment.getUsername())
+                .userId(comment.getUser().getId())
+                .build();
+    }
 }

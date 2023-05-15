@@ -19,20 +19,20 @@ public class Comment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
+    private String username;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
     private Article article;
-    private boolean canEdit;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    public Comment(User user, Article article, String description,boolean canEdit) {
+    public Comment(User user, Article article, String description, String username) {
         this.user = user;
         this.article = article;
         this.description = description;
-        this.canEdit = canEdit;
+        this.username = username;
     }
 }

@@ -3,7 +3,6 @@ package kr.ac.kgu.kpserver.domain.board.Articles;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ac.kgu.kpserver.domain.board.Articles.dto.ArticleDto;
-import kr.ac.kgu.kpserver.domain.board.Comments.Comment;
 import kr.ac.kgu.kpserver.domain.board.Comments.CommentRequest;
 import kr.ac.kgu.kpserver.domain.board.Comments.CommentService;
 import kr.ac.kgu.kpserver.domain.board.Likes.LikeService;
@@ -15,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.webjars.NotFoundException;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @Tag(name = "게시글 API")
@@ -25,6 +25,7 @@ public class ArticleController {
     private final ArticleService articleService;
     private final CommentService commentService;
     private final LikeService likeService;
+
     @Operation(summary = "userId API")
     @UserAuthenticated
     @GetMapping("getUserId")
@@ -58,7 +59,7 @@ public class ArticleController {
     @Operation(summary = "게시글 삭제 API")
     @UserAuthenticated
     @DeleteMapping("/{articleId}")
-    public ResponseEntity<Void> deleteArticle(User user, @PathVariable Long articleId) {
+    public ResponseEntity<Void> deleteArticle(User user, @PathVariable Long articleId) throws AccessDeniedException {
         articleService.deleteArticle(user.getId(), articleId);
         return ResponseEntity.ok().build();
     }
@@ -70,11 +71,12 @@ public class ArticleController {
         ArticleDto articleDto = articleService.displayArticleDetails(articleId);
         return ResponseEntity.ok(articleDto);
     }
+
     @Operation(summary = "게시물 모든 댓글 API")
     @UserAuthenticated
     @GetMapping("/{articleId}/comments")
-    public ResponseEntity<List<Comment>> getCommentsForArticle(@PathVariable Long articleId) throws NotFoundException {
-        List<Comment> comments = commentService.getCommentsForArticle(articleId);
+    public ResponseEntity<List<CommentRequest>> getCommentsForArticle(@PathVariable Long articleId) throws NotFoundException {
+        List<CommentRequest> comments = commentService.getCommentsForArticle(articleId);
         return ResponseEntity.ok(comments);
     }
 
@@ -90,22 +92,19 @@ public class ArticleController {
 
     @Operation(summary = "댓글 수정 API")
     @UserAuthenticated
-    @PutMapping("/{articleId}/updatedComment/{commentId}")
-    public ResponseEntity<Void> updateComment(User user,
-                                              @PathVariable Long articleId,
-                                              @PathVariable Long commentId,
+    @PutMapping("/{commentId}/updatedComment")
+    public ResponseEntity<Void> updateComment(@PathVariable Long commentId,
                                               @RequestBody CommentRequest commentRequest) {
-        commentService.updatedComments(user.getId(), articleId, commentId, commentRequest);
+        commentService.updateComment(commentId, commentRequest);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "댓글 삭제 API")
     @UserAuthenticated
     @DeleteMapping("{articleId}/comments/{commentId}")
-    public ResponseEntity<Void> deleteComment(User user,
-                                              @PathVariable Long articleId,
+    public ResponseEntity<Void> deleteComment(@PathVariable Long articleId,
                                               @PathVariable Long commentId) {
-        commentService.deleteComment(user.getId(), commentId, articleId);
+        commentService.deleteComment( commentId, articleId);
         return ResponseEntity.noContent().build();
     }
 

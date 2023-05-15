@@ -15,13 +15,18 @@ public class ArticleDto {
     private String title;
     private String description;
     private boolean canEdit;
+    private Long userId;
+
+    private String username;
+
 
     public static ArticleDto of(Article article) {
         return ArticleDto.builder()
                 .id(article.getId())
                 .title(article.getTitle())
                 .description(article.getDescription())
-                .canEdit(article.isCanEdit())
+                .userId(article.getUser().getId())
+                .username(article.getUsername())
                 .build();
     }
 

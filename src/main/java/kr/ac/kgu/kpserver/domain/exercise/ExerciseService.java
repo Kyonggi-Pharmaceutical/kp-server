@@ -31,6 +31,7 @@ public class ExerciseService {
         this.userRepository = userRepository;
 
     }
+
     Logger logger = LoggerFactory.getLogger(ExerciseService.class);
 
     public void saveUserExerciseByMBTI(Long userId) throws NotFoundException {
@@ -57,7 +58,7 @@ public class ExerciseService {
 
         Exercise exercise = exerciseRepository.findById(userExercise.getExercise().getId())
                 .orElseThrow(() -> new NotFoundException("Could not find exercise with id: " + userExercise.getExercise().getId()));
-        if(user.getUserAnswer().equals(UserAnswer.HARD)){
+        if (user.getUserAnswer().equals(UserAnswer.HARD)) {
             double metToCalories = exercise.getMet() * user.getWeight() * 30 / 60;
             return Math.round(metToCalories * 100) / 100.0;
         }
@@ -146,26 +147,24 @@ public class ExerciseService {
     }
 
     @Transactional
-    public List<ExerciseDto> getDailyExercisesByUser(Long userId) {
+    public void getDailyExercisesByUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
-        Set<UserExercise> userExercise = user.getUserExercises();
+        MBTI userMBTI = user.getMbti();
+        Exercise exercise = exerciseRepository.findByMbti(userMBTI)
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("Could not find exercise for MBTI: " + userMBTI));
         if (user.getUserAnswer().equals(UserAnswer.HARD)) {
-            userExercise.stream()
-                    .map(userEx -> {
-                        ExerciseDto exerciseDto = ExerciseDto.from(userEx.getExercise());
-                        exerciseDto.setCal(userEx.getCal());
-                        exerciseDto.setTime(30);
-                        return exerciseDto;
-                    })
-                    .collect(Collectors.toList());
+            double metToCalories = exercise.getMet() * user.getWeight() * 30 / 60;
+            double cal = Math.round(metToCalories * 100) / 100.0;
+            UserExercise userExercise = new UserExercise(user, exercise, cal);
+            userExerciseRepository.save(userExercise);
         }
-        return userExercise.stream()
-                .map(userEx -> {
-                    ExerciseDto exerciseDto = ExerciseDto.from(userEx.getExercise());
-                    exerciseDto.setCal(userEx.getCal());
-                    return exerciseDto;
-                })
-                .collect(Collectors.toList());
+        double metToCalories = exercise.getMet() * user.getWeight() * 60 / 60;
+        double cal = Math.round(metToCalories * 100) / 100.0;
+        UserExercise userExercise = new UserExercise(user, exercise, cal);
+        userExerciseRepository.save(userExercise);
     }
+
 }
