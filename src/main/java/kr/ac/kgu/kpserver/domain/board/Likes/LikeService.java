@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @Service
@@ -19,7 +20,7 @@ public class LikeService {
     private final LikeRepository likeRepository;
 
     @Transactional
-    public void checkedLikes(Long userId, Long articleId) throws Exception {
+    public boolean checkedLikes(Long userId, Long articleId) throws AccessDeniedException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
 
@@ -27,18 +28,18 @@ public class LikeService {
                 .orElseThrow(() -> new NotFoundException("Could not found article id : " + articleId));
 
         if (likeRepository.findByUserAndArticle(user, article).isPresent()) {
-            throw new Exception();
+            throw new AccessDeniedException("User already liked the article.");
         }
 
         Like like = new Like(article, user);
         likeRepository.save(like);
-
         userRepository.save(user);
         articleRepository.save(article);
+        return true;
     }
 
     @Transactional
-    public void deletedLikes(Long userId, Long articleId, Long likeId) {
+    public boolean deletedLikes(Long userId, Long articleId, Long likeId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
         Article article = articleRepository.findById(articleId)
@@ -48,7 +49,9 @@ public class LikeService {
 
         if (user.getId().equals(article.getUser().getId())) {
             likeRepository.delete(like);
+
         }
+        return false;
     }
 
     @Transactional

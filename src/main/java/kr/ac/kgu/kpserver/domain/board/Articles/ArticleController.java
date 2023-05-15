@@ -9,7 +9,6 @@ import kr.ac.kgu.kpserver.domain.board.Likes.LikeService;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.webjars.NotFoundException;
@@ -111,20 +110,20 @@ public class ArticleController {
     @Operation(summary = "좋아요 체크 API")
     @UserAuthenticated
     @PostMapping("{articleId}/createdLike")
-    public ResponseEntity<Void> saveLikes(User user,
-                                          @PathVariable Long articleId) throws Exception {
-        likeService.checkedLikes(user.getId(), articleId);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Boolean> saveLikes(User user,
+                                          @PathVariable Long articleId) throws AccessDeniedException {
+        boolean trueLike = likeService.checkedLikes(user.getId(), articleId);
+        return ResponseEntity.ok().body(trueLike);
     }
 
     @Operation(summary = "좋아요 삭제 API")
     @UserAuthenticated
     @DeleteMapping("{articleId}/deleteLike/{likeId}")
-    public ResponseEntity<Void> deleteLikes(User user,
+    public ResponseEntity<Boolean> deleteLikes(User user,
                                             @PathVariable Long articleId,
                                             @PathVariable Long likeId) {
-        likeService.deletedLikes(user.getId(), articleId, likeId);
-        return ResponseEntity.ok().build();
+        boolean falseLike = likeService.deletedLikes(user.getId(), articleId, likeId);
+        return ResponseEntity.ok().body(falseLike);
     }
 
     @Operation(summary = "각 게시글 좋아요 모아보기 API")
