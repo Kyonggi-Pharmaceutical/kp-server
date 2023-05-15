@@ -29,6 +29,7 @@ public class Exercise extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MBTI mbti;
     private Double met;
+    private int time;
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
     private List<UserExercise> userExercises = new ArrayList<>();
 
@@ -42,10 +43,4 @@ public class Exercise extends BaseEntity {
                 '}';
     }
 
-    public Exercise(String name, ExerciseType exerciseType, MBTI mbti, Double met) {
-        this.name = name;
-        this.type = exerciseType;
-        this.mbti = mbti;
-        this.met = met;
-    }
 }

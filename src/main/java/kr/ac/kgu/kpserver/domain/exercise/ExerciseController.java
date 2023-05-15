@@ -3,7 +3,6 @@ package kr.ac.kgu.kpserver.domain.exercise;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ac.kgu.kpserver.domain.user.User;
-import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,16 +27,16 @@ public class ExerciseController {
     @UserAuthenticated
     @GetMapping("/exerciseSolution")
     public ResponseEntity<List<ExerciseDto>> getDailyExercises(User user) {
-        List<ExerciseDto> dailyExercises = exerciseService.getDailyExercisesByUser(user);
+        List<ExerciseDto> dailyExercises = exerciseService.getDailyExercisesByUser(user.getId());
         logger.info(String.valueOf(dailyExercises.size()));
         return ResponseEntity.ok(dailyExercises);
     }
 
-    @Operation(summary = "사용자 만족도 타입 저장 API")
+    @Operation(summary = "초기 운동 저장 API")
     @UserAuthenticated
-    @PostMapping("/saveUserAnswer")
-    public ResponseEntity<Void> saveUserAnswer(User user, UserDto userDto) {
-        exerciseService.findByUserAnswer(user, userDto);
+    @PostMapping("/saveUserExercise")
+    public ResponseEntity<Void> getFirstUserExercise(User user){
+        exerciseService.saveUserExerciseByMBTI(user.getId());
         return ResponseEntity.ok().build();
     }
 

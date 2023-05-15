@@ -7,6 +7,7 @@ import kr.ac.kgu.kpserver.domain.health.progress.DailyProgressRepository;
 import kr.ac.kgu.kpserver.domain.health.progress.dto.DailyProgressResponse;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
+import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import kr.ac.kgu.kpserver.util.KpException;
 import kr.ac.kgu.kpserver.util.KpExceptionType;
 import lombok.RequiredArgsConstructor;
@@ -108,7 +109,7 @@ public class HealthService {
     }
 
     /*
-     * 솔루션 만족도 만족 선택시 몸무게 계산
+     * 솔루션 만족 선택시 몸무게 계산
      */
     public Double satisfySurveySolution(Long userId) {
         User user = userRepository.findById(userId)
@@ -123,4 +124,15 @@ public class HealthService {
         }
         return userWeightGoal;
     }
+    /*
+     * 사용자 불만족시 응답 받기
+     * */
+    @Transactional
+    public void findByUserAnswer(long userId, UserDto userDto) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
+        user.setUserAnswer(userDto.getUserAnswer());
+        userRepository.save(user);
+    }
+
 }

@@ -38,17 +38,17 @@ public class LikeService {
     }
 
     @Transactional
-    public void deletedLikes(Long userId, Long likeId ) throws Exception {
+    public void deletedLikes(Long userId, Long articleId, Long likeId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
-
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException("Could not found article id : " + articleId));
         Like like = likeRepository.findById(likeId)
                 .orElseThrow(() -> new NotFoundException("Could not find like with id: " + likeId));
 
-        if (!user.getId().equals(like.getUser().getId())) {
-            throw new Exception();
+        if (user.getId().equals(article.getUser().getId())) {
+            likeRepository.delete(like);
         }
-        likeRepository.delete(like);
     }
 
     @Transactional

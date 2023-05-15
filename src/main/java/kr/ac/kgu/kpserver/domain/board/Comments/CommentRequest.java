@@ -8,5 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 public class CommentRequest {
     private String description;
+    private boolean canEdit;
 
 }

@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ac.kgu.kpserver.domain.health.progress.dto.DailyProgressResponse;
 import kr.ac.kgu.kpserver.domain.user.User;
+import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -73,5 +74,13 @@ public class HealthController {
     public ResponseEntity<Double> satisfactionSurveySatisfy(User user) {
         double resultWeight = healthService.satisfySurveySolution(user.getId());
         return ResponseEntity.ok().body(resultWeight);
+    }
+    @Operation(summary = "사용자 불만족시 응답 타입 저장 API")
+    @UserAuthenticated
+    @PostMapping("/saveUserAnswer")
+    public ResponseEntity<Void> saveUserAnswer(User user,
+                                               @RequestBody UserDto userDto) {
+        healthService.findByUserAnswer(user.getId(), userDto);
+        return ResponseEntity.ok().build();
     }
 }

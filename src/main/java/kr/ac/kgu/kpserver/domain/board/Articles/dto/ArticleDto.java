@@ -14,12 +14,14 @@ public class ArticleDto {
     private Long id;
     private String title;
     private String description;
+    private boolean canEdit;
 
     public static ArticleDto of(Article article) {
         return ArticleDto.builder()
                 .id(article.getId())
                 .title(article.getTitle())
                 .description(article.getDescription())
+                .canEdit(article.isCanEdit())
                 .build();
     }
 

@@ -31,7 +31,8 @@ public class Article extends BaseEntity {
     @NotBlank
     @Size(max = 500)
     private String description;
-    
+    private boolean canEdit;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;
@@ -46,16 +47,19 @@ public class Article extends BaseEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    public Article(String title, String content, User user, Board board) {
+    public Article(String title, String description, User user, Board board, boolean canEdit) {
         this.user = user;
         this.title = title;
-        this.description = content;
+        this.description = description;
         this.board = board;
+        this.canEdit = canEdit;
     }
 
     public void addComments(Comment comment) {
         comments.add(comment);
         comment.setArticle(this);
     }
+
+
 
 }

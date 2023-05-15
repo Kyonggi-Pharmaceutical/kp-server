@@ -25,33 +25,47 @@ public class CommentService {
 
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
-
-        Comment comment = new Comment(user, article, commentRequest.getDescription());
+        boolean canEdit = false;
+        Comment comment = new Comment(user, article, commentRequest.getDescription(), canEdit);
         commentRepository.save(comment);
         article.addComments(comment);
         articleRepository.save(article);
     }
 
     @Transactional
-    public void updatedComments(Long userId, Long commentId, CommentRequest commentRequest) throws NotFoundException {
+    public void updatedComments(Long userId, Long articleId, Long commentId, CommentRequest commentRequest) throws NotFoundException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
-
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + articleId));
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + commentId));
 
-        if (!user.getId().equals(comment.getUser().getId())) {
-            return ;
+        if (user.getId().equals(article.getUser().getId())) {
+            boolean canEdit = true;
+            comment.setCanEdit(canEdit);
+            comment.setDescription(commentRequest.getDescription());
+            commentRepository.save(comment);
         }
-        comment.setDescription(commentRequest.getDescription());
-        commentRepository.save(comment);
     }
 
     @Transactional
-    public void deleteComment(Long commentId)throws NotFoundException {
+    public void deleteComment(Long userId,
+                              Long articleId,
+                              Long commentId) throws NotFoundException {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
+
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + articleId));
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + commentId));
-        commentRepository.delete(comment);
+        if (user.getId().equals(article.getUser().getId())) {
+            boolean canEdit = true;
+            comment.setCanEdit(canEdit);
+            commentRepository.delete(comment);
+        }
+
     }
 
     @Transactional(readOnly = true)

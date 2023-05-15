@@ -23,14 +23,16 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
     private Article article;
+    private boolean canEdit;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    public Comment(User user, Article article, String description) {
+    public Comment(User user, Article article, String description,boolean canEdit) {
         this.user = user;
         this.article = article;
         this.description = description;
+        this.canEdit = canEdit;
     }
 }
