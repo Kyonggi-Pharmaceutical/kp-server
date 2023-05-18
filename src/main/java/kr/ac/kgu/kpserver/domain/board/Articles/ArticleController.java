@@ -24,7 +24,6 @@ public class ArticleController {
     private final ArticleService articleService;
     private final CommentService commentService;
     private final LikeService likeService;
-
     @Operation(summary = "userId API")
     @UserAuthenticated
     @GetMapping("getUserId")
@@ -36,7 +35,7 @@ public class ArticleController {
 
     @Operation(summary = "게시글 저장 작성 API")
     @UserAuthenticated
-    @PostMapping("{boardId}/createdArticle")
+    @PostMapping("/{boardId}/createdArticle")
     public ResponseEntity<Void> createdArticles(User user,
                                                 @PathVariable Long boardId,
                                                 @RequestBody ArticleDto articleDto) {
@@ -65,7 +64,7 @@ public class ArticleController {
 
     @Operation(summary = "게시글 상세 내용 API")
     @UserAuthenticated
-    @GetMapping("displayArticles/{articleId}")
+    @GetMapping("/displayArticles/{articleId}")
     public ResponseEntity<ArticleDto> displayArticleDetails(@PathVariable Long articleId) {
         ArticleDto articleDto = articleService.displayArticleDetails(articleId);
         return ResponseEntity.ok(articleDto);
@@ -100,37 +99,36 @@ public class ArticleController {
 
     @Operation(summary = "댓글 삭제 API")
     @UserAuthenticated
-    @DeleteMapping("{articleId}/comments/{commentId}")
+    @DeleteMapping("/{articleId}/comments/{commentId}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long articleId,
                                               @PathVariable Long commentId) {
-        commentService.deleteComment( commentId, articleId);
+        commentService.deleteComment(articleId, commentId);
         return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "좋아요 체크 API")
     @UserAuthenticated
-    @PostMapping("{articleId}/createdLike")
-    public ResponseEntity<Boolean> saveLikes(User user,
-                                          @PathVariable Long articleId) throws AccessDeniedException {
-        boolean trueLike = likeService.checkedLikes(user.getId(), articleId);
-        return ResponseEntity.ok().body(trueLike);
+    @PostMapping("/{articleId}/createdLike")
+    public ResponseEntity<Void> saveLikes(User user,
+                                          @PathVariable Long articleId) {
+        likeService.checkedLikes(user.getId(), articleId);
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "좋아요 삭제 API")
     @UserAuthenticated
-    @DeleteMapping("{articleId}/deleteLike/{likeId}")
-    public ResponseEntity<Boolean> deleteLikes(User user,
-                                            @PathVariable Long articleId,
-                                            @PathVariable Long likeId) {
-        boolean falseLike = likeService.deletedLikes(user.getId(), articleId, likeId);
-        return ResponseEntity.ok().body(falseLike);
+    @DeleteMapping("/{articleId}/deleteLike")
+    public ResponseEntity<Void> deleteLikes(User user,
+                                            @PathVariable Long articleId) {
+        likeService.deleteLikes(user.getId(), articleId);
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "각 게시글 좋아요 모아보기 API")
     @UserAuthenticated
-    @GetMapping("/likes/{articleId}")
+    @GetMapping("/{articleId}/likes")
     public ResponseEntity<Integer> getLikesForArticle(@PathVariable Long articleId) throws NotFoundException {
-        int likesCount = articleService.getLikesForArticle(articleId);
+        int likesCount = likeService.getLikesForArticle(articleId);
         return ResponseEntity.ok().body(likesCount);
     }
 

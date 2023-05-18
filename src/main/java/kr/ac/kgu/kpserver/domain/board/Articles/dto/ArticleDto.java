@@ -1,6 +1,7 @@
 package kr.ac.kgu.kpserver.domain.board.Articles.dto;
 
 import kr.ac.kgu.kpserver.domain.board.Articles.Article;
+import kr.ac.kgu.kpserver.domain.board.Likes.Like;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +17,8 @@ public class ArticleDto {
     private String description;
     private boolean canEdit;
     private Long userId;
-
     private String username;
+    private Like likes;
 
 
     public static ArticleDto of(Article article) {

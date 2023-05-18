@@ -77,12 +77,4 @@ public class ArticleService {
 
         articleRepository.delete(article);
     }
-
-    @Transactional
-    public int getLikesForArticle(Long articleId) throws NotFoundException {
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
-        return article.getLikes().size();
-    }
-
 }
