@@ -111,7 +111,7 @@ public class ArticleController {
     @PostMapping("/{articleId}/createdLike")
     public ResponseEntity<Void> saveLikes(User user,
                                           @PathVariable Long articleId) {
-        likeService.checkedLikes(user.getId(), articleId);
+        likeService.checkedLikeForArticle(user.getId(), articleId);
         return ResponseEntity.ok().build();
     }
 

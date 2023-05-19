@@ -17,7 +17,7 @@ import org.webjars.NotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,7 +27,6 @@ public class HealthService {
     private final DailyProgressRepository dailyProgressRepository;
     private final HealthGoalRepository healthGoalRepository;
     private final UserRepository userRepository;
-    private static final Logger logger = Logger.getLogger(HealthService.class.getName());
 
     /*
      * 사용자 운동 목표 데이터베이스 저장
@@ -48,11 +47,11 @@ public class HealthService {
     }
 
     /*
-     * 일일 솔루션 달성 체크 확인
+     * 일일 솔루션 달성 체크 저장
      */
     @Transactional
     public void saveDailyProgress(Long userId,
-                                  DailyProgressResponse dailyProgressResponse) {
+                                   DailyProgressResponse dailyProgressResponse) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
         HealthGoal healthGoal = user.getHealthGoal();
@@ -70,6 +69,17 @@ public class HealthService {
         healthGoal.addDailyProgress(dailyProgress);
         dailyProgressRepository.save(dailyProgress);
         healthGoalRepository.save(healthGoal);
+    }
+    /*
+     * 일일 솔루션 달성 체크 출력
+     */
+    @Transactional(readOnly = true)
+    public boolean displayDailyProgress(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
+        LocalDateTime currentDate = LocalDateTime.now();
+        Optional<DailyProgress> dailyProgress = dailyProgressRepository.findByUserAndCreatedAt(user, currentDate);
+        return dailyProgress.map(DailyProgress::getIsCheck).orElse(false);
     }
 
     /*
@@ -95,13 +105,10 @@ public class HealthService {
                 .orElseThrow(() -> new NotFoundException("Could not find article with id: " + user.getHealthGoal().getId()));
 
         LocalDateTime startAt = healthGoal.getStartAt();
-        logger.info(startAt.toString());
         LocalDateTime currentDate = LocalDateTime.now();
 
         List<DailyProgress> dailyProgress = dailyProgressRepository.findByUserAndHealthGoalAndDateBetween(
                 user, healthGoal, startAt, currentDate);
-
-        logger.info("Daily progress count: " + dailyProgress.size());
 
         return dailyProgress.stream()
                 .map(DailyProgressResponse::of)
@@ -134,5 +141,4 @@ public class HealthService {
         user.setUserAnswer(userDto.getUserAnswer());
         userRepository.save(user);
     }
-
 }

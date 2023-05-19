@@ -27,11 +27,13 @@ public class UserExercise extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double cal;
+    private int time;
 
-    public UserExercise(User user, Exercise exercise, double calories) {
+    public UserExercise(User user, Exercise exercise, double calories, int time) {
         this.user = user;
         this.exercise = exercise;
         this.cal = calories;
+        this.time = time;
     }
 
 }
