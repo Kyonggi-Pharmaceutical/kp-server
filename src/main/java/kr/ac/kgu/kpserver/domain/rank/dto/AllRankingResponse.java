@@ -15,10 +15,11 @@ public class AllRankingResponse {
 
     private String nickname;
     private Integer rank;
+    private Double progressRate;
 
     public static List<AllRankingResponse> from(List<AllRanking> allRankingList) {
         return allRankingList.stream()
-                .map(ranking -> new AllRankingResponse(ranking.getNickname(), ranking.getRankScore()))
+                .map(ranking -> new AllRankingResponse(ranking.getNickname(), ranking.getRankScore(), ranking.getProgressRate()))
                 .collect(Collectors.toList());
     }
 }

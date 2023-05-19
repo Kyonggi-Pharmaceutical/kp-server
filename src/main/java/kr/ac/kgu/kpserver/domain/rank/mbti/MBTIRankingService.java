@@ -75,7 +75,14 @@ public class MBTIRankingService extends PeriodRankingService<MBTIRanking> {
         return IntStream.range(0, sortedCheckedRateByMBTI.size())
                 .mapToObj(rank -> {
                     Map.Entry<MBTI, Double> map = sortedCheckedRateByMBTI.get(rank);
-                    return new MBTIRanking(map.getKey(), rank + 1, rankingPeriod, RankingType.MOST_PARTICIPATE, timePeriod.getFrom().toLocalDate());
+                    return new MBTIRanking(
+                            map.getKey(),
+                            rank + 1,
+                            rankingPeriod,
+                            RankingType.MOST_PARTICIPATE,
+                            timePeriod.getFrom().toLocalDate(),
+                            map.getValue()
+                    );
                 }).collect(Collectors.toList());
     }
 }
