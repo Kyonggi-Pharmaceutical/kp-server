@@ -42,36 +42,36 @@ values
 
 
 
-INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-VALUES (-10, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISFP', 6.0, 'Jogging', 'CARDIO');
-INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-VALUES (-11, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'INFJ', 8.0, 'Yoga', 'CARDIO');
-INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-VALUES (-12, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ENTP', 5.0, 'Swimming', 'CARDIO');
-INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-VALUES (-13, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISTJ', 6.0, 'Biking', 'CARDIO');
-INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-VALUES (-14, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ENFJ', 7.0, 'Pilates', 'CARDIO');
-INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-VALUES (-15, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ESTJ', 4.0, 'Walking', 'CARDIO');
-INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-VALUES (-16, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISFJ', 3.0, 'Dancing', 'CARDIO');
-INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-VALUES (-17, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'INTP', 5.0, 'Jumping rope', 'CARDIO');
-INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-VALUES (-18, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ESFJ', 7.0, 'Hiking', 'CARDIO');
-INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-VALUES (-19, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISTP', 4.0, 'Push-ups', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE) VALUES (-20, '2023-05-01', '2023-05-01', 'ISTP, ENTP, INFP', 5.5, 'RUNNING', 'CARDIO'), (0, '2023-05-02', '2023-05-02',
+INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time)
+VALUES (-10, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISFP', 6.0, 'Jogging', 'CARDIO', 0);
+INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time)
+VALUES (-11, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'INFJ', 8.0, 'Yoga', 'CARDIO', 0);
+INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time)
+VALUES (-12, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ENTP', 5.0, 'Swimming', 'CARDIO', 0);
+INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time)
+VALUES (-13, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISTJ', 6.0, 'Biking', 'CARDIO', 0);
+INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time)
+VALUES (-14, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ENFJ', 7.0, 'Pilates', 'CARDIO', 0);
+INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time)
+VALUES (-15, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ESTJ', 4.0, 'Walking', 'CARDIO', 0);
+INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time)
+VALUES (-16, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISFJ', 3.0, 'Dancing', 'CARDIO', 0);
+INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time)
+VALUES (-17, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'INTP', 5.0, 'Jumping rope', 'CARDIO', 0);
+INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time)
+VALUES (-18, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ESFJ', 7.0, 'Hiking', 'CARDIO', 0);
+INSERT INTO EXERCISEs (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time)
+VALUES (-19, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISTP', 4.0, 'Push-ups', 'CARDIO', 0);
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE, time) VALUES (-20, '2023-05-01', '2023-05-01', 'ISTP, ENTP, INFP', 5.5, 'RUNNING', 'CARDIO', 0), (0, '2023-05-02', '2023-05-02',
                                                                                                                                                                   'ISTP, ENTP, INFP', 5.5,
-                                                                                                                                                                  'hiking', 'CARDIO'),
+                                                                                                                                                                  'hiking', 'CARDIO', 0),
                                                                                  (-21, '2023-05-01', '2023-05-01','ISTJ,ISFJ,INFJ', 4.3,
-                                                                                  'Weightlifting', 'WEIGHT'),
+                                                                                  'Weightlifting', 'WEIGHT', 0),
                                                                                  (-22, '2023-05-01', '2023-05-01','INFJ', 5.5, 'Running',
-                                                                                  'CARDIO'),
+                                                                                  'CARDIO', 0),
                                                                                  (-23,'2023-05-01', '2023-05-01', 'ISTJ', 3.8, 'Yoga',
-                                                                                  'CARDIO');
-insert into user_exercises(ID, CAL, DATE, EXERCISE_ID, USER_ID) values (0, 33.3, '2023-05-05', -10, -10);
+                                                                                  'CARDIO', 0);
+insert into user_exercises(ID, CAL, EXERCISE_ID, USER_ID) values (0, 33.3, -10, -10);
 
 insert into activities(id, name, symptom) values (1, 'TEST_ACTIVITY_1', 'LETHARGIC');
 insert into activities(id, name, symptom) values (2, 'TEST_ACTIVITY_2', 'LETHARGIC');
@@ -220,3 +220,5 @@ insert into daily_progresses(created_at, is_check, date, health_goal_id, user_id
 insert into daily_progresses(created_at, is_check, date, health_goal_id, user_id) values ('2023-04-12T12:00:00',true, '2023-04-12', -110, -110);
 insert into daily_progresses(created_at, is_check, date, health_goal_id, user_id) values ('2023-04-13T12:00:00',false, '2023-04-13', -110, -110);
 insert into daily_progresses(created_at, is_check, date, health_goal_id, user_id) values ('2023-04-14T12:00:00',false, '2023-04-14', -110, -110);
+
+insert into boards(id, category) values (0, 'HEALTH'), (1, 'STRESS');
