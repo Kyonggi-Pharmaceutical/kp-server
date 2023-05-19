@@ -1,5 +1,5 @@
 package kr.ac.kgu.kpserver.domain.board;
 
 public enum BoardCategory {
-    STRESS, WEIGHT
+    STRESS, ACTIVITY
 }

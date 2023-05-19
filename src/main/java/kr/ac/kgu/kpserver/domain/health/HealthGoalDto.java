@@ -16,4 +16,5 @@ public class HealthGoalDto {
     private LocalDateTime endAt;
     private Double accomplishRate;
     private HealthcareType type;
+    private UserAnswer userAnswer;
 }

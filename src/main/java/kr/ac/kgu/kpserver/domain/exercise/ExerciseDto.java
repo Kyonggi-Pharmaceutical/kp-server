@@ -14,13 +14,15 @@ public class ExerciseDto {
     private String name;
     private ExerciseType type;
     private Double cal;
+    private int time;
 
     public static ExerciseDto from(Exercise exercise) {
         return new ExerciseDto(
                 exercise.getId(),
                 exercise.getName(),
                 exercise.getType(),
-                null
+                null,
+                exercise.getTime()
         );
 
     }

@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class UserDto {
-
+    private final Long id;
     private final String nickname;
     private final String firstName;
     private final String lastName;
