@@ -1,6 +1,7 @@
-package kr.ac.kgu.kpserver.domain.rank;
+package kr.ac.kgu.kpserver.domain.rank.all;
 
-import kr.ac.kgu.kpserver.domain.mbti.MBTI;
+import kr.ac.kgu.kpserver.domain.rank.Ranking;
+import kr.ac.kgu.kpserver.domain.rank.RankingType;
 import kr.ac.kgu.kpserver.domain.rank.period.RankingPeriod;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,21 +14,22 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@Table(name = "mbti_ranking")
+@Table(name = "all_ranking")
 @AllArgsConstructor
 @NoArgsConstructor
-public class MBTIRanking extends Ranking {
+public class AllRanking extends Ranking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private MBTI mbti;
+    private Long userId;
+    private String nickname;
     private Integer rankScore;
 
-    public MBTIRanking(MBTI mbti, Integer rankScore, RankingPeriod period, RankingType type, LocalDate targetDate) {
-        this.mbti = mbti;
+    public AllRanking(Long userId, String nickname, Integer rankScore, RankingPeriod period, RankingType type, LocalDate targetDate) {
+        this.userId = userId;
+        this.nickname = nickname;
         this.rankScore = rankScore;
         this.setPeriod(period);
         this.setType(type);
