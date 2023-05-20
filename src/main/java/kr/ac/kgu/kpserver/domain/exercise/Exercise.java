@@ -32,20 +32,4 @@ public class Exercise extends BaseEntity {
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
     private List<UserExercise> userExercises = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "Exercise{" +
-                "id=" +
-                ", name='" + name + '\'' +
-                ", mbti=" + mbti.toString() +
-                ", type=" + type.toString() +
-                '}';
-    }
-
-    public Exercise(String name, ExerciseType exerciseType, MBTI mbti, Double met) {
-        this.name = name;
-        this.type = exerciseType;
-        this.mbti = mbti;
-        this.met = met;
-    }
 }

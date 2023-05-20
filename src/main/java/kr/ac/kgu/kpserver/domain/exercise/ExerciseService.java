@@ -4,13 +4,11 @@ import kr.ac.kgu.kpserver.domain.health.UserAnswer;
 import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
-import kr.ac.kgu.kpserver.domain.user.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,27 +30,21 @@ public class ExerciseService {
 
     }
 
-    Logger logger = LoggerFactory.getLogger(ExerciseService.class);
     @Transactional
-    public void findByUserAnswer(User user, UserDto userDto) {
-        String userAnswer = String.valueOf(userDto.getUserAnswer());
-        user.setUserAnswer(UserAnswer.valueOf(userAnswer));
-        userRepository.save(user);
+    public List<ExerciseDto> getDailyExercisesByUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
+        Set<UserExercise> userExercises = userExerciseRepository.findAllByUser(user);
+
+        return userExercises.stream()
+                .map(userExercise -> {
+                    Exercise exercise = exerciseRepository.findById(userExercise.getExercise().getId())
+                            .orElseThrow(() -> new NotFoundException("Could not find exercise with id: " + userExercise.getExercise().getId()));
+                    return ExerciseDto.from(exercise, userExercise.getCal(), userExercise.getTime());
+                })
+                .collect(Collectors.toList());
     }
 
-    /*
-     * met -> calories
-     * */
-
-    private double calculateCaloriesToNormalAndEasy(Exercise exercise, User user) {
-        double metToCalories = exercise.getMet() * user.getWeight() * 60 / 60;
-        return Math.round(metToCalories * 100) / 100.0;
-    }
-
-    private double calculateCaloriesToEasy(Exercise exercise, User user) {
-        double metToCalories = exercise.getMet() * user.getWeight() * 30 / 60;
-        return Math.round(metToCalories * 100) / 100.0;
-    }
 
     /*
      * 맞춤 운동 솔루션 제시(normal)
@@ -73,11 +65,11 @@ public class ExerciseService {
 
             int randomIdx = new Random().nextInt(exercisesList.size());
             Exercise exercise = exercisesList.get(randomIdx);
-            logger.info(exercise.toString());
-            double calories = calculateCaloriesToNormalAndEasy(exercise, user); // 칼로리 계산
-            UserExercise userExerciseSolution = new UserExercise(user, exercise, calories); // 칼로리 추가
+            int time = 60;
+            double metToCalories = exercise.getMet() * user.getWeight() * time / 60;
+            double calories = Math.round(metToCalories * 100) / 100.0; // 칼로리 계산
+            UserExercise userExerciseSolution = new UserExercise(user, exercise, calories, time); // 칼로리 추가
             userExerciseRepository.save(userExerciseSolution);
-            logger.info(userExerciseSolution.toString());
         });
     }
 
@@ -99,9 +91,10 @@ public class ExerciseService {
                     int randomIdx = new Random().nextInt(exercisesList.size());
                     Exercise exercise = exercisesList.get(randomIdx);
 
-
-                    double calories = calculateCaloriesToEasy(exercise, user); // 칼로리 계산
-                    UserExercise userExerciseSolution = new UserExercise(user, exercise, calories); // 칼로리 추가
+                    int time = 30;
+                    double metToCalories = exercise.getMet() * user.getWeight() * time / 60;
+                    double calories = Math.round(metToCalories * 100) / 100.0; // 칼로리 계산
+                    UserExercise userExerciseSolution = new UserExercise(user, exercise, calories, time); // 칼로리 추가
                     userExerciseRepository.save(userExerciseSolution);
                 }
         );
@@ -126,22 +119,35 @@ public class ExerciseService {
                 int randomIdx = new Random().nextInt(exercisesList.size());
                 Exercise exercise = exercisesList.get(randomIdx);
 
-                double calories = calculateCaloriesToNormalAndEasy(exercise, user); // 칼로리 계산
-                UserExercise userExerciseSolution = new UserExercise(user, exercise, calories); // 칼로리 추가
+                int time = 60;
+                double metToCalories = exercise.getMet() * user.getWeight() * 60 / 60;
+                double calories = Math.round(metToCalories * 100) / 100.0;
+                UserExercise userExerciseSolution = new UserExercise(user, exercise, calories, time); // 칼로리 추가
                 userExerciseRepository.save(userExerciseSolution);
             }
         });
     }
 
-    @Transactional
-    public List<ExerciseDto> getDailyExercisesByUser(User user) {
-        Set<UserExercise> userExercise = user.getUserExercises();
-        return userExercise.stream()
-                .map(userEx -> {
-                    ExerciseDto exerciseDto = ExerciseDto.from(userEx.getExercise());
-                    exerciseDto.setCal(userEx.getCal());
-                    return exerciseDto;
-                })
-                .collect(Collectors.toList());
+    public void saveUserExerciseByMBTI(Long userId) throws NotFoundException {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
+        MBTI userMBTI = user.getMbti();
+        Exercise exercise = exerciseRepository.findByMbti(userMBTI)
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("Could not find exercise for MBTI: " + userMBTI));
+        if (user.getUserAnswer().equals(UserAnswer.HARD)) {
+            int time = 30;
+            double metToCalories = exercise.getMet() * user.getWeight() * time / 60;
+            double cal = Math.round(metToCalories * 100) / 100.0;
+            UserExercise userExercise = new UserExercise(user, exercise, cal, time);
+            userExerciseRepository.save(userExercise);
+        } else {
+            int time = 60;
+            double metToCalories = exercise.getMet() * user.getWeight() * time / 60;
+            double cal = Math.round(metToCalories * 100) / 100.0;
+            UserExercise userExercise = new UserExercise(user, exercise, cal, time);
+            userExerciseRepository.save(userExercise);
+        }
     }
 }

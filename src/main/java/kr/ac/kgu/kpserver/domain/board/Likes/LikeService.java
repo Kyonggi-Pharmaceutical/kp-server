@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,36 +21,42 @@ public class LikeService {
     private final LikeRepository likeRepository;
 
     @Transactional
-    public void checkedLikes(Long userId, Long articleId) throws Exception {
+    public void checkedLikeForArticle(Long userId, Long articleId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
 
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NotFoundException("Could not found article id : " + articleId));
 
-        if (likeRepository.findByUserAndArticle(user, article).isPresent()) {
-            throw new Exception();
-        }
-
         Like like = new Like(article, user);
         likeRepository.save(like);
-
         userRepository.save(user);
         articleRepository.save(article);
     }
 
+//    @Transactional
+//    public void checkedLikeForComment(Long userId, Long articleId, Long commentId) {
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
+//
+//        Article article = articleRepository.findById(articleId)
+//                .orElseThrow(() -> new NotFoundException("Could not found article id : " + articleId));
+//        Comment comment = commentRepository.findById(commentId)
+//                .orElseThrow(() -> new NotFoundException("Could not found article id : " + commentId));
+//        CommentRequest.of(comment);
+//        Like like = new Like(article, user);
+//        likeRepository.save(like);
+//        userRepository.save(user);
+//        articleRepository.save(article);
+//    }
     @Transactional
-    public void deletedLikes(Long userId, Long likeId ) throws Exception {
+    public void deleteLikes(Long userId, Long articleId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
-
-        Like like = likeRepository.findById(likeId)
-                .orElseThrow(() -> new NotFoundException("Could not find like with id: " + likeId));
-
-        if (!user.getId().equals(like.getUser().getId())) {
-            throw new Exception();
-        }
-        likeRepository.delete(like);
+                .orElseThrow(() -> new NotFoundException("Could not find user id: " + userId));
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException("Could not find article id: " + articleId));
+        Optional<Like> likeOptional = likeRepository.findByUserAndArticle(user, article);
+        likeOptional.ifPresent(likeRepository::delete);
     }
 
     @Transactional
@@ -59,4 +67,17 @@ public class LikeService {
         return articleRepository.findByLikesUser(user);
     }
 
+    @Transactional
+    public int getLikesForArticle(Long articleId) throws NotFoundException {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
+        List<Like> likes = likeRepository.findAllByArticle(article);
+        if (likes.isEmpty()) {
+            return 0;
+        }
+        return likes.stream()
+                .map(LikeDto::of)
+                .collect(Collectors.toList())
+                .size();
+    }
 }

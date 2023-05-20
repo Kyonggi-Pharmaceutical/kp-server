@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
     List<Exercise> findByMbtiAndIdNotIn(MBTI mbti, List<Long> excludeExerciseIds);
+    List<Exercise> findByMbti(MBTI mbti);
+
 }
