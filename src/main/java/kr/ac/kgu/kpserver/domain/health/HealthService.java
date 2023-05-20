@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,7 +29,6 @@ public class HealthService {
     private final DailyProgressRepository dailyProgressRepository;
     private final HealthGoalRepository healthGoalRepository;
     private final UserRepository userRepository;
-    private static final Logger logger = Logger.getLogger(HealthService.class.getName());
 
     /*
      * 사용자 운동 목표 데이터베이스 저장
@@ -48,11 +49,11 @@ public class HealthService {
     }
 
     /*
-     * 일일 솔루션 달성 체크 확인
+     * 일일 솔루션 달성 체크 저장
      */
     @Transactional
     public void saveDailyProgress(Long userId,
-                                  DailyProgressResponse dailyProgressResponse) {
+                                   DailyProgressResponse dailyProgressResponse) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
         HealthGoal healthGoal = user.getHealthGoal();
@@ -60,16 +61,27 @@ public class HealthService {
         if (healthGoal.hasDailyProgress()) {
             throw new KpException(KpExceptionType.ALREADY_SET_DAILY_PROGRESS);
         }
-        LocalDateTime currentTime = LocalDateTime.now();
         DailyProgress dailyProgress =
                 new DailyProgress(dailyProgressResponse.getIsCheck(),
                         healthGoal,
                         null,
-                        user,
-                        currentTime);
+                        user);
         healthGoal.addDailyProgress(dailyProgress);
         dailyProgressRepository.save(dailyProgress);
         healthGoalRepository.save(healthGoal);
+    }
+    /*
+     * 일일 솔루션 달성 체크 출력
+     */
+    @Transactional(readOnly = true)
+    public boolean displayDailyProgress(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
+        LocalDate currentDate = LocalDate.now();
+        Optional<DailyProgress> dailyProgress = dailyProgressRepository.findByUserAndCreatedAtBetween(
+                user, currentDate.atStartOfDay(), currentDate.atTime(LocalTime.MAX)
+        );
+        return dailyProgress.map(DailyProgress::getIsCheck).orElse(false);
     }
 
     /*
@@ -95,13 +107,10 @@ public class HealthService {
                 .orElseThrow(() -> new NotFoundException("Could not find article with id: " + user.getHealthGoal().getId()));
 
         LocalDateTime startAt = healthGoal.getStartAt();
-        logger.info(startAt.toString());
         LocalDateTime currentDate = LocalDateTime.now();
 
-        List<DailyProgress> dailyProgress = dailyProgressRepository.findByUserAndHealthGoalAndDateBetween(
+        List<DailyProgress> dailyProgress = dailyProgressRepository.findByUserAndHealthGoalAndCreatedAtBetween(
                 user, healthGoal, startAt, currentDate);
-
-        logger.info("Daily progress count: " + dailyProgress.size());
 
         return dailyProgress.stream()
                 .map(DailyProgressResponse::of)
@@ -134,5 +143,4 @@ public class HealthService {
         user.setUserAnswer(userDto.getUserAnswer());
         userRepository.save(user);
     }
-
 }

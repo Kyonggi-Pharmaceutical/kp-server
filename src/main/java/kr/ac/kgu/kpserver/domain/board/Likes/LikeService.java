@@ -21,7 +21,7 @@ public class LikeService {
     private final LikeRepository likeRepository;
 
     @Transactional
-    public void checkedLikes(Long userId, Long articleId) {
+    public void checkedLikeForArticle(Long userId, Long articleId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
 
@@ -33,6 +33,22 @@ public class LikeService {
         userRepository.save(user);
         articleRepository.save(article);
     }
+
+//    @Transactional
+//    public void checkedLikeForComment(Long userId, Long articleId, Long commentId) {
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
+//
+//        Article article = articleRepository.findById(articleId)
+//                .orElseThrow(() -> new NotFoundException("Could not found article id : " + articleId));
+//        Comment comment = commentRepository.findById(commentId)
+//                .orElseThrow(() -> new NotFoundException("Could not found article id : " + commentId));
+//        CommentRequest.of(comment);
+//        Like like = new Like(article, user);
+//        likeRepository.save(like);
+//        userRepository.save(user);
+//        articleRepository.save(article);
+//    }
     @Transactional
     public void deleteLikes(Long userId, Long articleId) {
         User user = userRepository.findById(userId)

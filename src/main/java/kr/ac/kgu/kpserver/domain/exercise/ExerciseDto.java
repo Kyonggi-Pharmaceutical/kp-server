@@ -13,17 +13,16 @@ public class ExerciseDto {
     private Long id;
     private String name;
     private ExerciseType type;
-    private Double cal;
+    private double cal;
     private int time;
 
-    public static ExerciseDto from(Exercise exercise) {
-        return new ExerciseDto(
-                exercise.getId(),
-                exercise.getName(),
-                exercise.getType(),
-                null,
-                exercise.getTime()
-        );
-
+    public static ExerciseDto from(Exercise exercise, double cal, int time) {
+        ExerciseDto exerciseDto = new ExerciseDto();
+        exerciseDto.setId(exercise.getId());
+        exerciseDto.setName(exercise.getName());
+        exerciseDto.setType(exercise.getType());
+        exerciseDto.setCal(cal);
+        exerciseDto.setTime(time);
+        return exerciseDto;
     }
 }

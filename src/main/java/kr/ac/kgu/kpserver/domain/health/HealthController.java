@@ -29,21 +29,26 @@ public class HealthController {
     @PostMapping("/updateUserWeightGoal")
     public ResponseEntity<Void> saveUserExerciseGroup(User user,
                                                       @RequestBody HealthGoalDto healthGoalDto) {
-        logger.info("운동목표 몸무게 api 호출");
         healthService.saveHealthGoalWithUser(user.getId(), healthGoalDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "일일 솔루션 체크 저장 API")
+    @UserAuthenticated
+    @PostMapping("/dailyProgressChecked")
+    public ResponseEntity<Void> saveDailyProgress(User user,
+                                                  @RequestBody DailyProgressResponse dailyProgressResponse) {
+        healthService.saveDailyProgress(user.getId(),dailyProgressResponse);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "일일 솔루션 체크 API")
     @UserAuthenticated
-    @PostMapping("/dailyProgressChecked")
-    public ResponseEntity<Void> saveDailyProgress(User user,
-                                                  @RequestBody DailyProgressResponse dailyProgressResponse) {
-        healthService.saveDailyProgress(user.getId(), dailyProgressResponse);
-        logger.info("사용자 체크 값 " + dailyProgressResponse.toString());
-        return ResponseEntity.ok().build();
+    @GetMapping("/printDailyProgress")
+    public ResponseEntity<Boolean> printDailyProgress (User user){
+        boolean TrueValues = healthService.displayDailyProgress(user.getId());
+        return ResponseEntity.ok().body(TrueValues);
     }
-
 
     @Operation(summary = "월별 솔루션 달성률 제시 API")
     @UserAuthenticated
@@ -59,7 +64,6 @@ public class HealthController {
     public ResponseEntity<List<DailyProgressResponse>> checkedMyProgress(User user) {
         try {
             List<DailyProgressResponse> trueDates = healthService.checkedMyProgress(user.getId());
-            logger.info("checklist 불러옴" + trueDates.size());
             return ResponseEntity.ok(trueDates);
         } catch (
                 Exception e) {
