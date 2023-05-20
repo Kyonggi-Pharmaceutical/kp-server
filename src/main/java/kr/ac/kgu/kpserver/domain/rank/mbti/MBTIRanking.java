@@ -27,12 +27,14 @@ public class MBTIRanking extends Ranking {
     @Enumerated(EnumType.STRING)
     private MBTI mbti;
     private Integer rankScore;
+    private Double progressRate;
 
-    public MBTIRanking(MBTI mbti, Integer rankScore, RankingPeriod period, RankingType type, LocalDate targetDate) {
+    public MBTIRanking(MBTI mbti, Integer rankScore, RankingPeriod period, RankingType type, LocalDate targetDate, Double progressRate) {
         this.mbti = mbti;
         this.rankScore = rankScore;
         this.setPeriod(period);
         this.setType(type);
         this.setTargetDate(targetDate);
+        this.progressRate = progressRate;
     }
 }

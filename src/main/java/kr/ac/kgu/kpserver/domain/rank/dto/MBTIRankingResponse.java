@@ -17,10 +17,11 @@ public class MBTIRankingResponse {
 
     private MBTI mbti;
     private Integer rank;
+    private Double progressRate;
 
     public static List<MBTIRankingResponse> from(List<MBTIRanking> mbtiRankingList) {
         return mbtiRankingList.stream()
-                .map(ranking -> new MBTIRankingResponse(ranking.getMbti(), ranking.getRankScore()))
+                .map(ranking -> new MBTIRankingResponse(ranking.getMbti(), ranking.getRankScore(), ranking.getProgressRate()))
                 .collect(Collectors.toList());
     }
 }

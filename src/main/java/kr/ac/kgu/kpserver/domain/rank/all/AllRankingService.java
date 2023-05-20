@@ -70,7 +70,15 @@ public class AllRankingService extends PeriodRankingService<AllRanking> {
         return IntStream.range(0, sortedCheckedRateByUser.size())
                 .mapToObj(rank -> {
                     UserCheckedCountDto userCheckedCountDto = sortedCheckedRateByUser.get(rank);
-                    return new AllRanking(userCheckedCountDto.getUserId(), userCheckedCountDto.getNickname(), rank + 1, rankingPeriod, RankingType.MOST_PARTICIPATE, timePeriod.getFrom().toLocalDate());
+                    return new AllRanking(
+                            userCheckedCountDto.getUserId(),
+                            userCheckedCountDto.getNickname(),
+                            rank + 1,
+                            rankingPeriod,
+                            RankingType.MOST_PARTICIPATE,
+                            timePeriod.getFrom().toLocalDate(),
+                            userCheckedCountDto.getProgressRate()
+                    );
                 }).collect(Collectors.toList());
     }
 }

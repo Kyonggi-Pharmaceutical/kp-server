@@ -26,13 +26,15 @@ public class AllRanking extends Ranking {
     private Long userId;
     private String nickname;
     private Integer rankScore;
+    private Double progressRate;
 
-    public AllRanking(Long userId, String nickname, Integer rankScore, RankingPeriod period, RankingType type, LocalDate targetDate) {
+    public AllRanking(Long userId, String nickname, Integer rankScore, RankingPeriod period, RankingType type, LocalDate targetDate, Double progressRate) {
         this.userId = userId;
         this.nickname = nickname;
         this.rankScore = rankScore;
         this.setPeriod(period);
         this.setType(type);
         this.setTargetDate(targetDate);
+        this.progressRate = progressRate;
     }
 }
