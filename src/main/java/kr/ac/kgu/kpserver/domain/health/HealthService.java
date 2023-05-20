@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -59,13 +61,11 @@ public class HealthService {
         if (healthGoal.hasDailyProgress()) {
             throw new KpException(KpExceptionType.ALREADY_SET_DAILY_PROGRESS);
         }
-        LocalDateTime currentTime = LocalDateTime.now();
         DailyProgress dailyProgress =
                 new DailyProgress(dailyProgressResponse.getIsCheck(),
                         healthGoal,
                         null,
-                        user,
-                        currentTime);
+                        user);
         healthGoal.addDailyProgress(dailyProgress);
         dailyProgressRepository.save(dailyProgress);
         healthGoalRepository.save(healthGoal);
@@ -77,8 +77,10 @@ public class HealthService {
     public boolean displayDailyProgress(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
-        LocalDateTime currentDate = LocalDateTime.now();
-        Optional<DailyProgress> dailyProgress = dailyProgressRepository.findByUserAndCreatedAt(user, currentDate);
+        LocalDate currentDate = LocalDate.now();
+        Optional<DailyProgress> dailyProgress = dailyProgressRepository.findByUserAndCreatedAtBetween(
+                user, currentDate.atStartOfDay(), currentDate.atTime(LocalTime.MAX)
+        );
         return dailyProgress.map(DailyProgress::getIsCheck).orElse(false);
     }
 
@@ -107,7 +109,7 @@ public class HealthService {
         LocalDateTime startAt = healthGoal.getStartAt();
         LocalDateTime currentDate = LocalDateTime.now();
 
-        List<DailyProgress> dailyProgress = dailyProgressRepository.findByUserAndHealthGoalAndDateBetween(
+        List<DailyProgress> dailyProgress = dailyProgressRepository.findByUserAndHealthGoalAndCreatedAtBetween(
                 user, healthGoal, startAt, currentDate);
 
         return dailyProgress.stream()

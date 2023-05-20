@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DailyProgressRepository extends JpaRepository<DailyProgress, Long> {
-    List<DailyProgress> findByUserAndHealthGoalAndDateBetween(User user, HealthGoal healthGoal, LocalDateTime start, LocalDateTime end);
-    Optional<DailyProgress> findByUserAndCreatedAt(User user, LocalDateTime time);
+    List<DailyProgress> findByUserAndHealthGoalAndCreatedAtBetween(User user, HealthGoal healthGoal, LocalDateTime start, LocalDateTime end);
+    Optional<DailyProgress> findByUserAndCreatedAtBetween(User user, LocalDateTime from, LocalDateTime to);
 }
-
