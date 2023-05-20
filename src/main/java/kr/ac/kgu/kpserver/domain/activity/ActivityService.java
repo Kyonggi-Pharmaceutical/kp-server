@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,7 +28,7 @@ public class ActivityService {
 
     @Transactional(readOnly = true)
     public List<ActivityDto> getDailyActivitiesByUser(User user) {
-        List<UserActivity> userActivities = user.getUserActivities();
+        Set<UserActivity> userActivities = user.getUserActivities();
         return userActivities.stream()
                 .map(UserActivity::getActivity)
                 .map(ActivityDto::from)
@@ -68,7 +69,7 @@ public class ActivityService {
         Collections.shuffle(activitiesByMBTI);
         int newActivitySize = Math.min(activitiesByMBTI.size(), MAX_DAILY_ACTIVITY_COUNT);
         List<Activity> newActivities = activitiesByMBTI.subList(0, newActivitySize);
-        List<UserActivity> userActivities = user.updateUserActivities(newActivities);
+        Set<UserActivity> userActivities = user.updateUserActivities(newActivities);
         userActivityRepository.deleteByUser(user);
         userActivityRepository.saveAll(userActivities);
     }
