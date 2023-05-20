@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -27,14 +26,14 @@ public class UserExercise extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate date;
     private double cal;
+    private int time;
 
-    public UserExercise(User user, Exercise exercise, double calories) {
+    public UserExercise(User user, Exercise exercise, double calories, int time) {
         this.user = user;
         this.exercise = exercise;
         this.cal = calories;
-        this.date = LocalDate.now();
+        this.time = time;
     }
 
 }

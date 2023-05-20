@@ -71,7 +71,7 @@ insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE) VALUES
                                                                                   'CARDIO'),
                                                                                  (-23,'2023-05-01', '2023-05-01', 'ISTJ', 3.8, 'Yoga',
                                                                                   'CARDIO');
-insert into user_exercises(ID, CAL, DATE, EXERCISE_ID, USER_ID) values (0, 33.3, '2023-05-05', -10, -10);
+
 
 insert into activities(id, name, symptom) values (1, 'TEST_ACTIVITY_1', 'LETHARGIC');
 insert into activities(id, name, symptom) values (2, 'TEST_ACTIVITY_2', 'LETHARGIC');

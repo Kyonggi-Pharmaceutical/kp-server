@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findByUserAndArticle(User user, Article article);
+    List<Comment>  findByArticle(Article article);
 }
