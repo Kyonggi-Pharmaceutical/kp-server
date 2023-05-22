@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.stress.goal;
 
+import kr.ac.kgu.kpserver.domain.health.HealthcareType;
 import kr.ac.kgu.kpserver.domain.stress.dto.StressGoalResponse;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
@@ -32,6 +33,7 @@ public class StressGoalService {
         StressGoal stressGoal = new StressGoal();
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new KpException(KpExceptionType.NOT_FOUND_USER));
+        user.setHealthcareType(HealthcareType.STRESS);
         user.setStressGoal(stressGoal);
         userRepository.save(user);
         stressGoalRepository.save(stressGoal);
