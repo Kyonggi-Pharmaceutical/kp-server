@@ -34,7 +34,7 @@ public class LikeService {
         articleRepository.save(article);
     }
 
-//    @Transactional
+    //    @Transactional
 //    public void checkedLikeForComment(Long userId, Long articleId, Long commentId) {
 //        User user = userRepository.findById(userId)
 //                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
@@ -65,6 +65,16 @@ public class LikeService {
                 .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
 
         return articleRepository.findByLikesUser(user);
+    }
+
+    @Transactional
+    public boolean displayLikes(Long userId, Long articleId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException("Could not find article id: " + articleId));
+        Optional<Like> like = likeRepository.findByUserAndArticle(user, article);
+        return like.isPresent();
     }
 
     @Transactional

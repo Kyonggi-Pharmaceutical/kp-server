@@ -124,6 +124,14 @@ public class ArticleController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = " 좋아요 유지 API")
+    @UserAuthenticated
+    @GetMapping("/{articleId}/maintainLikes")
+    public ResponseEntity<Boolean> getLikesByUser(User user, @PathVariable Long articleId) throws NotFoundException {
+        boolean trueValue = likeService.displayLikes(user.getId(), articleId);
+        return ResponseEntity.ok().body(trueValue);
+    }
+
     @Operation(summary = "각 게시글 좋아요 모아보기 API")
     @UserAuthenticated
     @GetMapping("/{articleId}/likes")
