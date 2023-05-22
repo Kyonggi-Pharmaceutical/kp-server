@@ -53,4 +53,12 @@ public class StressController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "스트레스 목표 생성 API")
+    @UserAuthenticated
+    @PostMapping("/stress-goal")
+    public ResponseEntity<Void> createStressGoal(User user) {
+        stressGoalService.createStressGoal(user.getId());
+        return ResponseEntity.ok().build();
+    }
+
 }

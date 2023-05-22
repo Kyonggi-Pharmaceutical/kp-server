@@ -12,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class StressGoalService {
 
     private final UserRepository userRepository;
+    private final StressGoalRepository stressGoalRepository;
 
-    public StressGoalService(UserRepository userRepository) {
+    public StressGoalService(UserRepository userRepository, StressGoalRepository stressGoalRepository) {
         this.userRepository = userRepository;
+        this.stressGoalRepository = stressGoalRepository;
     }
 
     @Transactional(readOnly = true)
@@ -23,6 +25,16 @@ public class StressGoalService {
                 .orElseThrow(() -> new KpException(KpExceptionType.NOT_FOUND_USER));
         StressGoal stressGoal = user.getStressGoal();
         return StressGoalResponse.of(stressGoal);
+    }
+
+    @Transactional
+    public void createStressGoal(Long userId) {
+        StressGoal stressGoal = new StressGoal();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new KpException(KpExceptionType.NOT_FOUND_USER));
+        user.setStressGoal(stressGoal);
+        userRepository.save(user);
+        stressGoalRepository.save(stressGoal);
     }
 
 }
