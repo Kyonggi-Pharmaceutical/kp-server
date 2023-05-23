@@ -2,6 +2,7 @@ package kr.ac.kgu.kpserver.domain.board.Likes;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
 import kr.ac.kgu.kpserver.domain.board.Articles.Article;
+import kr.ac.kgu.kpserver.domain.board.Comments.Comment;
 import kr.ac.kgu.kpserver.domain.user.User;
 import lombok.*;
 
@@ -24,17 +25,17 @@ public class Like extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
     private Article article;
-//    private Comment comment;
+
+    private Comment comment;
+
 
     public Like(Article article, User user) {
         this.article = article;
         this.user = user;
     }
 
-//    public Like(Article article, User user, Comment comment) {
-//        this.article = article;
-//        this.user = user;
-//        this.comment = comment;
-//    }
-//}
+    public Like(User user, Comment comment) {
+        this.user = user;
+        this.comment = comment;
+    }
 }

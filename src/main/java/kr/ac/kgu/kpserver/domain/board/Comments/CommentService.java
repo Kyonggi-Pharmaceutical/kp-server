@@ -63,13 +63,14 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    public List<Comment> getCommentsByUser(Long userId, Long articleId) {
+    @Transactional
+    public List<CommentRequest> getCommentsByUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
 
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
-        return commentRepository.findByUserAndArticle(user, article);
+        List<Comment> comments = commentRepository.findByUser(user);
+        return comments.stream()
+                .map(CommentRequest::of)
+                .collect(Collectors.toList());
     }
-
 }

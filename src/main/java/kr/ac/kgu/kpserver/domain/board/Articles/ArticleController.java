@@ -128,7 +128,7 @@ public class ArticleController {
     @UserAuthenticated
     @GetMapping("/{articleId}/maintainLikes")
     public ResponseEntity<Boolean> getLikesByUser(User user, @PathVariable Long articleId) throws NotFoundException {
-        boolean trueValue = likeService.displayLikes(user.getId(), articleId);
+        boolean trueValue = likeService.maintainLikesForArticle(user.getId(), articleId);
         return ResponseEntity.ok().body(trueValue);
     }
 
@@ -138,6 +138,14 @@ public class ArticleController {
     public ResponseEntity<Integer> getLikesForArticle(@PathVariable Long articleId) throws NotFoundException {
         int likesCount = likeService.getLikesForArticle(articleId);
         return ResponseEntity.ok().body(likesCount);
+    }
+
+    @Operation(summary = "내가 쓴 게시글 모아보기 API")
+    @UserAuthenticated
+    @GetMapping("/getArticlesByUser")
+    public ResponseEntity<List<ArticleDto>> getArticleByUser(User user, Long articleId) throws NotFoundException {
+        List<ArticleDto> articles = articleService.getArticleByUser(user.getId(), articleId);
+        return ResponseEntity.ok(articles);
     }
 
 }

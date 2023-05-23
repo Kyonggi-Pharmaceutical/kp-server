@@ -12,7 +12,7 @@ public class SchedulerStartupListener {
         this.exerciseService = exerciseService;
     }
 
-    @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
+    @Scheduled(cron = "0 0/2 * * * *") // 매일 자정에 실행
     public void setExerciseService() {
         exerciseService.solutionTypeNormal();
     }

@@ -2,6 +2,10 @@ package kr.ac.kgu.kpserver.domain.board.Likes;
 
 import kr.ac.kgu.kpserver.domain.board.Articles.Article;
 import kr.ac.kgu.kpserver.domain.board.Articles.ArticleRepository;
+import kr.ac.kgu.kpserver.domain.board.Articles.dto.ArticleDto;
+import kr.ac.kgu.kpserver.domain.board.Comments.Comment;
+import kr.ac.kgu.kpserver.domain.board.Comments.CommentRepository;
+import kr.ac.kgu.kpserver.domain.board.Comments.CommentRequest;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +23,7 @@ public class LikeService {
     private final ArticleRepository articleRepository;
     private final UserRepository userRepository;
     private final LikeRepository likeRepository;
+    private final CommentRepository commentRepository;
 
     @Transactional
     public void checkedLikeForArticle(Long userId, Long articleId) {
@@ -34,21 +39,17 @@ public class LikeService {
         articleRepository.save(article);
     }
 
-    //    @Transactional
-//    public void checkedLikeForComment(Long userId, Long articleId, Long commentId) {
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
-//
-//        Article article = articleRepository.findById(articleId)
-//                .orElseThrow(() -> new NotFoundException("Could not found article id : " + articleId));
-//        Comment comment = commentRepository.findById(commentId)
-//                .orElseThrow(() -> new NotFoundException("Could not found article id : " + commentId));
-//        CommentRequest.of(comment);
-//        Like like = new Like(article, user);
-//        likeRepository.save(like);
-//        userRepository.save(user);
-//        articleRepository.save(article);
-//    }
+    @Transactional
+    public void addLikeForComment(Long userId, Long commentId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NotFoundException("Could not found article id : " + commentId));
+        CommentRequest.of(comment);
+        Like like = new Like(user, comment);
+        likeRepository.save(like);
+    }
+
     @Transactional
     public void deleteLikes(Long userId, Long articleId) {
         User user = userRepository.findById(userId)
@@ -60,20 +61,44 @@ public class LikeService {
     }
 
     @Transactional
-    public List<Article> getLikedArticlesForUser(Long userId) throws NotFoundException {
+    public List<ArticleDto> getLikedArticleByUser(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
+                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
 
-        return articleRepository.findByLikesUser(user);
+        List<Article> articles = articleRepository.findByUser(user);
+        return articles.stream()
+                .map(ArticleDto::of)
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public boolean displayLikes(Long userId, Long articleId) {
+    public List<CommentRequest> getLikedCommentByUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
+
+        List<Comment> comments = commentRepository.findByUser(user);
+        return comments.stream()
+                .map(CommentRequest::of)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public boolean maintainLikesForArticle(Long userId, Long articleId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NotFoundException("Could not find article id: " + articleId));
         Optional<Like> like = likeRepository.findByUserAndArticle(user, article);
+        return like.isPresent();
+    }
+
+    @Transactional
+    public boolean maintainLikesForComments(Long userId, Long commentId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NotFoundException("Could not found article id : " + commentId));
+        Optional<Like> like = likeRepository.findByUserAndComment(user, comment);
         return like.isPresent();
     }
 

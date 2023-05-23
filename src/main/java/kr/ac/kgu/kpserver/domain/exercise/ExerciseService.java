@@ -10,7 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
-import java.util.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,11 +27,14 @@ public class ExerciseService {
     private final UserRepository userRepository;
     @Autowired
     private final UserExerciseRepository userExerciseRepository;
+    private final ExerciseMBTIRepository exerciseMBTIRepository;
 
-    public ExerciseService(ExerciseRepository exerciseRepository, UserRepository userRepository, UserExerciseRepository userExerciseRepository) {
+
+    public ExerciseService(ExerciseRepository exerciseRepository, UserRepository userRepository, UserExerciseRepository userExerciseRepository, ExerciseMBTIRepository exerciseMBTIRepository) {
         this.exerciseRepository = exerciseRepository;
         this.userExerciseRepository = userExerciseRepository;
         this.userRepository = userRepository;
+        this.exerciseMBTIRepository = exerciseMBTIRepository;
 
     }
 
@@ -34,7 +42,9 @@ public class ExerciseService {
     public List<ExerciseDto> getDailyExercisesByUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
-        Set<UserExercise> userExercises = userExerciseRepository.findAllByUser(user);
+        LocalDate currentDate = LocalDate.now();
+        Set<UserExercise> userExercises = userExerciseRepository.findAllByUserAndCreatedAtBetween(user,
+                currentDate.atStartOfDay(), currentDate.atTime(LocalTime.MAX));
 
         return userExercises.stream()
                 .map(userExercise -> {
@@ -60,11 +70,13 @@ public class ExerciseService {
                     .map(Exercise::getId)
                     .collect(Collectors.toList());
 
-            List<Exercise> exercisesList = Optional.ofNullable(exerciseRepository.findByMbtiAndIdNotIn(userMBTI, exerciseIds))
-                    .orElse(Collections.emptyList());
+            List<Exercise> exercisesByMBTI = exerciseMBTIRepository.findByMbti(userMBTI).stream()
+                    .map(ExerciseMBTI::getExercise)
+                    .filter(exercise -> !exerciseIds.contains(exercise.getId()))
+                    .collect(Collectors.toList());
 
-            int randomIdx = new Random().nextInt(exercisesList.size());
-            Exercise exercise = exercisesList.get(randomIdx);
+            int randomIdx = new Random().nextInt(exercisesByMBTI.size());
+            Exercise exercise = exercisesByMBTI.get(randomIdx);
             int time = 60;
             double metToCalories = exercise.getMet() * user.getWeight() * time / 60;
             double calories = Math.round(metToCalories * 100) / 100.0; // 칼로리 계산
@@ -85,12 +97,14 @@ public class ExerciseService {
                             .map(UserExercise::getExercise)
                             .map(Exercise::getId)
                             .collect(Collectors.toList());
-                    List<Exercise> exercisesList = exerciseRepository
-                            .findByMbtiAndIdNotIn(userMBTI, exerciseIds);
 
-                    int randomIdx = new Random().nextInt(exercisesList.size());
-                    Exercise exercise = exercisesList.get(randomIdx);
+                    List<Exercise> exercisesByMBTI = exerciseMBTIRepository.findByMbti(userMBTI).stream()
+                            .map(ExerciseMBTI::getExercise)
+                            .filter(exercise -> !exerciseIds.contains(exercise.getId()))
+                            .collect(Collectors.toList());
 
+                    int randomIdx = new Random().nextInt(exercisesByMBTI.size());
+                    Exercise exercise = exercisesByMBTI.get(randomIdx);
                     int time = 30;
                     double metToCalories = exercise.getMet() * user.getWeight() * time / 60;
                     double calories = Math.round(metToCalories * 100) / 100.0; // 칼로리 계산
@@ -112,13 +126,15 @@ public class ExerciseService {
                     .map(UserExercise::getExercise)
                     .map(Exercise::getId)
                     .collect(Collectors.toList());
-            List<Exercise> exercisesList = exerciseRepository.findByMbtiAndIdNotIn(userMBTI, exerciseIds);
+            List<Exercise> exercisesByMBTI = exerciseMBTIRepository.findByMbti(userMBTI).stream()
+                    .map(ExerciseMBTI::getExercise)
+                    .filter(exercise -> !exerciseIds.contains(exercise.getId()))
+                    .collect(Collectors.toList());
 
 
             for (int i = 0; i < 2; i++) {
-                int randomIdx = new Random().nextInt(exercisesList.size());
-                Exercise exercise = exercisesList.get(randomIdx);
-
+                int randomIdx = new Random().nextInt(exercisesByMBTI.size());
+                Exercise exercise = exercisesByMBTI.get(randomIdx);
                 int time = 60;
                 double metToCalories = exercise.getMet() * user.getWeight() * 60 / 60;
                 double calories = Math.round(metToCalories * 100) / 100.0;
@@ -132,22 +148,28 @@ public class ExerciseService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
         MBTI userMBTI = user.getMbti();
-        Exercise exercise = exerciseRepository.findByMbti(userMBTI)
+        List<Exercise> exercisesByMBTI = exerciseMBTIRepository.findByMbti(userMBTI)
                 .stream()
-                .findFirst()
-                .orElseThrow(() -> new NotFoundException("Could not find exercise for MBTI: " + userMBTI));
+                .map(ExerciseMBTI::getExercise)
+                .limit(2)
+                .collect(Collectors.toList());
+
+        int time = 60;
+        double weight = user.getWeight();
+
         if (user.getUserAnswer().equals(UserAnswer.HARD)) {
-            int time = 30;
-            double metToCalories = exercise.getMet() * user.getWeight() * time / 60;
-            double cal = Math.round(metToCalories * 100) / 100.0;
-            UserExercise userExercise = new UserExercise(user, exercise, cal, time);
-            userExerciseRepository.save(userExercise);
-        } else {
-            int time = 60;
-            double metToCalories = exercise.getMet() * user.getWeight() * time / 60;
-            double cal = Math.round(metToCalories * 100) / 100.0;
-            UserExercise userExercise = new UserExercise(user, exercise, cal, time);
-            userExerciseRepository.save(userExercise);
+            time /= 2;
         }
+
+        List<UserExercise> userExercises = new ArrayList<>();
+
+        for (Exercise exercise : exercisesByMBTI) {
+            double metToCalories = exercise.getMet() * weight * time / 60;
+            double calories = Math.round(metToCalories * 100) / 100.0;
+            UserExercise userExercise = new UserExercise(user, exercise, calories, time);
+            userExercises.add(userExercise);
+        }
+
+        userExerciseRepository.saveAll(userExercises);
     }
 }

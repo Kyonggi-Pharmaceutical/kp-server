@@ -2,13 +2,12 @@ package kr.ac.kgu.kpserver.domain.board.Comments;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import kr.ac.kgu.kpserver.domain.board.Likes.LikeService;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.webjars.NotFoundException;
 
 import java.util.List;
@@ -19,14 +18,29 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentsController {
     private final CommentService commentService;
+    private final LikeService likeService;
 
     @Operation(summary = "사용자가 작성한 댓글의 게시물 보기 API")
     @UserAuthenticated
-    @GetMapping("/myCommentLists")
-    public ResponseEntity<List<Comment>> getCommentsByUser(User user, Long articleId) throws NotFoundException {
-        List<Comment> comments = commentService.getCommentsByUser(user.getId(), articleId);
+    @GetMapping("/getCommentsByUser")
+    public ResponseEntity<List<CommentRequest>> getCommentsByUser(User user) throws NotFoundException {
+        List<CommentRequest> comments = commentService.getCommentsByUser(user.getId());
         return ResponseEntity.ok(comments);
     }
 
+    @Operation(summary = "댓글 좋아요 API")
+    @UserAuthenticated
+    @PostMapping("/{commentId}/likes")
+    public ResponseEntity<Void> addLikeForComment(@PathVariable Long commentId, User user) {
+        likeService.addLikeForComment(user.getId(), commentId);
+        return ResponseEntity.ok().build();
+    }
 
+    @Operation(summary = "댓글 좋아요 유지 API")
+    @UserAuthenticated
+    @GetMapping("/{commentId}/maintainLikesForComments")
+    public ResponseEntity<Boolean> maintainLikesForComments(User user, @PathVariable Long commentId) throws NotFoundException {
+        boolean tureValues = likeService.maintainLikesForComments(user.getId(), commentId);
+        return ResponseEntity.ok(tureValues);
+    }
 }

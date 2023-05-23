@@ -1,7 +1,6 @@
 package kr.ac.kgu.kpserver.domain.exercise;
 
 import kr.ac.kgu.kpserver.domain.BaseEntity;
-import kr.ac.kgu.kpserver.domain.mbti.MBTI;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,8 +25,8 @@ public class Exercise extends BaseEntity {
     private String name;
     @Enumerated(EnumType.STRING)
     private ExerciseType type;
-    @Enumerated(EnumType.STRING)
-    private MBTI mbti;
+    @OneToMany(mappedBy = "activity")
+    private List<ExerciseMBTI> mbtiList = new ArrayList<>();
     private Double met;
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
     private List<UserExercise> userExercises = new ArrayList<>();

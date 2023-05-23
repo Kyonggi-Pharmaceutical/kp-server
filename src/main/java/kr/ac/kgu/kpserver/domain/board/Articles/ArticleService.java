@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
 import java.nio.file.AccessDeniedException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -76,5 +78,18 @@ public class ArticleService {
         }
 
         articleRepository.delete(article);
+    }
+
+    @Transactional
+    public List<ArticleDto> getArticleByUser(Long userId, Long articleId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
+
+        List<Article> articles = articleRepository.findByIdAndUser(article, user);
+        return articles.stream()
+                .map(ArticleDto::of)
+                .collect(Collectors.toList());
     }
 }

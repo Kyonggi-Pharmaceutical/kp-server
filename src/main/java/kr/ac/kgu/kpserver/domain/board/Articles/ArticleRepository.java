@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
-    List<Article> findByLikesUser(User user);
+    List<Article> findByUser(User user);
     Page<Article> findByBoard(Board board, Pageable pageable);
+    List<Article> findByIdAndUser(Article article, User user);
 }
