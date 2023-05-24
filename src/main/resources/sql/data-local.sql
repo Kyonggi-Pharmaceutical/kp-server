@@ -6,7 +6,7 @@ insert into users(id, nickname, first_name, last_name, email, profile_image_url,
 values (-1, '김영희!!!', '영희', '김', 'test2@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP', 'STRESS', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00');
 insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
                   mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, user_answer)
-values (1, '이정은!', null, null, 'lje4624@kyonggi.ac.kr', '', 'FEMALE', '2023-01-01', 160, 50, 'ISTP', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00','NORMAL');
+values (1, '이정은!', null, null, 'lje4624@kyonggi.ac.kr', '', 'FEMALE', '2023-01-01', 160, 50, 'ESTP', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00','NORMAL');
 
 insert into daily_health_messages(id, type, personality, content)
 values (1, 'EXERCISE', 'INTROVERSION', 'EXERCISE INTROVERSION message');
@@ -44,38 +44,119 @@ insert into daily_health_messages(id, type, personality, content)
 values (17, 'LIFE_STYLE', 'EXTROVERSION', 'LIFE_STYLE EXTROVERSION message');
 insert into daily_health_messages(id, type, personality, content)
 values (18, 'LIFE_STYLE', 'ALL', 'LIFE_STYLE ALL message');
-/*
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (1, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISFP', 6.0, 'Jogging', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (2, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'INFJ', 8.0, 'Yoga', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (3, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ENTP', 5.0, 'Swimming', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (4, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISTJ', 6.0, 'Biking', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (5, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ENFJ', 7.0, 'Pilates', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (6, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ESTJ', 4.0, 'Walking', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (7, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISFJ', 3.0, 'Dancing', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (8, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'INTP', 5.0, 'Jumping rope', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (9, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ESFJ', 7.0, 'Hiking', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (10, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 'ISTP', 4.0, 'Push-ups', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (11, '2023-05-01', '2023-05-01', 'ISTP, ENTP, INFP', 5.5, 'RUNNING', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (12, '2023-05-02', '2023-05-02', 'ISTP, ENTP, INFP', 5.5, 'hiking', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (13, '2023-05-01', '2023-05-01', 'ISTJ,ISFJ,INFJ', 4.3, 'Weightlifting', 'WEIGHT');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (14, '2023-05-01', '2023-05-01', 'INFJ', 5.5, 'Running', 'CARDIO');
-# insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE)
-# values (15, '2023-05-01', '2023-05-01', 'ISTJ', 3.8, 'Yoga','CARDIO');
-*/
+
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (1, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 6.0, 'Jogging', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (2, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 8.0, 'Yoga', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (3, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 5.0, 'Swimming', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (4, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 6.0, 'Biking', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (5, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 7.0, 'Pilates', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (6, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 4.0, 'Walking', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (7, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 3.0, 'Dancing', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (8, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 5.0, 'Jumping rope', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (9, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 7.0, 'Hiking', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (10, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 4.0, 'Push-ups', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (11, '2023-05-01', '2023-05-01', 5.5, 'RUNNING', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (12, '2023-05-02', '2023-05-02', 5.5, 'hiking', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (13, '2023-05-01', '2023-05-01', 4.3, 'Weightlifting', 'WEIGHT');
+insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
+values (14, '2023-05-01', '2023-05-01', 5.5, 'Running', 'CARDIO');
+insert into exercises (ID, CREATED_AT, UPDATED_AT,  MET, NAME, TYPE)
+values (15, '2023-05-01', '2023-05-01',  3.8, 'Yoga','CARDIO');
+
+insert into exercise_mbti(id, mbti, exercise_id)
+values (1, 'INTJ', 1);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (2, 'INFJ', 1);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (3, 'INTP', 1);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (4, 'INTJ', 2);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (5, 'INFJ', 2);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (6, 'INTP', 2);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (7, 'INTJ', 3);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (8, 'INFJ', 3);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (9, 'INTP', 3);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (10, 'INTJ', 11);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (11, 'INFJ', 4);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (12, 'INTP', 4);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (13, 'INTJ', 5);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (14, 'INFJ', 5);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (15, 'INTP', 5);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (16, 'ESTJ', 6);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (17, 'ESFJ', 6);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (18, 'ESTP', 6);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (19, 'ESTJ', 12);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (20, 'ESFJ', 7);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (21, 'ESTP', 7);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (22, 'ESTJ', 8);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (23, 'ESFJ', 13);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (24, 'ESTP', 8);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (25, 'ESTJ', 9);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (26, 'ESFJ', 9);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (27, 'ESTP', 14);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (28, 'ESTJ', 10);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (29, 'ESFJ', 11);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (30, 'ESTP', 10);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (31, 'ESFP', 1);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (32, 'ESFP', 14);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (33, 'ESFP', 3);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (34, 'ESFP', 4);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (35, 'ESFP', 5);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (36, 'ESFP', 6);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (37, 'ESFP', 7);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (38, 'ESFP', 15);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (39, 'ESFP', 9);
+insert into exercise_mbti(id, mbti, exercise_id)
+values (40, 'ESFP', 12);
+
 insert into activities(id, name, symptom)
 values (1, 'TEST_ACTIVITY_1', 'LETHARGIC');
 insert into activities(id, name, symptom)

@@ -21,14 +21,11 @@ public class Exercise extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     @Enumerated(EnumType.STRING)
     private ExerciseType type;
+    private Double met;
     @OneToMany(mappedBy = "exercise")
     private List<ExerciseMBTI> mbtiList = new ArrayList<>();
-    private Double met;
-    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
-    private List<UserExercise> userExercises = new ArrayList<>();
 
 }
