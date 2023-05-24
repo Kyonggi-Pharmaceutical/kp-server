@@ -25,7 +25,7 @@ public class Exercise extends BaseEntity {
     private String name;
     @Enumerated(EnumType.STRING)
     private ExerciseType type;
-    @OneToMany(mappedBy = "activity")
+    @OneToMany(mappedBy = "exercise")
     private List<ExerciseMBTI> mbtiList = new ArrayList<>();
     private Double met;
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
