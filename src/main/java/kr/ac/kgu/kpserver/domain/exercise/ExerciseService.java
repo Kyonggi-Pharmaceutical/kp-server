@@ -66,7 +66,7 @@ public class ExerciseService {
      * 맞춤 운동 솔루션 제시(normal)
      */
     @Transactional
-    @Scheduled(cron = "0 0/2 * * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     public void renewForNormalUserExercises() {
         List<User> userList = userRepository.findByUserAnswer(UserAnswer.NORMAL);
 
