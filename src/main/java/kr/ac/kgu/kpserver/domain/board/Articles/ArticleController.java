@@ -143,8 +143,8 @@ public class ArticleController {
     @Operation(summary = "내가 쓴 게시글 모아보기 API")
     @UserAuthenticated
     @GetMapping("/getArticlesByUser")
-    public ResponseEntity<List<ArticleDto>> getArticleByUser(User user, Long articleId) throws NotFoundException {
-        List<ArticleDto> articles = articleService.getArticleByUser(user.getId(), articleId);
+    public ResponseEntity<List<ArticleDto>> getArticleByUser(User user) throws NotFoundException {
+        List<ArticleDto> articles = articleService.getArticleByUser(user.getId());
         return ResponseEntity.ok(articles);
     }
 

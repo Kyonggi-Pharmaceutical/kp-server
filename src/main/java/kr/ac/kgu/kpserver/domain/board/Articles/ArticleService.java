@@ -81,13 +81,10 @@ public class ArticleService {
     }
 
     @Transactional
-    public List<ArticleDto> getArticleByUser(Long userId, Long articleId){
+    public List<ArticleDto> getArticleByUser(Long userId){
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
-
-        List<Article> articles = articleRepository.findByIdAndUser(article, user);
+        List<Article> articles = articleRepository.findByUser(user);
         return articles.stream()
                 .map(ArticleDto::of)
                 .collect(Collectors.toList());
