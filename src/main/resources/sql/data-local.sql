@@ -73,16 +73,16 @@ insert into exercises (ID, CREATED_AT, UPDATED_AT, MBTI, MET, NAME, TYPE) VALUES
                                                                                   'CARDIO');
 insert into user_exercises(ID, CAL, EXERCISE_ID, USER_ID, time) values (0, 33.3, -10, -10, 0);
 
-insert into activities(id, name, symptom) values (1, 'TEST_ACTIVITY_1', 'LETHARGIC');
-insert into activities(id, name, symptom) values (2, 'TEST_ACTIVITY_2', 'LETHARGIC');
-insert into activities(id, name, symptom) values (3, 'TEST_ACTIVITY_3', 'LETHARGIC');
-insert into activities(id, name, symptom) values (4, 'TEST_ACTIVITY_4', 'LETHARGIC');
-insert into activities(id, name, symptom) values (5, 'TEST_ACTIVITY_5', 'LETHARGIC');
-insert into activities(id, name, symptom) values (6, 'TEST_ACTIVITY_6', 'LETHARGIC');
-insert into activities(id, name, symptom) values (7, 'TEST_ACTIVITY_7', 'LETHARGIC');
-insert into activities(id, name, symptom) values (8, 'TEST_ACTIVITY_8', 'LETHARGIC');
-insert into activities(id, name, symptom) values (9, 'TEST_ACTIVITY_9', 'LETHARGIC');
-insert into activities(id, name, symptom) values (10, 'TEST_ACTIVITY_10', 'LETHARGIC');
+insert into activities(id, name, symptom, problem) values (1, 'TEST_ACTIVITY_1', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (2, 'TEST_ACTIVITY_2', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (3, 'TEST_ACTIVITY_3', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (4, 'TEST_ACTIVITY_4', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (5, 'TEST_ACTIVITY_5', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (6, 'TEST_ACTIVITY_6', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (7, 'TEST_ACTIVITY_7', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (8, 'TEST_ACTIVITY_8', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (9, 'TEST_ACTIVITY_9', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (10, 'TEST_ACTIVITY_10', 'LETHARGIC', '');
 
 insert into activity_mbti(id, mbti, activity_id) values (1, 'INTJ', 1);
 insert into activity_mbti(id, mbti, activity_id) values (2, 'INFJ', 1);
