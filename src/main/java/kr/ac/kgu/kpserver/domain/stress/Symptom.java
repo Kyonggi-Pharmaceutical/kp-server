@@ -2,9 +2,10 @@ package kr.ac.kgu.kpserver.domain.stress;
 
 public enum Symptom {
 
-    LETHARGIC("무기력함"),
+    LETHARGIC("피곤함"),
     DEPRESSED("우울함"),
     ANXIETY("불안함"),
+    SADNESS("슬픔"),
     ANGER("분노");
 
 
