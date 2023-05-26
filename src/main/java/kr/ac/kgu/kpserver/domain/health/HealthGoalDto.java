@@ -1,6 +1,7 @@
 package kr.ac.kgu.kpserver.domain.health;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,4 +18,15 @@ public class HealthGoalDto {
     private Double accomplishRate;
     private HealthcareType type;
     private UserAnswer userAnswer;
+
+    public static HealthGoalDto of(HealthGoal healthGoal, UserAnswer userAnswer) {
+        return new HealthGoalDto(
+                healthGoal.getWeightGoal(),
+                healthGoal.getStartAt(),
+                healthGoal.getEndAt(),
+                healthGoal.getAccomplishRate(),
+                healthGoal.getType(),
+                userAnswer
+        );
+    }
 }
