@@ -15,6 +15,7 @@ import org.webjars.NotFoundException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,8 +24,8 @@ public class LikeService {
     private final ArticleRepository articleRepository;
     private final UserRepository userRepository;
     private final LikeRepository likeRepository;
+    private final LikeCommentRepository likeCommentRepository;
     private final CommentRepository commentRepository;
-
     @Transactional
     public void checkedLikeForArticle(Long userId, Long articleId) {
         User user = userRepository.findById(userId)
@@ -46,8 +47,18 @@ public class LikeService {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NotFoundException("Could not found article id : " + commentId));
         CommentRequest.of(comment);
-        Like like = new Like(user, comment);
-        likeRepository.save(like);
+        LikeComment like = new LikeComment(user,  comment);
+        likeCommentRepository.save(like);
+    }
+
+    @Transactional
+    public void deleteLikeForComment(Long userId, Long commentId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NotFoundException("Could not found article id : " + commentId));
+        Optional<LikeComment> like = likeCommentRepository.findByUserAndComment(user, comment);
+        like.ifPresent(likeCommentRepository::delete);
     }
 
     @Transactional
@@ -63,11 +74,18 @@ public class LikeService {
     @Transactional
     public List<ArticleDto> getLikedArticleByUser(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
+                .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
 
-        List<Article> articles = articleRepository.findByUser(user);
+        List<Like> likes = likeRepository.findByUser(user);
+        List<Long> articleIds = likes.stream()
+                .map(Like::getArticle)
+                .map(Article::getId)
+                .collect(Collectors.toList());
+
+        List<Article> articles = articleRepository.findByIdIn(articleIds);
+
         return articles.stream()
-                .map(ArticleDto::of)
+                .map(article -> new ArticleDto(article.getTitle(), article.getDescription()))
                 .collect(Collectors.toList());
     }
 
@@ -76,9 +94,15 @@ public class LikeService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not found user id : " + userId));
 
-        List<Comment> comments = commentRepository.findByUser(user);
-        return comments.stream()
-                .map(CommentRequest::of)
+        List<LikeComment> likes = likeCommentRepository.findByUser(user);
+        List<Long> commentIds = likes.stream()
+                .map(LikeComment::getComment)
+                .map(Comment::getId)
+                .collect(Collectors.toList());
+
+        List<Comment> articles = commentRepository.findByIdIn(commentIds);
+        return articles.stream()
+                .map(comment -> new CommentRequest(comment.getDescription()))
                 .collect(Collectors.toList());
     }
 
@@ -98,7 +122,7 @@ public class LikeService {
                 .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NotFoundException("Could not found article id : " + commentId));
-        Optional<Like> like = likeRepository.findByUserAndComment(user, comment);
+        Optional<LikeComment> like = likeCommentRepository.findByUserAndComment(user, comment);
         return like.isPresent();
     }
 
@@ -112,6 +136,20 @@ public class LikeService {
         }
         return likes.stream()
                 .map(LikeDto::of)
+                .collect(Collectors.toList())
+                .size();
+    }
+
+    @Transactional
+    public int getLikesForComment(Long commentId) throws NotFoundException {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NotFoundException("Could not found article id : " + commentId));
+        List<LikeComment> likes = likeCommentRepository.findAllByComment(comment);
+        if (likes.isEmpty()) {
+            return 0;
+        }
+        return likes.stream()
+                .map(LikeCommentDto::of)
                 .collect(Collectors.toList())
                 .size();
     }

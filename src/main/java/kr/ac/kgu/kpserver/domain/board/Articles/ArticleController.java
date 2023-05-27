@@ -99,10 +99,10 @@ public class ArticleController {
 
     @Operation(summary = "댓글 삭제 API")
     @UserAuthenticated
-    @DeleteMapping("/{articleId}/comments/{commentId}")
-    public ResponseEntity<Void> deleteComment(@PathVariable Long articleId,
+    @DeleteMapping("/comments/{commentId}")
+    public ResponseEntity<Void> deleteComment(
                                               @PathVariable Long commentId) {
-        commentService.deleteComment(articleId, commentId);
+        commentService.deleteComment( commentId);
         return ResponseEntity.noContent().build();
     }
 

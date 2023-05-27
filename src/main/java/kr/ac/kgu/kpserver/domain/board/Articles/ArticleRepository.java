@@ -11,4 +11,5 @@ import java.util.List;
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Article> findByUser(User user);
     Page<Article> findByBoard(Board board, Pageable pageable);
+    List<Article> findByIdIn(List<Long> articleIds);
 }

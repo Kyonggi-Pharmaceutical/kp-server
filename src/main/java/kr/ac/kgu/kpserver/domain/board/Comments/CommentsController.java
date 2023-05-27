@@ -31,8 +31,16 @@ public class CommentsController {
     @Operation(summary = "댓글 좋아요 API")
     @UserAuthenticated
     @PostMapping("/{commentId}/likes")
-    public ResponseEntity<Void> addLikeForComment(@PathVariable Long commentId, User user) {
+    public ResponseEntity<Void> addLikeForComment( @PathVariable Long commentId, User user) {
         likeService.addLikeForComment(user.getId(), commentId);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "댓글 좋아요 API")
+    @UserAuthenticated
+    @PostMapping("/{commentId}/deleteLikes")
+    public ResponseEntity<Void> deleteLikeForComment( @PathVariable Long commentId, User user) {
+        likeService.deleteLikeForComment(user.getId(), commentId);
         return ResponseEntity.ok().build();
     }
 
@@ -42,5 +50,17 @@ public class CommentsController {
     public ResponseEntity<Boolean> maintainLikesForComments(User user, @PathVariable Long commentId) throws NotFoundException {
         boolean tureValues = likeService.maintainLikesForComments(user.getId(), commentId);
         return ResponseEntity.ok(tureValues);
+    }
+
+    @Operation(summary = "댓글 좋아요 유지 API")
+    @UserAuthenticated
+    @GetMapping("/{commentId}/likes")
+    public ResponseEntity<Integer> getLikesForComment(@PathVariable Long commentId) {
+        try {
+            int likesCount = likeService.getLikesForComment(commentId);
+            return ResponseEntity.ok(likesCount);
+        } catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

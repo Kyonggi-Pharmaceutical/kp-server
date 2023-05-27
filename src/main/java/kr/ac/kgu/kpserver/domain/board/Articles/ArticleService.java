@@ -3,6 +3,7 @@ package kr.ac.kgu.kpserver.domain.board.Articles;
 import kr.ac.kgu.kpserver.domain.board.Articles.dto.ArticleDto;
 import kr.ac.kgu.kpserver.domain.board.Board;
 import kr.ac.kgu.kpserver.domain.board.BoardRepository;
+import kr.ac.kgu.kpserver.domain.board.Likes.LikeRepository;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final UserRepository userRepository;
     private final BoardRepository boardRepository;
+    private final LikeRepository likeRepository;
 
     @Transactional
     public Long getUserId(Long userId) {
@@ -76,7 +78,7 @@ public class ArticleService {
         if (!article.getUser().equals(user)) {
             throw new AccessDeniedException(("User is not authorized to delete this article."));
         }
-
+        likeRepository.deleteByArticle(article);
         articleRepository.delete(article);
     }
 
@@ -89,4 +91,5 @@ public class ArticleService {
                 .map(ArticleDto::of)
                 .collect(Collectors.toList());
     }
+
 }
