@@ -16,8 +16,8 @@ public enum RankingPeriod {
                     .to(now.minusDays(1).atTime(LocalTime.MAX));
         } else if (this == BEFORE_WEEKLY) {
             builder
-                    .from(now.minusDays(1).minusWeeks(1).with(DayOfWeek.MONDAY).atTime(LocalTime.MIN))
-                    .to(now.minusDays(1).minusWeeks(1).with(DayOfWeek.FRIDAY).atTime(LocalTime.MAX));
+                    .from(now.minusWeeks(1).with(DayOfWeek.MONDAY).atTime(LocalTime.MIN))
+                    .to(now.minusWeeks(1).with(DayOfWeek.FRIDAY).atTime(LocalTime.MAX));
         } else if (this == BEFORE_MONTHLY) {
             builder
                     .from(YearMonth.now().minusMonths(1).atDay(1).atStartOfDay())
