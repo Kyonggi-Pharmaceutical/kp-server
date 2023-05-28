@@ -258,9 +258,17 @@ insert into activity_mbti(id, mbti, activity_id)
 values (39, 'ESFP', 9);
 insert into activity_mbti(id, mbti, activity_id)
 values (40, 'ESFP', 10);
+insert into activities(id, name, symptom, problem) values (1, 'TEST_ACTIVITY_1', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (2, 'TEST_ACTIVITY_2', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (3, 'TEST_ACTIVITY_3', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (4, 'TEST_ACTIVITY_4', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (5, 'TEST_ACTIVITY_5', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (6, 'TEST_ACTIVITY_6', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (7, 'TEST_ACTIVITY_7', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (8, 'TEST_ACTIVITY_8', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (9, 'TEST_ACTIVITY_9', 'LETHARGIC', '');
+insert into activities(id, name, symptom, problem) values (10, 'TEST_ACTIVITY_10', 'LETHARGIC', '');
 
-insert into user_activities(id, user_id, activity_id)
-values (0, -1, 1);
 insert into stress_goals(id, accomplish_rate, start_at, end_at)
 values (0, 0.0, '2023-04-01T00:00:00', '2023-04-30T23:59:59');
 update users
@@ -306,148 +314,66 @@ values (-109, '2023-04-09', 60.0, 44.0);
 insert into health_goals (id, start_at, accomplish_rate, weight_goal)
 values (-110, '2023-04-10', 80.0, 45.0);
 
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id)
-values (-101, 'USER-101', 'USER-101', 'USER-101', 'user-101@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTJ',
-        'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00', -101);
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id)
-values (-102, 'USER-102', 'USER-102', 'USER-102', 'user-102@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTJ',
-        'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00', -102);
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id)
-values (-103, 'USER-103', 'USER-103', 'USER-103', 'user-103@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTJ',
-        'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00', -103);
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id)
-values (-104, 'USER-104', 'USER-104', 'USER-104', 'user-104@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTP',
-        'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00', -104);
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id)
-values (-105, 'USER-105', 'USER-105', 'USER-105', 'user-105@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTP',
-        'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00', -105);
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id)
-values (-106, 'USER-106', 'USER-106', 'USER-106', 'user-106@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'INTP',
-        'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00', -106);
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id)
-values (-107, 'USER-107', 'USER-107', 'USER-107', 'user-107@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'INTP',
-        'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00', -107);
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id)
-values (-108, 'USER-108', 'USER-108', 'USER-108', 'user-108@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP',
-        'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00', -108);
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id)
-values (-109, 'USER-109', 'USER-109', 'USER-109', 'user-109@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP',
-        'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00', -109);
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id)
-values (-110, 'USER-110', 'USER-110', 'USER-110', 'user-110@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP',
-        'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00', -110);
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id) values (-101, 'USER-101', 'USER-101', 'USER-101', 'user-101@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTJ', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00',-101);
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id) values (-102, 'USER-102', 'USER-102', 'USER-102', 'user-102@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTJ', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00',-102);
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id) values (-103, 'USER-103', 'USER-103', 'USER-103', 'user-103@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTJ', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00',-103);
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id) values (-104, 'USER-104', 'USER-104', 'USER-104', 'user-104@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTP', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00',-104);
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id) values (-105, 'USER-105', 'USER-105', 'USER-105', 'user-105@test.com', '', 'MALE', '2023-01-01', 180, 70, 'INTP', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00',-105);
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id) values (-106, 'USER-106', 'USER-106', 'USER-106', 'user-106@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'INTP', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00',-106);
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id) values (-107, 'USER-107', 'USER-107', 'USER-107', 'user-107@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'INTP', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00',-107);
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id) values (-108, 'USER-108', 'USER-108', 'USER-108', 'user-108@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00',-108);
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id) values (-109, 'USER-109', 'USER-109', 'USER-109', 'user-109@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00',-109);
+insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight, mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, health_goal_id) values (-110, 'USER-110', 'USER-110', 'USER-110', 'user-110@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00',-110);
 
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-01T12:00:00', true, -101, -101);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-02T12:00:00', true, -101, -101);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-03T12:00:00', true, -101, -101);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-04T12:00:00', true, -101, -101);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-05T12:00:00', true, -101, -101);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-02T12:00:00', true, -102, -102);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-03T12:00:00', false, -102, -102);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-04T12:00:00', false, -102, -102);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-05T12:00:00', false, -102, -102);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-06T12:00:00', true, -102, -102);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-03T12:00:00', true, -103, -103);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-04T12:00:00', true, -103, -103);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-05T12:00:00', false, -103, -103);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-06T12:00:00', false, -103, -103);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-07T12:00:00', true, -103, -103);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-04T12:00:00', true, -104, -104);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-05T12:00:00', true, -104, -104);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-06T12:00:00', true, -104, -104);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-07T12:00:00', true, -104, -104);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-08T12:00:00', false, -104, -104);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-05T12:00:00', false, -105, -105);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-06T12:00:00', true, -105, -105);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-07T12:00:00', true, -105, -105);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-08T12:00:00', true, -105, -105);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-09T12:00:00', true, -105, -105);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-06T12:00:00', true, -106, -106);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-07T12:00:00', false, -106, -106);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-08T12:00:00', true, -106, -106);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-09T12:00:00', true, -106, -106);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-10T12:00:00', true, -106, -106);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-07T12:00:00', true, -107, -107);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-08T12:00:00', true, -107, -107);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-09T12:00:00', false, -107, -107);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-10T12:00:00', true, -107, -107);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-11T12:00:00', false, -107, -107);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-08T12:00:00', false, -108, -108);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-09T12:00:00', true, -108, -108);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-10T12:00:00', true, -108, -108);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-11T12:00:00', true, -108, -108);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-12T12:00:00', false, -108, -108);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-09T12:00:00', true, -109, -109);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-10T12:00:00', true, -109, -109);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-11T12:00:00', true, -109, -109);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-12T12:00:00', true, -109, -109);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-13T12:00:00', true, -109, -109);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-10T12:00:00', false, -110, -110);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-11T12:00:00', false, -110, -110);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-12T12:00:00', true, -110, -110);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-13T12:00:00', false, -110, -110);
-insert into daily_progresses(created_at, is_check, health_goal_id, user_id)
-values ('2023-04-14T12:00:00', false, -110, -110);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-01T12:00:00',true, -101, -101);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-02T12:00:00',true, -101, -101);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-03T12:00:00',true, -101, -101);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-04T12:00:00',true, -101, -101);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-05T12:00:00',true, -101, -101);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-02T12:00:00',true, -102, -102);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-03T12:00:00',false, -102, -102);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-04T12:00:00',false, -102, -102);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-05T12:00:00',false, -102, -102);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-06T12:00:00',true, -102, -102);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-03T12:00:00',true, -103, -103);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-04T12:00:00',true, -103, -103);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-05T12:00:00',false, -103, -103);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-06T12:00:00',false, -103, -103);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-07T12:00:00',true, -103, -103);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-04T12:00:00',true, -104, -104);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-05T12:00:00',true, -104, -104);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-06T12:00:00',true, -104, -104);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-07T12:00:00',true, -104, -104);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-08T12:00:00',false, -104, -104);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-05T12:00:00',false, -105, -105);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-06T12:00:00',true, -105, -105);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-07T12:00:00',true, -105, -105);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-08T12:00:00',true, -105, -105);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-09T12:00:00',true, -105, -105);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-06T12:00:00',true, -106, -106);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-07T12:00:00',false, -106, -106);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-08T12:00:00',true, -106, -106);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-09T12:00:00',true, -106, -106);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-10T12:00:00',true, -106, -106);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-07T12:00:00',true, -107, -107);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-08T12:00:00',true, -107, -107);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-09T12:00:00',false, -107, -107);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-10T12:00:00',true, -107, -107);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-11T12:00:00',false, -107, -107);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-08T12:00:00',false, -108, -108);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-09T12:00:00',true, -108, -108);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-10T12:00:00',true, -108, -108);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-11T12:00:00',true, -108, -108);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-12T12:00:00',false, -108, -108);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-09T12:00:00',true, -109, -109);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-10T12:00:00',true, -109, -109);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-11T12:00:00',true, -109, -109);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-12T12:00:00',true, -109, -109);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-13T12:00:00',true, -109, -109);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-10T12:00:00',false, -110, -110);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-11T12:00:00',false, -110, -110);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-12T12:00:00',true, -110, -110);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-13T12:00:00',false, -110, -110);
+insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-14T12:00:00',false, -110, -110);
 
-insert into boards(id, category)
-values (0, 'ACTIVITY'),
-       (1, 'STRESS');
+insert into boards(id, category) values (0, 'HEALTH'), (1, 'STRESS');

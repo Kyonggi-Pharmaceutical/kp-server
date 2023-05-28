@@ -3,6 +3,7 @@ package kr.ac.kgu.kpserver.domain.health.progress;
 import kr.ac.kgu.kpserver.domain.health.HealthcareType;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.health.progress.dto.DailyProgressResponse;
+import kr.ac.kgu.kpserver.domain.health.progress.dto.DailyProgressCheckTodayResponse;
 import kr.ac.kgu.kpserver.domain.stress.goal.StressGoal;
 import kr.ac.kgu.kpserver.domain.stress.goal.StressGoalRepository;
 import kr.ac.kgu.kpserver.domain.user.User;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,5 +71,14 @@ public class DailyProgressService {
             return DailyProgressResponse.from(dailyProgresses);
         }
         throw new KpException(KpExceptionType.INTERNAL_SERVER_ERROR);
+    }
+
+    @Transactional(readOnly = true)
+    public DailyProgressCheckTodayResponse isCheckToday(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new KpException(KpExceptionType.NOT_FOUND_USER));
+        LocalDate now = LocalDate.now();
+        Optional<DailyProgress> today = dailyProgressRepository.findByUserAndCreatedAtBetween(user, now.atStartOfDay(), now.atTime(LocalTime.MAX));
+        return new DailyProgressCheckTodayResponse(today.isPresent());
     }
 }

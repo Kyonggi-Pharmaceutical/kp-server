@@ -38,14 +38,14 @@ public class HealthController {
     @PostMapping("/dailyProgressChecked")
     public ResponseEntity<Void> saveDailyProgress(User user,
                                                   @RequestBody DailyProgressResponse dailyProgressResponse) {
-        healthService.saveDailyProgress(user.getId(),dailyProgressResponse);
+        healthService.saveDailyProgress(user.getId(), dailyProgressResponse);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "일일 솔루션 체크 API")
     @UserAuthenticated
     @GetMapping("/printDailyProgress")
-    public ResponseEntity<Boolean> printDailyProgress (User user){
+    public ResponseEntity<Boolean> printDailyProgress(User user) {
         boolean TrueValues = healthService.displayDailyProgress(user.getId());
         return ResponseEntity.ok().body(TrueValues);
     }
@@ -87,4 +87,13 @@ public class HealthController {
         healthService.findByUserAnswer(user.getId(), userDto);
         return ResponseEntity.ok().build();
     }
+
+    @Operation(summary = "건강 목표 조회 API")
+    @UserAuthenticated
+    @GetMapping("/health-goal")
+    public ResponseEntity<HealthGoalDto> getHealthGoal(User user) {
+        HealthGoalDto healthGoal = healthService.getHealthGoal(user.getId());
+        return ResponseEntity.ok(healthGoal);
+    }
+
 }

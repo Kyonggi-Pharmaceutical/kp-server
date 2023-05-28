@@ -143,4 +143,16 @@ public class HealthService {
         user.setUserAnswer(userDto.getUserAnswer());
         userRepository.save(user);
     }
+
+    @Transactional(readOnly = true)
+    public HealthGoalDto getHealthGoal(long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new KpException(KpExceptionType.NOT_FOUND_USER));
+        HealthGoal healthGoal = user.getHealthGoal();
+        UserAnswer userAnswer = user.getUserAnswer();
+        if (healthGoal == null || userAnswer == null) {
+            return null;
+        }
+        return HealthGoalDto.of(healthGoal, userAnswer);
+    }
 }

@@ -24,6 +24,7 @@ public class Activity extends BaseEntity {
     private Long id;
 
     private String name;
+    private String problem;
     @Enumerated(EnumType.STRING)
     private Symptom symptom;
 
