@@ -29,4 +29,11 @@ public class HealthGoalDto {
                 userAnswer
         );
     }
+    public static HealthGoalDto from(HealthGoal healthGoal) {
+        return HealthGoalDto.builder().
+                weightGoal(healthGoal.getWeightGoal())
+                .accomplishRate(healthGoal.getAccomplishRate())
+                .type(healthGoal.getType())
+                .build();
+    }
 }
