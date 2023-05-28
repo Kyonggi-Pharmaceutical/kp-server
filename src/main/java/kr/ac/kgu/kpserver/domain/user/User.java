@@ -88,7 +88,16 @@ public class User extends BaseEntity {
     }
 
     public Boolean isSignUp() {
-        return healthcareType != null && nickname != null && height != null && weight != null;
+        return healthcareType != null &&
+                nickname != null &&
+                height != null &&
+                weight != null &&
+                email != null &&
+                firstName != null &&
+                lastName != null &&
+                gender != null &&
+                dateOfBirth != null &&
+                mbti != null;
     }
 
     public Personality getPersonality() {
