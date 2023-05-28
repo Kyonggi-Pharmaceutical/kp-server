@@ -52,9 +52,9 @@ public class CommentsController {
         return ResponseEntity.ok(tureValues);
     }
 
-    @Operation(summary = "댓글 좋아요 유지 API")
+    @Operation(summary = "댓글 좋아요 수 API")
     @UserAuthenticated
-    @GetMapping("/{commentId}/likes")
+    @GetMapping("/{commentId}/intLikes")
     public ResponseEntity<Integer> getLikesForComment(@PathVariable Long commentId) {
         try {
             int likesCount = likeService.getLikesForComment(commentId);
