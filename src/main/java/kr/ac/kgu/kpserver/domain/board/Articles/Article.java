@@ -16,7 +16,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Builder
 @Table(name = "articles")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,7 +58,5 @@ public class Article extends BaseEntity {
         comments.add(comment);
         comment.setArticle(this);
     }
-
-
 
 }

@@ -99,10 +99,10 @@ public class ArticleController {
 
     @Operation(summary = "댓글 삭제 API")
     @UserAuthenticated
-    @DeleteMapping("/{articleId}/comments/{commentId}")
-    public ResponseEntity<Void> deleteComment(@PathVariable Long articleId,
+    @DeleteMapping("/comments/{commentId}")
+    public ResponseEntity<Void> deleteComment(
                                               @PathVariable Long commentId) {
-        commentService.deleteComment(articleId, commentId);
+        commentService.deleteComment( commentId);
         return ResponseEntity.noContent().build();
     }
 
@@ -124,12 +124,28 @@ public class ArticleController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = " 좋아요 유지 API")
+    @UserAuthenticated
+    @GetMapping("/{articleId}/maintainLikes")
+    public ResponseEntity<Boolean> getLikesByUser(User user, @PathVariable Long articleId) throws NotFoundException {
+        boolean trueValue = likeService.maintainLikesForArticle(user.getId(), articleId);
+        return ResponseEntity.ok().body(trueValue);
+    }
+
     @Operation(summary = "각 게시글 좋아요 모아보기 API")
     @UserAuthenticated
     @GetMapping("/{articleId}/likes")
     public ResponseEntity<Integer> getLikesForArticle(@PathVariable Long articleId) throws NotFoundException {
         int likesCount = likeService.getLikesForArticle(articleId);
         return ResponseEntity.ok().body(likesCount);
+    }
+
+    @Operation(summary = "내가 쓴 게시글 모아보기 API")
+    @UserAuthenticated
+    @GetMapping("/getArticlesByUser")
+    public ResponseEntity<List<ArticleDto>> getArticleByUser(User user) throws NotFoundException {
+        List<ArticleDto> articles = articleService.getArticleByUser(user.getId());
+        return ResponseEntity.ok(articles);
     }
 
 }

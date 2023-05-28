@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface LikeRepository extends JpaRepository<Like, Long> {
     Optional<Like> findByUserAndArticle(User user, Article article);
     List<Like> findAllByArticle(Article article);
+    List<Like> findByUser(User user);
+    void deleteByArticle(Article article);
 }

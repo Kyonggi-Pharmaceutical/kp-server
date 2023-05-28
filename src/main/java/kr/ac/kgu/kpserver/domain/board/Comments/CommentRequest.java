@@ -24,4 +24,8 @@ public class CommentRequest {
                 .userId(comment.getUser().getId())
                 .build();
     }
+
+    public CommentRequest(String description){
+        this.description = description;
+    }
 }

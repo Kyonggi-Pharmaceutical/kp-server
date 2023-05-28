@@ -36,6 +36,4 @@ public class ExerciseController {
         exerciseService.saveUserExerciseByMBTI(user.getId());
         return ResponseEntity.ok().build();
     }
-
-
 }

@@ -2,6 +2,7 @@ package kr.ac.kgu.kpserver.domain.board.Comments;
 
 import kr.ac.kgu.kpserver.domain.board.Articles.Article;
 import kr.ac.kgu.kpserver.domain.board.Articles.ArticleRepository;
+import kr.ac.kgu.kpserver.domain.board.Likes.LikeCommentRepository;
 import kr.ac.kgu.kpserver.domain.user.User;
 import kr.ac.kgu.kpserver.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class CommentService {
     private final ArticleRepository articleRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
+    private final LikeCommentRepository likeCommentRepository;
 
     @Transactional
     public void createdComments(Long userId, Long articleId, CommentRequest commentRequest) throws NotFoundException {
@@ -43,13 +45,11 @@ public class CommentService {
     }
 
     @Transactional
-    public void deleteComment(Long articleId,
-                              Long commentId) throws NotFoundException {
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + articleId));
+    public void deleteComment(
+            Long commentId) throws NotFoundException {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NotFoundException("Could not find comment with id : " + commentId));
-        article.getComments().remove(comment);
+        likeCommentRepository.deleteByComment(comment);
         commentRepository.delete(comment);
     }
 
@@ -63,13 +63,15 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    public List<Comment> getCommentsByUser(Long userId, Long articleId) {
+    @Transactional
+    public List<CommentRequest> getCommentsByUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id : " + userId));
 
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new NotFoundException("Could not find article with id : " + articleId));
-        return commentRepository.findByUserAndArticle(user, article);
+        List<Comment> comments = commentRepository.findByUser(user);
+        return comments.stream()
+                .map(CommentRequest::of)
+                .collect(Collectors.toList());
     }
 
 }
