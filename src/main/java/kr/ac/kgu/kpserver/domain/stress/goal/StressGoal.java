@@ -29,7 +29,7 @@ public class StressGoal {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
     private LocalDateTime endAt = startAt.plusDays(30);
 
-    private Double accomplishRate;
+    private Double accomplishRate = 0.0;
 
     @OneToMany(mappedBy = "stressGoal")
     private List<DailyProgress> dailyProgresses = new ArrayList<>();
