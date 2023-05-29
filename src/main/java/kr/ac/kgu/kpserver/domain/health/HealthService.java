@@ -88,12 +88,12 @@ public class HealthService {
      * 달성률 출력 코드
      * */
     @Transactional(readOnly = true)
-    public double getAccomplishRate(Long userId) {
+    public HealthGoalDto getAccomplishRate(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id: " + userId));
 
         HealthGoal healthGoal = user.getHealthGoal();
-        return healthGoal.getAccomplishRate();
+        return HealthGoalDto.from(healthGoal);
     }
 
     /*

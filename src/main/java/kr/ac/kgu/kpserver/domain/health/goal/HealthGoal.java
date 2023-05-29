@@ -43,6 +43,8 @@ public class HealthGoal extends BaseEntity {
         this.startAt = startAt;
         this.weightGoal = weightGoal;
         this.type = type;
+        this.accomplishRate = 0.0;
+        this.endAt = startAt.plusMonths(1);
     }
 
     public void addDailyProgress(DailyProgress dailyProgress) {

@@ -53,9 +53,9 @@ public class HealthController {
     @Operation(summary = "월별 솔루션 달성률 제시 API")
     @UserAuthenticated
     @GetMapping("/monthAchievementRate")
-    public ResponseEntity<Double> calculationMonthExerciseGoal(User user) {
-        Double accomplishRate = healthService.getAccomplishRate(user.getId());
-        return ResponseEntity.ok(accomplishRate);
+    public ResponseEntity<HealthGoalDto> calculationMonthExerciseGoal(User user) {
+        HealthGoalDto healthGoalDto = healthService.getAccomplishRate(user.getId());
+        return ResponseEntity.ok(healthGoalDto);
     }
 
     @Operation(summary = "이전 솔루션 체크 리스트 확인 API")
@@ -74,7 +74,7 @@ public class HealthController {
 
     @Operation(summary = "솔루션 만족시 API")
     @UserAuthenticated
-    @PostMapping("/solutionSatisfaction")
+    @GetMapping("/solutionSatisfaction")
     public ResponseEntity<Double> satisfactionSurveySatisfy(User user) {
         double resultWeight = healthService.satisfySurveySolution(user.getId());
         return ResponseEntity.ok().body(resultWeight);
