@@ -25,7 +25,8 @@ public class CommentRequest {
                 .build();
     }
 
-    public CommentRequest(String description){
+    public CommentRequest(Long articleId, String description){
+        this.articleId =articleId;
         this.description = description;
     }
 }

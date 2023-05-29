@@ -102,7 +102,7 @@ public class LikeService {
 
         List<Comment> articles = commentRepository.findByIdIn(commentIds);
         return articles.stream()
-                .map(comment -> new CommentRequest(comment.getDescription()))
+                .map(comment -> new CommentRequest(comment.getArticle().getId(), comment.getDescription()))
                 .collect(Collectors.toList());
     }
 
