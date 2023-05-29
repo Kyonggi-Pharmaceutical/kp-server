@@ -45,6 +45,7 @@ public class HealthService {
 
         healthGoalRepository.save(healthGoal);
         user.setHealthGoal(healthGoal);
+        user.setHealthcareType(HealthcareType.HEALTH);
         userRepository.save(user);
     }
 
