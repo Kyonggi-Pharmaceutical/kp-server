@@ -44,7 +44,7 @@ public class DailyHealthMessageService {
         List<DailyHealthMessage> messages = dailyHealthMessageRepository.findByTypeAndPersonality(type, personality);
 
         int today = LocalDateTime.now().getDayOfMonth();
-        int randomIndexByDay = today % (messages.size() + user.getId().intValue());
+        int randomIndexByDay = today % (messages.size() + user.getId().intValue() % messages.size());
         return messages.get(randomIndexByDay);
     }
 

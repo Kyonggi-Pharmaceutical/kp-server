@@ -54,7 +54,7 @@ public class HealthController {
     @UserAuthenticated
     @GetMapping("/monthAchievementRate")
     public ResponseEntity<HealthGoalDto> calculationMonthExerciseGoal(User user) {
-        HealthGoalDto healthGoalDto= healthService.getAccomplishRate(user.getId());
+        HealthGoalDto healthGoalDto = healthService.getAccomplishRate(user.getId());
         return ResponseEntity.ok(healthGoalDto);
     }
 
