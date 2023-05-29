@@ -377,3 +377,14 @@ insert into daily_progresses(created_at, is_check, health_goal_id, user_id) valu
 insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-14T12:00:00',false, -110, -110);
 
 insert into boards(id, category) values (0, 'HEALTH'), (1, 'STRESS');
+
+insert into articles(id, title,	description, username, board_id, user_id, created_at)
+values (1, '오늘말야', '그니까 내가 오늘 말야 ', '이정은!!', 1, 1, '2023-04-13T12:00:00');
+insert into articles(id, title,	description, username, board_id, user_id, created_at)
+values (2, '어제말야', '어제 그냥 헬스 했어', '이정은!!', 1, 1, '2023-04-13T12:00:00');
+insert into comments (id, created_at, description, username, article_id, user_id)
+values (1,'2023-04-14T12:00:00', 'ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 웃기다', '이정은!', 1, 1 );
+insert into comments (id, created_at, description, username, article_id, user_id)
+values (2,'2023-04-14T12:00:00', 'ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 안 웃기다', '이정은!', 2, 1 );
+insert into likes(id, created_at, user_id, article_id)
+values (1,'2023-04-14T12:00:00', 1, 1);
