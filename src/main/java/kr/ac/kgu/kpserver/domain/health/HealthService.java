@@ -1,5 +1,6 @@
 package kr.ac.kgu.kpserver.domain.health;
 
+import kr.ac.kgu.kpserver.domain.exercise.UserExerciseRepository;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoal;
 import kr.ac.kgu.kpserver.domain.health.goal.HealthGoalRepository;
 import kr.ac.kgu.kpserver.domain.health.progress.DailyProgress;
@@ -29,6 +30,7 @@ public class HealthService {
     private final DailyProgressRepository dailyProgressRepository;
     private final HealthGoalRepository healthGoalRepository;
     private final UserRepository userRepository;
+    private final UserExerciseRepository userExerciseRepository;
 
     /*
      * 사용자 운동 목표 데이터베이스 저장
@@ -43,6 +45,7 @@ public class HealthService {
                         healthGoalDto.getWeightGoal(),
                         HealthcareType.HEALTH);
 
+        userExerciseRepository.deleteAllByUserId(userId);
         healthGoalRepository.save(healthGoal);
         user.setHealthGoal(healthGoal);
         user.setHealthcareType(HealthcareType.HEALTH);

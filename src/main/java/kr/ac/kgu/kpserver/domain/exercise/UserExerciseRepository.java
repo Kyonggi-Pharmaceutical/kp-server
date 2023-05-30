@@ -8,4 +8,5 @@ import java.util.Set;
 
 public interface UserExerciseRepository extends JpaRepository<UserExercise, Long> {
    Set<UserExercise> findAllByUserAndCreatedAtBetween(User user, LocalDateTime from, LocalDateTime to);
+   void deleteAllByUserId(long userId);
 }
