@@ -42,20 +42,23 @@ public class AllRankingService extends PeriodRankingService<AllRanking> {
 
     @Override
     public List<AllRanking> getDailyRanking() {
-        CustomTimePeriod timePeriod = RankingPeriod.BEFORE_DAILY.getTimePeriod();
-        return allRankingRepository.findByTargetDate(timePeriod.getFrom().toLocalDate());
+        RankingPeriod period = RankingPeriod.BEFORE_DAILY;
+        CustomTimePeriod timePeriod = period.getTimePeriod();
+        return allRankingRepository.findByTargetDateAndPeriod(timePeriod.getFrom().toLocalDate(), period);
     }
 
     @Override
     public List<AllRanking> getWeeklyRanking() {
-        CustomTimePeriod timePeriod = RankingPeriod.BEFORE_WEEKLY.getTimePeriod();
-        return allRankingRepository.findByTargetDate(timePeriod.getFrom().toLocalDate());
+        RankingPeriod period = RankingPeriod.BEFORE_WEEKLY;
+        CustomTimePeriod timePeriod = period.getTimePeriod();
+        return allRankingRepository.findByTargetDateAndPeriod(timePeriod.getFrom().toLocalDate(), period);
     }
 
     @Override
     public List<AllRanking> getMonthlyRanking() {
-        CustomTimePeriod timePeriod = RankingPeriod.BEFORE_MONTHLY.getTimePeriod();
-        return allRankingRepository.findByTargetDate(timePeriod.getFrom().toLocalDate());
+        RankingPeriod period = RankingPeriod.BEFORE_MONTHLY;
+        CustomTimePeriod timePeriod = period.getTimePeriod();
+        return allRankingRepository.findByTargetDateAndPeriod(timePeriod.getFrom().toLocalDate(), period);
     }
 
     private List<AllRanking> getAllRankingListByTimePeriod(RankingPeriod rankingPeriod) {

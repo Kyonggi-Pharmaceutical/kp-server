@@ -1,6 +1,7 @@
 package kr.ac.kgu.kpserver.domain.rank.mbti;
 
 import kr.ac.kgu.kpserver.domain.rank.dto.MBTICheckedCountDto;
+import kr.ac.kgu.kpserver.domain.rank.period.RankingPeriod;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,5 +18,5 @@ public interface MBTIRankingRepository extends JpaRepository<MBTIRanking, Long> 
             "GROUP BY u.mbti")
     List<MBTICheckedCountDto> findMBTIDailyProgressCheckedCountBetween(LocalDateTime from, LocalDateTime to);
 
-    List<MBTIRanking> findByTargetDate(LocalDate targetDate);
+    List<MBTIRanking> findByTargetDateAndPeriod(LocalDate targetDate, RankingPeriod period);
 }

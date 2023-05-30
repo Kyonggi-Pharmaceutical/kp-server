@@ -1,6 +1,7 @@
 package kr.ac.kgu.kpserver.domain.rank.all;
 
 import kr.ac.kgu.kpserver.domain.rank.dto.UserCheckedCountDto;
+import kr.ac.kgu.kpserver.domain.rank.period.RankingPeriod;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,5 +18,5 @@ interface AllRankingRepository extends JpaRepository<AllRanking, Long> {
             "GROUP BY u")
     List<UserCheckedCountDto> findUserDailyProgressCheckedCountBetween(LocalDateTime from, LocalDateTime to);
 
-    List<AllRanking> findByTargetDate(LocalDate targetDate);
+    List<AllRanking> findByTargetDateAndPeriod(LocalDate targetDate, RankingPeriod period);
 }
