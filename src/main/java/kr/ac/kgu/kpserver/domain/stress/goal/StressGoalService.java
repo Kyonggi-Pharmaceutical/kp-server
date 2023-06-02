@@ -33,10 +33,11 @@ public class StressGoalService {
         StressGoal stressGoal = new StressGoal();
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new KpException(KpExceptionType.NOT_FOUND_USER));
+        stressGoalRepository.save(stressGoal);
         user.setHealthcareType(HealthcareType.STRESS);
         user.setStressGoal(stressGoal);
+        user.setHealthGoal(null);
         userRepository.save(user);
-        stressGoalRepository.save(stressGoal);
     }
 
 }

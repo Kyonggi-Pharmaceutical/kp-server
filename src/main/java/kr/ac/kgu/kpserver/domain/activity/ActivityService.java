@@ -54,10 +54,6 @@ public class ActivityService {
 
     private void renewActivitiesByUser(User user) {
         MBTI userMbti = user.getMbti();
-        StressGoal stressGoal = user.getStressGoal();
-        if (stressGoal == null) {
-            return;
-        }
         List<Activity> currentActivities = user.getUserActivities().stream()
                 .map(UserActivity::getActivity)
                 .collect(Collectors.toList());

@@ -48,6 +48,7 @@ public class HealthService {
         userExerciseRepository.deleteAllByUserId(userId);
         healthGoalRepository.save(healthGoal);
         user.setHealthGoal(healthGoal);
+        user.setStressGoal(null);
         user.setHealthcareType(HealthcareType.HEALTH);
         userRepository.save(user);
     }
