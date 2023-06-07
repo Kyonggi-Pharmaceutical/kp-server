@@ -2,6 +2,12 @@
 
 ## 실행 방법
 
+### 0. OAuth2 설정 값
+
+```bash
+-Doauth2.google.client-id={클라이언트ID}
+```
+
 ### 1. spring profiles
 
 `local`, `dev` 중 실행하고 싶은 환경을 JVM 환경변수로 넣어준 후 실행.
@@ -28,13 +34,13 @@ $ docker compose up -d
 
 1. 형식
 
-   > `[타입]`: `[내용]`
+   > `[이슈번호]` `[타입]`: `[내용]`
 
 2. 예시
 
-   > docs: OO메소드 관련 설명 주석
+   > [OVZC-111] docs: OO메소드 관련 설명 주석
    >
-   > feature: 예약 시스템의 add()
+   > [OVZC-112] feature: 예약 시스템의 add()
 
 3. 타입 종류
 
@@ -55,6 +61,7 @@ $ docker compose up -d
 git-flow 를 따르되, 가장 기본적인 feature, develop, main 브랜치만 사용
 
 - feature: 각각 기능에 대한 개발 브랜치
+  - ex) feature/OVZC-41-implements-login-feature
 - develop: 개발용 서버 배포용 브랜치
 - main: 개발 & 테스트 완료 후 최종 브랜치
 
