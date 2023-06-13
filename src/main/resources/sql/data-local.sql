@@ -4,9 +4,6 @@ values (0, '홍길동!!!', '길동', '홍', 'test@test.com', '', 'MALE', '2023-0
 insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
                   mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at)
 values (-1, '김영희!!!', '영희', '김', 'test2@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP', 'STRESS', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00');
-insert into users(id, nickname, first_name, last_name, email, profile_image_url, gender, date_of_birth, height, weight,
-                  mbti, healthcare_type, stress_point, is_smoking, is_alcohol, created_at, updated_at, user_answer)
-values (1, '이정은!', null, null, 'lje4624@kyonggi.ac.kr', '', 'FEMALE', '2023-01-01', 160, 50, 'ESTP', 'HEALTH', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00','NORMAL');
 
 insert into daily_health_messages(id, type, personality, content)
 values (1, 'EXERCISE', 'INTROVERSION', 'EXERCISE INTROVERSION message');
@@ -157,107 +154,6 @@ values (39, 'ESFP', 9);
 insert into exercise_mbti(id, mbti, exercise_id)
 values (40, 'ESFP', 12);
 
-insert into activities(id, name, symptom)
-values (1, 'TEST_ACTIVITY_1', 'LETHARGIC');
-insert into activities(id, name, symptom)
-values (2, 'TEST_ACTIVITY_2', 'LETHARGIC');
-insert into activities(id, name, symptom)
-values (3, 'TEST_ACTIVITY_3', 'LETHARGIC');
-insert into activities(id, name, symptom)
-values (4, 'TEST_ACTIVITY_4', 'LETHARGIC');
-insert into activities(id, name, symptom)
-values (5, 'TEST_ACTIVITY_5', 'LETHARGIC');
-insert into activities(id, name, symptom)
-values (6, 'TEST_ACTIVITY_6', 'LETHARGIC');
-insert into activities(id, name, symptom)
-values (7, 'TEST_ACTIVITY_7', 'LETHARGIC');
-insert into activities(id, name, symptom)
-values (8, 'TEST_ACTIVITY_8', 'LETHARGIC');
-insert into activities(id, name, symptom)
-values (9, 'TEST_ACTIVITY_9', 'LETHARGIC');
-insert into activities(id, name, symptom)
-values (10, 'TEST_ACTIVITY_10', 'LETHARGIC');
-
-insert into activity_mbti(id, mbti, activity_id)
-values (1, 'INTJ', 1);
-insert into activity_mbti(id, mbti, activity_id)
-values (2, 'INFJ', 1);
-insert into activity_mbti(id, mbti, activity_id)
-values (3, 'INTP', 1);
-insert into activity_mbti(id, mbti, activity_id)
-values (4, 'INTJ', 2);
-insert into activity_mbti(id, mbti, activity_id)
-values (5, 'INFJ', 2);
-insert into activity_mbti(id, mbti, activity_id)
-values (6, 'INTP', 2);
-insert into activity_mbti(id, mbti, activity_id)
-values (7, 'INTJ', 3);
-insert into activity_mbti(id, mbti, activity_id)
-values (8, 'INFJ', 3);
-insert into activity_mbti(id, mbti, activity_id)
-values (9, 'INTP', 3);
-insert into activity_mbti(id, mbti, activity_id)
-values (10, 'INTJ', 4);
-insert into activity_mbti(id, mbti, activity_id)
-values (11, 'INFJ', 4);
-insert into activity_mbti(id, mbti, activity_id)
-values (12, 'INTP', 4);
-insert into activity_mbti(id, mbti, activity_id)
-values (13, 'INTJ', 5);
-insert into activity_mbti(id, mbti, activity_id)
-values (14, 'INFJ', 5);
-insert into activity_mbti(id, mbti, activity_id)
-values (15, 'INTP', 5);
-insert into activity_mbti(id, mbti, activity_id)
-values (16, 'ESTJ', 6);
-insert into activity_mbti(id, mbti, activity_id)
-values (17, 'ESFJ', 6);
-insert into activity_mbti(id, mbti, activity_id)
-values (18, 'ESTP', 6);
-insert into activity_mbti(id, mbti, activity_id)
-values (19, 'ESTJ', 7);
-insert into activity_mbti(id, mbti, activity_id)
-values (20, 'ESFJ', 7);
-insert into activity_mbti(id, mbti, activity_id)
-values (21, 'ESTP', 7);
-insert into activity_mbti(id, mbti, activity_id)
-values (22, 'ESTJ', 8);
-insert into activity_mbti(id, mbti, activity_id)
-values (23, 'ESFJ', 8);
-insert into activity_mbti(id, mbti, activity_id)
-values (24, 'ESTP', 8);
-insert into activity_mbti(id, mbti, activity_id)
-values (25, 'ESTJ', 9);
-insert into activity_mbti(id, mbti, activity_id)
-values (26, 'ESFJ', 9);
-insert into activity_mbti(id, mbti, activity_id)
-values (27, 'ESTP', 9);
-insert into activity_mbti(id, mbti, activity_id)
-values (28, 'ESTJ', 10);
-insert into activity_mbti(id, mbti, activity_id)
-values (29, 'ESFJ', 10);
-insert into activity_mbti(id, mbti, activity_id)
-values (30, 'ESTP', 10);
-insert into activity_mbti(id, mbti, activity_id)
-values (31, 'ESFP', 1);
-insert into activity_mbti(id, mbti, activity_id)
-values (32, 'ESFP', 2);
-insert into activity_mbti(id, mbti, activity_id)
-values (33, 'ESFP', 3);
-insert into activity_mbti(id, mbti, activity_id)
-values (34, 'ESFP', 4);
-insert into activity_mbti(id, mbti, activity_id)
-values (35, 'ESFP', 5);
-insert into activity_mbti(id, mbti, activity_id)
-values (36, 'ESFP', 6);
-insert into activity_mbti(id, mbti, activity_id)
-values (37, 'ESFP', 7);
-insert into activity_mbti(id, mbti, activity_id)
-values (38, 'ESFP', 8);
-insert into activity_mbti(id, mbti, activity_id)
-values (39, 'ESFP', 9);
-insert into activity_mbti(id, mbti, activity_id)
-values (40, 'ESFP', 10);
 insert into activities(id, name, symptom, problem) values (1, 'TEST_ACTIVITY_1', 'LETHARGIC', '');
 insert into activities(id, name, symptom, problem) values (2, 'TEST_ACTIVITY_2', 'LETHARGIC', '');
 insert into activities(id, name, symptom, problem) values (3, 'TEST_ACTIVITY_3', 'LETHARGIC', '');
@@ -377,14 +273,3 @@ insert into daily_progresses(created_at, is_check, health_goal_id, user_id) valu
 insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-14T12:00:00',false, -110, -110);
 
 insert into boards(id, category) values (0, 'HEALTH'), (1, 'STRESS');
-
-insert into articles(id, title,	description, username, board_id, user_id, created_at)
-values (1, '오늘말야', '그니까 내가 오늘 말야 ', '이정은!!', 1, 1, '2023-04-13T12:00:00');
-insert into articles(id, title,	description, username, board_id, user_id, created_at)
-values (2, '어제말야', '어제 그냥 헬스 했어', '이정은!!', 1, 1, '2023-04-13T12:00:00');
-insert into comments (id, created_at, description, username, article_id, user_id)
-values (1,'2023-04-14T12:00:00', 'ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 웃기다', '이정은!', 1, 1 );
-insert into comments (id, created_at, description, username, article_id, user_id)
-values (2,'2023-04-14T12:00:00', 'ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 안 웃기다', '이정은!', 2, 1 );
-insert into likes(id, created_at, user_id, article_id)
-values (1,'2023-04-14T12:00:00', 1, 1);
