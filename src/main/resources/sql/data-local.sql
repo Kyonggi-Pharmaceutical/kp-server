@@ -6,164 +6,137 @@ insert into users(id, nickname, first_name, last_name, email, profile_image_url,
 values (-1, '김영희!!!', '영희', '김', 'test2@test.com', '', 'FEMALE', '2023-01-01', 160, 50, 'ESFP', 'STRESS', 0, false, false, '2023-01-01T00:00:00', '2023-01-01T00:00:00');
 
 insert into daily_health_messages(id, type, personality, content)
-values (1, 'EXERCISE', 'INTROVERSION', 'EXERCISE INTROVERSION message');
+values (1, 'EXERCISE', 'INTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (2, 'EXERCISE', 'EXTROVERSION', 'EXERCISE EXTROVERSION message');
+values (2, 'EXERCISE', 'EXTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (3, 'EXERCISE', 'ALL', 'EXERCISE ALL message');
+values (3, 'EXERCISE', 'ALL', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (4, 'STRESS', 'INTROVERSION', 'STRESS INTROVERSION message');
+values (4, 'STRESS', 'INTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (5, 'STRESS', 'EXTROVERSION', 'STRESS EXTROVERSION message');
+values (5, 'STRESS', 'EXTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (6, 'STRESS', 'ALL', 'STRESS ALL message');
+values (6, 'STRESS', 'ALL', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (7, 'HEALTH_GOAL', 'INTROVERSION', 'HEALTH_GOAL INTROVERSION message');
+values (7, 'HEALTH_GOAL', 'INTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (8, 'HEALTH_GOAL', 'EXTROVERSION', 'HEALTH_GOAL EXTROVERSION message');
+values (8, 'HEALTH_GOAL', 'EXTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (9, 'HEALTH_GOAL', 'ALL', 'HEALTH_GOAL ALL message');
+values (9, 'HEALTH_GOAL', 'ALL', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (10, 'PROGRESS', 'INTROVERSION', 'PROGRESS INTROVERSION message');
+values (10, 'PROGRESS', 'INTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (11, 'PROGRESS', 'EXTROVERSION', 'PROGRESS EXTROVERSION message');
+values (11, 'PROGRESS', 'EXTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (12, 'PROGRESS', 'ALL', 'PROGRESS ALL message');
+values (12, 'PROGRESS', 'ALL', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (13, 'FOOD', 'INTROVERSION', 'FOOD INTROVERSION message');
+values (13, 'FOOD', 'INTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (14, 'FOOD', 'EXTROVERSION', 'FOOD EXTROVERSION message');
+values (14, 'FOOD', 'EXTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (15, 'FOOD', 'ALL', 'FOOD ALL message');
+values (15, 'FOOD', 'ALL', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (16, 'LIFE_STYLE', 'INTROVERSION', 'LIFE_STYLE INTROVERSION message');
+values (16, 'LIFE_STYLE', 'INTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (17, 'LIFE_STYLE', 'EXTROVERSION', 'LIFE_STYLE EXTROVERSION message');
+values (17, 'LIFE_STYLE', 'EXTROVERSION', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 insert into daily_health_messages(id, type, personality, content)
-values (18, 'LIFE_STYLE', 'ALL', 'LIFE_STYLE ALL message');
+values (18, 'LIFE_STYLE', 'ALL', '지금의 노력이 결국 당신의 건강과 행복으로 이어질 거예요. 힘내세요!');
 
 insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (1, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 6.0, 'Jogging', 'CARDIO');
+values (1, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 7.0, '싸이클', 'CARDIO');
 insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (2, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 8.0, 'Yoga', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (3, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 5.0, 'Swimming', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (4, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 6.0, 'Biking', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (5, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 7.0, 'Pilates', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (6, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 4.0, 'Walking', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (7, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 3.0, 'Dancing', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (8, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 5.0, 'Jumping rope', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (9, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 7.0, 'Hiking', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (10, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 4.0, 'Push-ups', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (11, '2023-05-01', '2023-05-01', 5.5, 'RUNNING', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (12, '2023-05-02', '2023-05-02', 5.5, 'hiking', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (13, '2023-05-01', '2023-05-01', 4.3, 'Weightlifting', 'WEIGHT');
-insert into exercises (ID, CREATED_AT, UPDATED_AT, MET, NAME, TYPE)
-values (14, '2023-05-01', '2023-05-01', 5.5, 'Running', 'CARDIO');
-insert into exercises (ID, CREATED_AT, UPDATED_AT,  MET, NAME, TYPE)
-values (15, '2023-05-01', '2023-05-01',  3.8, 'Yoga','CARDIO');
+values (2, '2023-05-02 00:00:00', '2023-05-02 00:00:00', 2.5, '요가', 'CARDIO');
 
-insert into exercise_mbti(id, mbti, exercise_id)
-values (1, 'INTJ', 1);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (2, 'INFJ', 1);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (3, 'INTP', 1);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (4, 'INTJ', 2);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (5, 'INFJ', 2);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (6, 'INTP', 2);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (7, 'INTJ', 3);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (8, 'INFJ', 3);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (9, 'INTP', 3);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (10, 'INTJ', 11);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (11, 'INFJ', 4);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (12, 'INTP', 4);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (13, 'INTJ', 5);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (14, 'INFJ', 5);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (15, 'INTP', 5);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (16, 'ESTJ', 6);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (17, 'ESFJ', 6);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (18, 'ESTP', 6);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (19, 'ESTJ', 12);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (20, 'ESFJ', 7);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (21, 'ESTP', 7);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (22, 'ESTJ', 8);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (23, 'ESFJ', 13);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (24, 'ESTP', 8);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (25, 'ESTJ', 9);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (26, 'ESFJ', 9);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (27, 'ESTP', 14);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (28, 'ESTJ', 10);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (29, 'ESFJ', 11);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (30, 'ESTP', 10);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (31, 'ESFP', 1);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (32, 'ESFP', 14);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (33, 'ESFP', 3);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (34, 'ESFP', 4);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (35, 'ESFP', 5);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (36, 'ESFP', 6);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (37, 'ESFP', 7);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (38, 'ESFP', 15);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (39, 'ESFP', 9);
-insert into exercise_mbti(id, mbti, exercise_id)
-values (40, 'ESFP', 12);
+insert into exercise_mbti(id, mbti, exercise_id) values (11, 'INTJ', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (12, 'INFJ', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (13, 'INTP', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (14, 'INFP', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (15, 'ISTJ', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (16, 'ISFJ', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (17, 'ISTP', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (18, 'ISFP', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (19, 'ENTJ', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (110, 'ENFJ', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (111, 'ENTP', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (112, 'ENFP', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (113, 'ESTJ', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (114, 'ESFJ', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (115, 'ESTP', 1);
+insert into exercise_mbti(id, mbti, exercise_id) values (116, 'ESFP', 1);
 
-insert into activities(id, name, symptom, problem) values (1, 'TEST_ACTIVITY_1', 'LETHARGIC', '');
-insert into activities(id, name, symptom, problem) values (2, 'TEST_ACTIVITY_2', 'LETHARGIC', '');
-insert into activities(id, name, symptom, problem) values (3, 'TEST_ACTIVITY_3', 'LETHARGIC', '');
-insert into activities(id, name, symptom, problem) values (4, 'TEST_ACTIVITY_4', 'LETHARGIC', '');
-insert into activities(id, name, symptom, problem) values (5, 'TEST_ACTIVITY_5', 'LETHARGIC', '');
-insert into activities(id, name, symptom, problem) values (6, 'TEST_ACTIVITY_6', 'LETHARGIC', '');
-insert into activities(id, name, symptom, problem) values (7, 'TEST_ACTIVITY_7', 'LETHARGIC', '');
-insert into activities(id, name, symptom, problem) values (8, 'TEST_ACTIVITY_8', 'LETHARGIC', '');
-insert into activities(id, name, symptom, problem) values (9, 'TEST_ACTIVITY_9', 'LETHARGIC', '');
-insert into activities(id, name, symptom, problem) values (10, 'TEST_ACTIVITY_10', 'LETHARGIC', '');
+insert into exercise_mbti(id, mbti, exercise_id) values (21, 'INTJ', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (22, 'INFJ', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (23, 'INTP', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (24, 'INFP', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (25, 'ISTJ', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (26, 'ISFJ', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (27, 'ISTP', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (28, 'ISFP', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (29, 'ENTJ', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (210, 'ENFJ', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (211, 'ENTP', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (212, 'ENFP', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (213, 'ESTJ', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (214, 'ESFJ', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (215, 'ESTP', 2);
+insert into exercise_mbti(id, mbti, exercise_id) values (216, 'ESFP', 2);
+
+
+insert into activities(id, name, symptom, problem) values (1, '자신과 대화 하며 현재 기분을 적어보기', 'LETHARGIC', '문제중심대처');
+insert into activities(id, name, symptom, problem) values (2, '편안하고 잔잔한 음악 듣기', 'LETHARGIC', '소망적 사고');
+insert into activities(id, name, symptom, problem) values (3, '오늘 하루에 대한 일기 써보기', 'LETHARGIC', '정서적 대처');
+
+insert into activity_mbti(id, mbti, activity_id) values (11, 'INTJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (12, 'INFJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (13, 'INTP', 1);
+insert into activity_mbti(id, mbti, activity_id) values (14, 'INFP', 1);
+insert into activity_mbti(id, mbti, activity_id) values (15, 'ISTJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (16, 'ISFJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (17, 'ISTP', 1);
+insert into activity_mbti(id, mbti, activity_id) values (18, 'ISFP', 1);
+insert into activity_mbti(id, mbti, activity_id) values (19, 'ENTJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (110, 'ENFJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (111, 'ENTP', 1);
+insert into activity_mbti(id, mbti, activity_id) values (112, 'ENFP', 1);
+insert into activity_mbti(id, mbti, activity_id) values (113, 'ESTJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (114, 'ESFJ', 1);
+insert into activity_mbti(id, mbti, activity_id) values (115, 'ESTP', 1);
+insert into activity_mbti(id, mbti, activity_id) values (116, 'ESFP', 1);
+
+insert into activity_mbti(id, mbti, activity_id) values (21, 'INTJ', 2);
+insert into activity_mbti(id, mbti, activity_id) values (22, 'INFJ', 2);
+insert into activity_mbti(id, mbti, activity_id) values (23, 'INTP', 2);
+insert into activity_mbti(id, mbti, activity_id) values (24, 'INFP', 2);
+insert into activity_mbti(id, mbti, activity_id) values (25, 'ISTJ', 2);
+insert into activity_mbti(id, mbti, activity_id) values (26, 'ISFJ', 2);
+insert into activity_mbti(id, mbti, activity_id) values (27, 'ISTP', 2);
+insert into activity_mbti(id, mbti, activity_id) values (28, 'ISFP', 2);
+insert into activity_mbti(id, mbti, activity_id) values (29, 'ENTJ', 2);
+insert into activity_mbti(id, mbti, activity_id) values (210, 'ENFJ', 2);
+insert into activity_mbti(id, mbti, activity_id) values (211, 'ENTP', 2);
+insert into activity_mbti(id, mbti, activity_id) values (212, 'ENFP', 2);
+insert into activity_mbti(id, mbti, activity_id) values (213, 'ESTJ', 2);
+insert into activity_mbti(id, mbti, activity_id) values (214, 'ESFJ', 2);
+insert into activity_mbti(id, mbti, activity_id) values (215, 'ESTP', 2);
+insert into activity_mbti(id, mbti, activity_id) values (216, 'ESFP', 2);
+
+insert into activity_mbti(id, mbti, activity_id) values (31, 'INTJ', 3);
+insert into activity_mbti(id, mbti, activity_id) values (32, 'INFJ', 3);
+insert into activity_mbti(id, mbti, activity_id) values (33, 'INTP', 3);
+insert into activity_mbti(id, mbti, activity_id) values (34, 'INFP', 3);
+insert into activity_mbti(id, mbti, activity_id) values (35, 'ISTJ', 3);
+insert into activity_mbti(id, mbti, activity_id) values (36, 'ISFJ', 3);
+insert into activity_mbti(id, mbti, activity_id) values (37, 'ISTP', 3);
+insert into activity_mbti(id, mbti, activity_id) values (38, 'ISFP', 3);
+insert into activity_mbti(id, mbti, activity_id) values (39, 'ENTJ', 3);
+insert into activity_mbti(id, mbti, activity_id) values (310, 'ENFJ', 3);
+insert into activity_mbti(id, mbti, activity_id) values (311, 'ENTP', 3);
+insert into activity_mbti(id, mbti, activity_id) values (312, 'ENFP', 3);
+insert into activity_mbti(id, mbti, activity_id) values (313, 'ESTJ', 3);
+insert into activity_mbti(id, mbti, activity_id) values (314, 'ESFJ', 3);
+insert into activity_mbti(id, mbti, activity_id) values (315, 'ESTP', 3);
+insert into activity_mbti(id, mbti, activity_id) values (316, 'ESFP', 3);
+
 
 insert into stress_goals(id, accomplish_rate, start_at, end_at)
 values (0, 0.0, '2023-04-01T00:00:00', '2023-04-30T23:59:59');
@@ -273,3 +246,71 @@ insert into daily_progresses(created_at, is_check, health_goal_id, user_id) valu
 insert into daily_progresses(created_at, is_check, health_goal_id, user_id) values ('2023-04-14T12:00:00',false, -110, -110);
 
 insert into boards(id, category) values (0, 'HEALTH'), (1, 'STRESS');
+
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', '홍길동', 100, 1, 2);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', '박준영', 90.5, 2, 5);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', '김영호', 85.5, 3, 11);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', '최성민', 80.5, 4, 6);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', '정기범', 75.5, 5, 7);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', '강현우', 70.5, 6, 8);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', '장동욱', 65.5, 7, 9);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', '이민재', 60.5, 8, 10);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', '박지은', 55.5, 9, 12);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', '김수진', 50.5, 10, 13);
+
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-06-12 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', '박지은', 95.5, 1, 12);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-06-12 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', '홍길동', 95, 2, 2);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-06-12 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', '박준영', 90, 3, 5);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-06-12 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', '김영호', 85, 4, 11);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-06-12 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', '최성민', 80, 5, 6);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-06-12 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', '정기범', 75, 6, 7);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-06-12 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', '강현우', 70, 7, 8);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-06-12 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', '장동욱', 65, 8, 9);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-06-12 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', '이민재', 60, 9, 10);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-06-12 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', '박지은', 55, 10, 12);
+
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', '김태현', 89.5, 1, 4);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', '홍길동', 89, 2, 2);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', '박준영', 79, 3, 5);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', '김영호', 69, 4, 11);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', '최성민', 59, 5, 6);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', '정기범', 49, 6, 7);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', '강현우', 39, 7, 8);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', '장동욱', 29, 8, 9);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', '이민재', 19, 9, 10);
+INSERT INTO all_ranking (created_at, updated_at, period, target_date, type, nickname, progress_rate, rank_score, user_id) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', '박지은', 9, 10, 12);
+
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', 'ISTJ', 100, 1);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', 'ENFP', 90.5, 2);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', 'ISFP', 85.5, 3);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', 'INTP', 80.5, 4);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', 'ESTJ', 75.5, 5);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', 'INFJ', 70.5, 6);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', 'ENTP', 65.5, 7);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', 'ISTP', 60.5, 8);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', 'INTJ', 55.5, 9);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_DAILY', '2023-06-13', 'MOST_PARTICIPATE', 'ESFJ', 50.5, 10);
+
+
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', 'ESFP', 95.5, 1);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', 'ENFJ', 95, 2);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', 'INFP', 90, 3);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', 'ENTJ', 85, 4);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', 'ISTJ', 80, 5);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', 'ESTP', 75, 6);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', 'ISFJ', 70, 7);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', 'INTJ', 65, 8);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', 'ENTP', 60, 9);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_WEEKLY', '2023-06-05', 'MOST_PARTICIPATE', 'INFJ', 55, 10);
+
+
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', 'ISTP', 89.5, 1);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', 'ESTJ', 89, 2);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', 'ENFP', 79, 3);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', 'ISFP', 69, 4);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', 'INTJ', 59, 5);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', 'INTP', 49, 6);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', 'ESFJ', 39, 7);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', 'INFJ', 29, 8);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', 'ENTP', 19, 9);
+INSERT INTO mbti_ranking (created_at, updated_at, period, target_date, type, mbti, progress_rate, rank_score) VALUES ('2023-05-29 00:00:00.000000', '2023-05-29 00:00:00.000000', 'BEFORE_MONTHLY', '2023-05-01', 'MOST_PARTICIPATE', 'ESTP', 9, 10);
